@@ -1527,6 +1527,7 @@ public class VentanaATM extends javax.swing.JFrame {
                 contenedor.setSelectedIndex(0);
                 pantalla = contenedor.getSelectedIndex();
                 lblTarjeta.setBackground(Color.red);
+                //VACIAR TODOS LOS ELEMENTOS----------------------------------------------
                 break;
             case 12:
                 txfRetirar.setText("");
@@ -1559,6 +1560,10 @@ public class VentanaATM extends javax.swing.JFrame {
                     contenedor.setSelectedIndex(9);
                     pantalla = contenedor.getSelectedIndex();
                 }
+                break;
+            case 5:
+                contenedor.setSelectedIndex(11);
+                pantalla = contenedor.getSelectedIndex();
                 break;
             case 9:
                 if (operacion == Operacion.RE) {
@@ -2051,7 +2056,7 @@ public class VentanaATM extends javax.swing.JFrame {
                         return false;
                     } else {
                         //En caso de que exista y no este bloqueada
-                        String consultaGetPin = "select iban, pin from tarjeta_bancaria where numero_tarjeta = \"" + numTarjeta + "\" and pin = \"" + contr + "\";";
+                        String consultaGetPin = "select pin from tarjeta_bancaria where numero_tarjeta = \"" + numTarjeta + "\" and pin = \"" + contr + "\";";
                         resultado = sentencia.executeQuery(consultaGetPin);
                         //Si no encuentra el iban correspondiente a la contraseña introducida:
                         if (!resultado.next()) {
@@ -2070,7 +2075,7 @@ public class VentanaATM extends javax.swing.JFrame {
                             //Si la contraseña corresponde al iban introducido:
                         } else {
                             //Comprobamos que la cuenta bancaria no este bloqueada:
-                            String selectBloquearIban = "select cb.bloqueada from cuenta_bancaria cb join tarjeta_bancaria tb using(iban) where numero_tarjeta=\""+numTarjeta+"\";";
+                            String selectBloquearIban = "select cb.bloqueada from cuenta_bancaria cb join tarjeta_bancaria tb using(iban) where numero_tarjeta=\"" + numTarjeta + "\";";
                             resultado = sentencia.executeQuery(selectBloquearIban);
                             resultado.next();
                             int bloqueadaIban = resultado.getInt("cb.bloqueada");
@@ -2078,6 +2083,9 @@ public class VentanaATM extends javax.swing.JFrame {
                                 JOptionPane.showMessageDialog(this, "Cuenta bancaria bloqueada, contacte con un administrador para su desbloqueo", "ERROR", JOptionPane.ERROR_MESSAGE);
                                 return false;
                             } else {
+                                String consultaGetIbanRegistrado = "select iban from tarjeta_bancaria where numero_tarjeta = \"" + numTarjeta + "\" and pin = \"" + contr + "\";";
+                                resultado = sentencia.executeQuery(consultaGetIbanRegistrado);
+                                resultado.next();
                                 ibanRegistrado = resultado.getString("iban");
                                 tarjetaIngresada = numTarjeta;
                                 lblTarjeta.setBackground(Color.green);
