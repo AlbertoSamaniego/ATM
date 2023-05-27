@@ -8,6 +8,7 @@ import bases_datos.Conexion;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
@@ -53,6 +54,7 @@ public class VentanaATM extends javax.swing.JFrame {
         initReloj();
         contenedor.setSelectedIndex(0);
         pantalla = contenedor.getSelectedIndex();
+        focoActual = KeyboardFocusManager.getCurrentKeyboardFocusManager();
     }
 
     private void initBD() {
@@ -165,9 +167,9 @@ public class VentanaATM extends javax.swing.JFrame {
         jLabel18 = new javax.swing.JLabel();
         cambiarPIN = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        passwd1 = new javax.swing.JPasswordField();
         jLabel20 = new javax.swing.JLabel();
-        jPasswordField2 = new javax.swing.JPasswordField();
+        passwd2 = new javax.swing.JPasswordField();
         consultarAgenda = new javax.swing.JPanel();
         jLabel22 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -199,6 +201,11 @@ public class VentanaATM extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         jLabel36 = new javax.swing.JLabel();
         txfRetirar = new javax.swing.JTextField();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel37 = new javax.swing.JLabel();
+        jPanel7 = new javax.swing.JPanel();
+        jLabel38 = new javax.swing.JLabel();
+        txfIngresar = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         btnInzquierda1 = new javax.swing.JButton();
         btnInzquierda2 = new javax.swing.JButton();
@@ -521,40 +528,43 @@ public class VentanaATM extends javax.swing.JFrame {
 
         cambiarPIN.setBorder(new javax.swing.border.MatteBorder(null));
 
+        jLabel19.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         jLabel19.setText("Introduzca el nuevo PIN:");
 
-        jPasswordField1.setText("jPasswordField1");
+        passwd1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        passwd1.setFocusable(false);
 
+        jLabel20.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         jLabel20.setText("Introduzca otra vez el nuevo PIN:");
 
-        jPasswordField2.setText("jPasswordField2");
+        passwd2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        passwd2.setFocusable(false);
 
         javax.swing.GroupLayout cambiarPINLayout = new javax.swing.GroupLayout(cambiarPIN);
         cambiarPIN.setLayout(cambiarPINLayout);
         cambiarPINLayout.setHorizontalGroup(
             cambiarPINLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(cambiarPINLayout.createSequentialGroup()
-                .addGap(302, 302, 302)
+                .addGap(336, 336, 336)
                 .addGroup(cambiarPINLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(cambiarPINLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
-                        .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(422, Short.MAX_VALUE))
+                    .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(passwd2, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(passwd1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel20))
+                .addContainerGap(362, Short.MAX_VALUE))
         );
         cambiarPINLayout.setVerticalGroup(
             cambiarPINLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(cambiarPINLayout.createSequentialGroup()
-                .addGap(14, 14, 14)
+                .addContainerGap(139, Short.MAX_VALUE)
                 .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
-                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
+                .addGap(18, 18, 18)
+                .addComponent(passwd1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(69, 69, 69)
                 .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(205, Short.MAX_VALUE))
+                .addComponent(passwd2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(65, 65, 65))
         );
 
         contenedor.addTab("tab5", cambiarPIN);
@@ -830,26 +840,78 @@ public class VentanaATM extends javax.swing.JFrame {
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(280, Short.MAX_VALUE)
-                .addComponent(jLabel36, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(261, 261, 261))
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(393, 393, 393)
                 .addComponent(txfRetirar, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(428, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel36, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(235, 235, 235))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(38, 38, 38)
+                .addGap(35, 35, 35)
                 .addComponent(jLabel36, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(61, 61, 61)
+                .addGap(64, 64, 64)
                 .addComponent(txfRetirar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(249, Short.MAX_VALUE))
         );
 
         contenedor.addTab("tab13", jPanel5);
+
+        jLabel37.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
+        jLabel37.setText("Por favor, retire su dinero.");
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addContainerGap(311, Short.MAX_VALUE)
+                .addComponent(jLabel37, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(274, 274, 274))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(118, 118, 118)
+                .addComponent(jLabel37, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(275, Short.MAX_VALUE))
+        );
+
+        contenedor.addTab("tab14", jPanel6);
+
+        jLabel38.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
+        jLabel38.setText("Introduce la cantidad a ingresar");
+
+        txfIngresar.setFocusable(false);
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                .addContainerGap(298, Short.MAX_VALUE)
+                .addComponent(jLabel38, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(294, 294, 294))
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(394, 394, 394)
+                .addComponent(txfIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addComponent(jLabel38, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(44, 44, 44)
+                .addComponent(txfIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(275, Short.MAX_VALUE))
+        );
+
+        contenedor.addTab("tab15", jPanel7);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel2.setLayout(new java.awt.GridLayout(4, 1, 0, 20));
@@ -1144,9 +1206,35 @@ public class VentanaATM extends javax.swing.JFrame {
 
     private void lbl1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl1MouseClicked
         switch (pantalla) {
+            case 4:
+                String contr1 = String.valueOf(passwd1.getPassword());
+                String contr2 = String.valueOf(passwd2.getPassword());
+                if (contr1.length() != 4) {
+                    passwd1.setText(contr1 + "1");
+                } else {
+                    if (contr2.length() != 4) {
+                        passwd2.setText(contr2 + "1");
+                    } else {
+                        evt.consume();
+                    }
+
+                }
+                break;
             case 12:
                 String retirar = txfRetirar.getText();
-                txfRetirar.setText(retirar + "1");
+                if (retirar.length() != 5) {
+                    txfRetirar.setText(retirar + "1");
+                } else {
+                    evt.consume();
+                }
+                break;
+            case 14:
+                String ingresar = txfIngresar.getText();
+                if (ingresar.length() != 5) {
+                    txfIngresar.setText(ingresar + "1");
+                } else {
+                    evt.consume();
+                }
         }
     }//GEN-LAST:event_lbl1MouseClicked
 
@@ -1163,12 +1251,19 @@ public class VentanaATM extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTarjetaActionPerformed
 
     private void btnDineroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDineroActionPerformed
-        // TODO add your handling code here:
+        switch (pantalla) {
+            case 13:
+                txfRetirar.setText("");
+                contenedor.setSelectedIndex(10);
+                pantalla = contenedor.getSelectedIndex();
+                break;
+
+        }
     }//GEN-LAST:event_btnDineroActionPerformed
 
     private void btnTicketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTicketActionPerformed
         if (lblTicket.getBackground().equals(Color.green)) {
-            ticket = new Ticket(efectivoRetirado, operacion, tarjetaIngresada);
+            ticket = new Ticket(efectivo, operacion, tarjetaIngresada);
             ticket.setVisible(true);
 
             lblTicket.setBackground(Color.red);
@@ -1210,7 +1305,13 @@ public class VentanaATM extends javax.swing.JFrame {
                 operacion = Operacion.RE;
                 break;
             case 2:
-                efectivoRetirado = 20;
+                efectivo = 20;
+                pantallaAnterior = contenedor.getSelectedIndex();
+                contenedor.setSelectedIndex(9);
+                pantalla = contenedor.getSelectedIndex();
+                break;
+            case 3:
+                efectivo = 20;
                 pantallaAnterior = contenedor.getSelectedIndex();
                 contenedor.setSelectedIndex(9);
                 pantalla = contenedor.getSelectedIndex();
@@ -1226,7 +1327,13 @@ public class VentanaATM extends javax.swing.JFrame {
                 operacion = Operacion.DE;
                 break;
             case 2:
-                efectivoRetirado = 75;
+                efectivo = 75;
+                pantallaAnterior = contenedor.getSelectedIndex();
+                contenedor.setSelectedIndex(9);
+                pantalla = contenedor.getSelectedIndex();
+                break;
+            case 3:
+                efectivo = 75;
                 pantallaAnterior = contenedor.getSelectedIndex();
                 contenedor.setSelectedIndex(9);
                 pantalla = contenedor.getSelectedIndex();
@@ -1239,9 +1346,16 @@ public class VentanaATM extends javax.swing.JFrame {
             case 1:
                 contenedor.setSelectedIndex(4);
                 pantalla = contenedor.getSelectedIndex();
+                passwd1.requestFocus();
                 break;
             case 2:
-                efectivoRetirado = 200;
+                efectivo = 200;
+                pantallaAnterior = contenedor.getSelectedIndex();
+                contenedor.setSelectedIndex(9);
+                pantalla = contenedor.getSelectedIndex();
+                break;
+            case 3:
+                efectivo = 200;
                 pantallaAnterior = contenedor.getSelectedIndex();
                 contenedor.setSelectedIndex(9);
                 pantalla = contenedor.getSelectedIndex();
@@ -1266,7 +1380,13 @@ public class VentanaATM extends javax.swing.JFrame {
                 operacion = Operacion.RT;
                 break;
             case 2:
-                efectivoRetirado = 50;
+                efectivo = 50;
+                pantallaAnterior = contenedor.getSelectedIndex();
+                contenedor.setSelectedIndex(9);
+                pantalla = contenedor.getSelectedIndex();
+                break;
+            case 3:
+                efectivo = 50;
                 pantallaAnterior = contenedor.getSelectedIndex();
                 contenedor.setSelectedIndex(9);
                 pantalla = contenedor.getSelectedIndex();
@@ -1282,7 +1402,13 @@ public class VentanaATM extends javax.swing.JFrame {
                 operacion = Operacion.CME;
                 break;
             case 2:
-                efectivoRetirado = 100;
+                efectivo = 100;
+                pantallaAnterior = contenedor.getSelectedIndex();
+                contenedor.setSelectedIndex(9);
+                pantalla = contenedor.getSelectedIndex();
+                break;
+            case 3:
+                efectivo = 100;
                 pantallaAnterior = contenedor.getSelectedIndex();
                 contenedor.setSelectedIndex(9);
                 pantalla = contenedor.getSelectedIndex();
@@ -1300,6 +1426,12 @@ public class VentanaATM extends javax.swing.JFrame {
                 pantallaAnterior = contenedor.getSelectedIndex();
                 contenedor.setSelectedIndex(12);
                 pantalla = contenedor.getSelectedIndex();
+                break;
+            case 3:
+                pantallaAnterior = contenedor.getSelectedIndex();
+                contenedor.setSelectedIndex(14);
+                pantalla = contenedor.getSelectedIndex();
+                break;
 
         }
     }//GEN-LAST:event_btnDerecha4ActionPerformed
@@ -1314,7 +1446,6 @@ public class VentanaATM extends javax.swing.JFrame {
             case 2,3,4,5,6,7,8:
                 contenedor.setSelectedIndex(1);
                 pantalla = contenedor.getSelectedIndex();
-                txfRetirar.setText("");
                 break;
             case 9:
                 contenedor.setSelectedIndex(pantallaAnterior);
@@ -1334,25 +1465,65 @@ public class VentanaATM extends javax.swing.JFrame {
                 contenedor.setSelectedIndex(2);
                 pantalla = contenedor.getSelectedIndex();
                 break;
+            case 14:
+                txfIngresar.setText("");
+                contenedor.setSelectedIndex(3);
+                pantalla = contenedor.getSelectedIndex();
+                break;
         }
     }//GEN-LAST:event_lblCancelMouseClicked
 
     private void lblEnterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblEnterMouseClicked
         switch (pantalla) {
-            case 9:
-                if (comprobarCantidad(Integer.parseInt(txfRetirar.getText()))) {
-                    insertarHistoricoOperacion();
-                    contenedor.setSelectedIndex(10);
+            case 4:
+                String contr1 = String.valueOf(passwd1.getPassword());
+                String contr2 = String.valueOf(passwd1.getPassword());
+                if (contr1.length() == 0) {
+                    JOptionPane.showMessageDialog(this, "Por favor, introduzca una contraseña", "ERROR", JOptionPane.ERROR_MESSAGE);
+                } else if (contr1.length() < 4) {
+                    JOptionPane.showMessageDialog(this, "La contraseña debe de tener 4 caracteres", "ERROR", JOptionPane.ERROR_MESSAGE);
+                } else if (!contr1.equals(contr2)) {
+                    JOptionPane.showMessageDialog(this, "Las contraseñas son diferentes, por favor intentenlo de nuevo", "ERROR", JOptionPane.ERROR_MESSAGE);
+                    passwd1.setText("");
+                    passwd2.setText("");
+                } else {
+                    contenedor.setSelectedIndex(9);
                     pantalla = contenedor.getSelectedIndex();
                 }
+                break;
+            case 9:
+                if (operacion == Operacion.RE) {
+                    if (comprobarCantidad(efectivo)) {
+                        insertarHistoricoOperacion();
+                        contenedor.setSelectedIndex(13);
+                        pantalla = contenedor.getSelectedIndex();
+                    }
 
+                } else if (operacion == Operacion.DE) {
+
+                    if (comprobarCantidad(efectivo)) {
+                        insertarHistoricoOperacion();
+                        contenedor.setSelectedIndex(10);
+                        pantalla = contenedor.getSelectedIndex();
+                    }
+
+                } else {
+                    if (operacion == null) {
+                        contenedor.setSelectedIndex(11);
+                        pantalla = contenedor.getSelectedIndex();
+                        //Cambiar contraseña
+                    } else {
+                        contenedor.setSelectedIndex(10);
+                        pantalla = contenedor.getSelectedIndex();
+                    }
+
+                }
                 break;
 
             case 10:
                 lblTicket.setBackground(Color.green);
                 contenedor.setSelectedIndex(11);
                 pantalla = contenedor.getSelectedIndex();
-
                 break;
             case 11:
                 contenedor.setSelectedIndex(1);
@@ -1361,7 +1532,12 @@ public class VentanaATM extends javax.swing.JFrame {
             case 12:
                 contenedor.setSelectedIndex(9);
                 pantalla = contenedor.getSelectedIndex();
-                efectivoRetirado = Integer.parseInt(txfRetirar.getText());
+                efectivo = Integer.parseInt(txfRetirar.getText());
+                break;
+            case 14:
+                contenedor.setSelectedIndex(9);
+                pantalla = contenedor.getSelectedIndex();
+                efectivo = Integer.parseInt(txfIngresar.getText());
                 break;
 
         }
@@ -1369,81 +1545,323 @@ public class VentanaATM extends javax.swing.JFrame {
 
     private void lbl3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl3MouseClicked
         switch (pantalla) {
+            case 4:
+                String contr1 = String.valueOf(passwd1.getPassword());
+                String contr2 = String.valueOf(passwd2.getPassword());
+                if (contr1.length() != 4) {
+                    passwd1.setText(contr1 + "3");
+                } else {
+                    if (contr2.length() != 4) {
+                        passwd2.setText(contr2 + "3");
+                    } else {
+                        evt.consume();
+                    }
+
+                }
+                break;
+
             case 12:
                 String retirar = txfRetirar.getText();
-                txfRetirar.setText(retirar + "3");
+                if (retirar.length() != 5) {
+                    txfRetirar.setText(retirar + "3");
+                } else {
+                    evt.consume();
+                }
+                break;
+            case 14:
+                String ingresar = txfIngresar.getText();
+                if (ingresar.length() != 5) {
+                    txfIngresar.setText(ingresar + "3");
+                } else {
+                    evt.consume();
+                }
+                break;
         }
     }//GEN-LAST:event_lbl3MouseClicked
 
     private void lbl4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl4MouseClicked
         switch (pantalla) {
+            case 4:
+                String contr1 = String.valueOf(passwd1.getPassword());
+                String contr2 = String.valueOf(passwd2.getPassword());
+                if (contr1.length() != 4) {
+                    passwd1.setText(contr1 + "4");
+                } else {
+                    if (contr2.length() != 4) {
+                        passwd2.setText(contr2 + "4");
+                    } else {
+                        evt.consume();
+                    }
+
+                }
+                break;
             case 12:
                 String retirar = txfRetirar.getText();
-                txfRetirar.setText(retirar + "4");
+                if (retirar.length() != 5) {
+                    txfRetirar.setText(retirar + "4");
+                } else {
+                    evt.consume();
+                }
+                break;
+            case 14:
+                String ingresar = txfIngresar.getText();
+                if (ingresar.length() != 5) {
+                    txfIngresar.setText(ingresar + "4");
+                } else {
+                    evt.consume();
+                }
+                break;
         }
     }//GEN-LAST:event_lbl4MouseClicked
 
     private void lbl5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl5MouseClicked
         switch (pantalla) {
+            case 4:
+                String contr1 = String.valueOf(passwd1.getPassword());
+                String contr2 = String.valueOf(passwd2.getPassword());
+                if (contr1.length() != 4) {
+                    passwd1.setText(contr1 + "5");
+                } else {
+                    if (contr2.length() != 4) {
+                        passwd2.setText(contr2 + "5");
+                    } else {
+                        evt.consume();
+                    }
+
+                }
+                break;
             case 12:
                 String retirar = txfRetirar.getText();
-                txfRetirar.setText(retirar + "5");
+                if (retirar.length() != 5) {
+                    txfRetirar.setText(retirar + "5");
+                } else {
+                    evt.consume();
+                }
+                break;
+            case 14:
+                String ingresar = txfIngresar.getText();
+                if (ingresar.length() != 5) {
+                    txfIngresar.setText(ingresar + "5");
+                } else {
+                    evt.consume();
+                }
+                break;
         }
     }//GEN-LAST:event_lbl5MouseClicked
 
     private void lbl2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl2MouseClicked
         switch (pantalla) {
+            case 4:
+                String contr1 = String.valueOf(passwd1.getPassword());
+                String contr2 = String.valueOf(passwd2.getPassword());
+                if (contr1.length() != 4) {
+                    passwd1.setText(contr1 + "2");
+                } else {
+                    if (contr2.length() != 4) {
+                        passwd2.setText(contr2 + "2");
+                    } else {
+                        evt.consume();
+                    }
+
+                }
+                break;
             case 12:
                 String retirar = txfRetirar.getText();
-                txfRetirar.setText(retirar + "2");
+                if (retirar.length() != 5) {
+                    txfRetirar.setText(retirar + "2");
+                } else {
+                    evt.consume();
+                }
+                break;
+            case 14:
+                String ingresar = txfIngresar.getText();
+                if (ingresar.length() != 5) {
+                    txfIngresar.setText(ingresar + "2");
+                } else {
+                    evt.consume();
+                }
+                break;
         }
     }//GEN-LAST:event_lbl2MouseClicked
 
     private void lbl6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl6MouseClicked
         switch (pantalla) {
+            case 4:
+                String contr1 = String.valueOf(passwd1.getPassword());
+                String contr2 = String.valueOf(passwd2.getPassword());
+                if (contr1.length() != 4) {
+                    passwd1.setText(contr1 + "6");
+                } else {
+                    if (contr2.length() != 4) {
+                        passwd2.setText(contr2 + "6");
+                    } else {
+                        evt.consume();
+                    }
+
+                }
+                break;
             case 12:
                 String retirar = txfRetirar.getText();
-                txfRetirar.setText(retirar + "6");
+                if (retirar.length() != 5) {
+                    txfRetirar.setText(retirar + "6");
+                } else {
+                    evt.consume();
+                }
+                break;
+            case 14:
+                String ingresar = txfIngresar.getText();
+                if (ingresar.length() != 5) {
+                    txfIngresar.setText(ingresar + "6");
+                } else {
+                    evt.consume();
+                }
+                break;
         }
     }//GEN-LAST:event_lbl6MouseClicked
 
     private void lbl7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl7MouseClicked
         switch (pantalla) {
+            case 4:
+                String contr1 = String.valueOf(passwd1.getPassword());
+                String contr2 = String.valueOf(passwd2.getPassword());
+                if (contr1.length() != 4) {
+                    passwd1.setText(contr1 + "7");
+                } else {
+                    if (contr2.length() != 4) {
+                        passwd2.setText(contr2 + "7");
+                    } else {
+                        evt.consume();
+                    }
+
+                }
+                break;
             case 12:
                 String retirar = txfRetirar.getText();
-                txfRetirar.setText(retirar + "7");
+                if (retirar.length() != 5) {
+                    txfRetirar.setText(retirar + "7");
+                } else {
+                    evt.consume();
+                }
+                break;
+            case 14:
+                String ingresar = txfIngresar.getText();
+                if (ingresar.length() != 5) {
+                    txfIngresar.setText(ingresar + "7");
+                } else {
+                    evt.consume();
+                }
+                break;
         }
     }//GEN-LAST:event_lbl7MouseClicked
 
     private void lbl8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl8MouseClicked
         switch (pantalla) {
+            case 4:
+                String contr1 = String.valueOf(passwd1.getPassword());
+                String contr2 = String.valueOf(passwd2.getPassword());
+                if (contr1.length() != 4) {
+                    passwd1.setText(contr1 + "8");
+                } else {
+                    if (contr2.length() != 4) {
+                        passwd2.setText(contr2 + "8");
+                    } else {
+                        evt.consume();
+                    }
+
+                }
+                break;
             case 12:
                 String retirar = txfRetirar.getText();
-                txfRetirar.setText(retirar + "8");
+                if (retirar.length() != 5) {
+                    txfRetirar.setText(retirar + "8");
+                } else {
+                    evt.consume();
+                }
+                break;
+            case 14:
+                String ingresar = txfIngresar.getText();
+                if (ingresar.length() != 5) {
+                    txfIngresar.setText(ingresar + "8");
+                } else {
+                    evt.consume();
+                }
+                break;
         }
     }//GEN-LAST:event_lbl8MouseClicked
 
     private void lbl9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl9MouseClicked
         switch (pantalla) {
+            case 4:
+                String contr1 = String.valueOf(passwd1.getPassword());
+                String contr2 = String.valueOf(passwd2.getPassword());
+                if (contr1.length() != 4) {
+                    passwd1.setText(contr1 + "9");
+                } else {
+                    if (contr2.length() != 4) {
+                        passwd2.setText(contr2 + "9");
+                    } else {
+                        evt.consume();
+                    }
+
+                }
+                break;
             case 12:
                 String retirar = txfRetirar.getText();
-                txfRetirar.setText(retirar + "9");
+                if (retirar.length() != 5) {
+                    txfRetirar.setText(retirar + "9");
+                } else {
+                    evt.consume();
+                }
+                break;
+            case 14:
+
+                String ingresar = txfIngresar.getText();
+                if (ingresar.length() != 5) {
+                    txfIngresar.setText(ingresar + "9");
+                } else {
+                    evt.consume();
+                }
+
+                break;
         }
     }//GEN-LAST:event_lbl9MouseClicked
 
     private void lbl0MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl0MouseClicked
         switch (pantalla) {
+            case 4:
+                String contr1 = String.valueOf(passwd1.getPassword());
+                String contr2 = String.valueOf(passwd2.getPassword());
+                if (contr1.length() != 4) {
+                    passwd1.setText(contr1 + "0");
+                } else {
+                    if (contr2.length() != 4) {
+                        passwd2.setText(contr2 + "0");
+                    } else {
+                        evt.consume();
+                    }
+
+                }
+                break;
             case 12:
                 String retirar = txfRetirar.getText();
-                if (retirar.equals("")) {
+                if (retirar.equals("") || retirar.length() == 5) {
                     evt.consume();
                 } else {
                     txfRetirar.setText(retirar + "0");
                 }
+                break;
+            case 14:
+                String ingresar = txfIngresar.getText();
+                if (ingresar.equals("") || ingresar.length() == 5) {
+                    evt.consume();
+                } else {
+                    txfIngresar.setText(ingresar + "0");
+                }
+                break;
 
         }
     }//GEN-LAST:event_lbl0MouseClicked
-    
+
     //Para el resto de operaciones meter tmb el tipo de operacion --> para saber el limite legal
     private boolean comprobarCantidad(int cantidad) {
         if (cantidad % 5 != 0) {
@@ -1453,11 +1871,20 @@ public class VentanaATM extends javax.swing.JFrame {
             txfRetirar.setText("");
             return false;
         } else if (cantidad > MAX_INGRESO_RETIRAR) {
-            JOptionPane.showMessageDialog(this, "La cantidad a retirar es mayor que el limite de seguridad", "ERROR", JOptionPane.ERROR_MESSAGE);
-            contenedor.setSelectedIndex(12);
-            pantalla = contenedor.getSelectedIndex();
-            txfRetirar.setText("");
-            return false;
+            if (operacion == Operacion.RE) {
+                JOptionPane.showMessageDialog(this, "La cantidad a retirar es mayor que el limite de seguridad", "ERROR", JOptionPane.ERROR_MESSAGE);
+                contenedor.setSelectedIndex(12);
+                pantalla = contenedor.getSelectedIndex();
+                txfRetirar.setText("");
+                return false;
+            } else if (operacion == Operacion.DE) {
+                JOptionPane.showMessageDialog(this, "La cantidad a ingresar es mayor que el limite de seguridad", "ERROR", JOptionPane.ERROR_MESSAGE);
+                contenedor.setSelectedIndex(14);
+                pantalla = contenedor.getSelectedIndex();
+                txfIngresar.setText("");
+                return false;
+            }
+
         } else {
             try {
                 sentencia = conexion.createStatement();
@@ -1492,7 +1919,8 @@ public class VentanaATM extends javax.swing.JFrame {
                 String fecha = ldtFecha.format(formato);
                 int idOperacion = operacion.getIdentificador();
                 //Comprobamos si la operacion es una transferencia o no:
-                String insert = "insert into historico_operacion values ('" + fecha + "', " + efectivoRetirado + ", \"" + dni + "\", " + idOperacion + ", \"" + ibanRegistrado + "\", NULL);";
+                String insert = "insert into historico_operacion (fecha_operacion, saldo_operacion, dniCliente, idOperacion, ibanEmisor, ibanReceptor)"
+                        + " values ('" + fecha + "', " + efectivo + ", \"" + dni + "\", " + idOperacion + ", \"" + ibanRegistrado + "\", NULL);";
                 sentencia.executeUpdate(insert);
             }
         } catch (SQLException ex) {
@@ -1553,7 +1981,7 @@ public class VentanaATM extends javax.swing.JFrame {
                                 sentencia.executeUpdate(bloquear);
                                 //En caso contrario se da otra oportunidad
                             } else {
-                                JOptionPane.showMessageDialog(this, "Contraseña incorrecta, le quedan " + (NUM_INTENTOS - fallos) + " intentos", "ERROR", JOptionPane.ERROR_MESSAGE);
+                                JOptionPane.showMessageDialog(this, "Contraseña incorrecta. Intentos restantes: " + (NUM_INTENTOS - fallos), "ERROR", JOptionPane.ERROR_MESSAGE);
                                 numeroTajeta.setText(numTarjeta);
                             }
                             return false;
@@ -1672,6 +2100,8 @@ public class VentanaATM extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1683,8 +2113,8 @@ public class VentanaATM extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JPasswordField jPasswordField2;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
@@ -1721,9 +2151,12 @@ public class VentanaATM extends javax.swing.JFrame {
     private javax.swing.JPanel panelAcciones;
     private javax.swing.JPanel panelBotones;
     private javax.swing.JPanel panelIdioma;
+    private javax.swing.JPasswordField passwd1;
+    private javax.swing.JPasswordField passwd2;
     private javax.swing.JPanel realizarTransferencia;
     private javax.swing.JPanel retirarSaldo;
     private javax.swing.JPanel tecladoPrincipal;
+    private javax.swing.JTextField txfIngresar;
     private javax.swing.JTextField txfRetirar;
     // End of variables declaration//GEN-END:variables
     Connection conexion;
@@ -1736,7 +2169,8 @@ public class VentanaATM extends javax.swing.JFrame {
     Idioma idioma;
     int pantalla;
     int pantallaAnterior;
-    int efectivoRetirado;
+    int efectivo;
     Operacion operacion;
     Ticket ticket;
+    KeyboardFocusManager focoActual;
 }
