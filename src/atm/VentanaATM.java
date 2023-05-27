@@ -8,7 +8,6 @@ import bases_datos.Conexion;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
@@ -27,6 +26,7 @@ import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -54,7 +54,52 @@ public class VentanaATM extends javax.swing.JFrame {
         initReloj();
         contenedor.setSelectedIndex(0);
         pantalla = contenedor.getSelectedIndex();
-        focoActual = KeyboardFocusManager.getCurrentKeyboardFocusManager();
+
+    }
+
+    private void initMovimientos() {
+        modeloTabla = (DefaultTableModel) tablaMovimientos.getModel();
+        tablaMovimientos.setModel(modeloTabla);
+        tablaMovimientos.getColumnModel().getColumn(0).setPreferredWidth(200);
+        tablaMovimientos.getColumnModel().getColumn(1).setPreferredWidth(150);
+        tablaMovimientos.getColumnModel().getColumn(2).setPreferredWidth(250);
+        tablaMovimientos.getColumnModel().getColumn(3).setPreferredWidth(310);
+        try {
+            double saldo = 0;
+            sentencia = conexion.createStatement();
+            String selectMovimientos = "select fecha_operacion, saldo_operacion, idOperacion, ibanReceptor from historico_operacion where ibanEmisor = \"" + ibanRegistrado + "\";";
+            resultado = sentencia.executeQuery(selectMovimientos);
+            while (resultado.next()) {
+                String fecha = resultado.getString("fecha_operacion");
+                double valor = resultado.getDouble("saldo_operacion");
+                saldo += valor;
+                int num_operacion = resultado.getInt("idOperacion");
+                String op = "";
+                switch (num_operacion) {
+                    case 1:
+                        op = Operacion.RE.getNombre();
+                        break;
+                    case 2:
+                        op = Operacion.DE.getNombre();
+                        break;
+                    case 3:
+                        op = Operacion.RT.getNombre();
+                        break;
+                    case 4:
+                        op = Operacion.CME.getNombre();
+                        break;
+                    case 5:
+                        op = Operacion.PF.getNombre();
+                }
+                String ibanReceptor = resultado.getString("ibanReceptor");
+                Object[] movBan = {fecha, valor, op, ibanReceptor};
+                modeloTabla.addRow(movBan);
+            }
+            txfSaldoTotal.setText(String.valueOf(saldo));
+
+        } catch (SQLException ex) {
+            Logger.getLogger(VentanaATM.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     private void initBD() {
@@ -173,9 +218,9 @@ public class VentanaATM extends javax.swing.JFrame {
         consultarAgenda = new javax.swing.JPanel();
         jLabel22 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaMovimientos = new javax.swing.JTable();
         jLabel23 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txfSaldoTotal = new javax.swing.JTextField();
         realizarTransferencia = new javax.swing.JPanel();
         jLabel24 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -571,52 +616,73 @@ public class VentanaATM extends javax.swing.JFrame {
 
         consultarAgenda.setBorder(new javax.swing.border.MatteBorder(null));
 
+        jLabel22.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         jLabel22.setText("Movimientos de tu cuenta bancaria:");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaMovimientos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Fecha operacion", "Saldo operacion", "Operacion", "Iban Receptor"
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Double.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
 
-        jLabel23.setText("jLabel23");
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
-        jTextField1.setText("jTextField1");
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tablaMovimientos);
+
+        jLabel23.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        jLabel23.setText("Saldo de su cuenta bancaria:");
+
+        txfSaldoTotal.setFocusable(false);
 
         javax.swing.GroupLayout consultarAgendaLayout = new javax.swing.GroupLayout(consultarAgenda);
         consultarAgenda.setLayout(consultarAgendaLayout);
         consultarAgendaLayout.setHorizontalGroup(
             consultarAgendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(consultarAgendaLayout.createSequentialGroup()
-                .addGap(134, 134, 134)
                 .addGroup(consultarAgendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(108, 108, 108)
-                .addGroup(consultarAgendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE))
-                .addContainerGap(103, Short.MAX_VALUE))
+                    .addGroup(consultarAgendaLayout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 607, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, consultarAgendaLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(152, 152, 152)))
+                .addGroup(consultarAgendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, consultarAgendaLayout.createSequentialGroup()
+                        .addComponent(txfSaldoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, consultarAgendaLayout.createSequentialGroup()
+                        .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(19, 19, 19))))
         );
         consultarAgendaLayout.setVerticalGroup(
             consultarAgendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(consultarAgendaLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addGroup(consultarAgendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
-                    .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(consultarAgendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(consultarAgendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(103, Short.MAX_VALUE))
+                    .addComponent(txfSaldoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         contenedor.addTab("tab6", consultarAgenda);
@@ -1368,7 +1434,9 @@ public class VentanaATM extends javax.swing.JFrame {
             case 1:
                 contenedor.setSelectedIndex(5);
                 pantalla = contenedor.getSelectedIndex();
+                initMovimientos();
                 break;
+
         }
     }//GEN-LAST:event_btnDerecha1ActionPerformed
 
@@ -1474,10 +1542,11 @@ public class VentanaATM extends javax.swing.JFrame {
     }//GEN-LAST:event_lblCancelMouseClicked
 
     private void lblEnterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblEnterMouseClicked
+        String contr1, contr2;
         switch (pantalla) {
             case 4:
-                String contr1 = String.valueOf(passwd1.getPassword());
-                String contr2 = String.valueOf(passwd1.getPassword());
+                contr1 = String.valueOf(passwd1.getPassword());
+                contr2 = String.valueOf(passwd1.getPassword());
                 if (contr1.length() == 0) {
                     JOptionPane.showMessageDialog(this, "Por favor, introduzca una contraseña", "ERROR", JOptionPane.ERROR_MESSAGE);
                 } else if (contr1.length() < 4) {
@@ -1512,6 +1581,9 @@ public class VentanaATM extends javax.swing.JFrame {
                         contenedor.setSelectedIndex(11);
                         pantalla = contenedor.getSelectedIndex();
                         //Cambiar contraseña
+                        contr1 = String.valueOf(passwd1.getPassword());
+                        contr2 = String.valueOf(passwd1.getPassword());
+                        cambiarContrasena(contr1, contr2);
                     } else {
                         contenedor.setSelectedIndex(10);
                         pantalla = contenedor.getSelectedIndex();
@@ -1862,6 +1934,16 @@ public class VentanaATM extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_lbl0MouseClicked
 
+    private void cambiarContrasena(String contra1, String contra2) {
+        try {
+            sentencia = conexion.createStatement();
+            String updateContra = "update tarjeta_bancaria set pin = " + Integer.parseInt(contra2) + " where numero_tarjeta = \"" + tarjetaIngresada + "\";";
+            sentencia.executeUpdate(updateContra);
+        } catch (SQLException ex) {
+            Logger.getLogger(VentanaATM.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     //Para el resto de operaciones meter tmb el tipo de operacion --> para saber el limite legal
     private boolean comprobarCantidad(int cantidad) {
         if (cantidad % 5 != 0) {
@@ -1987,13 +2069,25 @@ public class VentanaATM extends javax.swing.JFrame {
                             return false;
                             //Si la contraseña corresponde al iban introducido:
                         } else {
-                            ibanRegistrado = resultado.getString("iban");
-                            tarjetaIngresada = numTarjeta;
-                            lblTarjeta.setBackground(Color.green);
-                            lblTicket.setBackground(Color.red);
-                            contenedor.setSelectedIndex(1);
-                            pantalla = contenedor.getSelectedIndex();
-                            return true;
+                            //Comprobamos que la cuenta bancaria no este bloqueada:
+                            String selectBloquearIban = "select cb.bloqueada from cuenta_bancaria cb join tarjeta_bancaria tb using(iban) where numero_tarjeta=\""+numTarjeta+"\";";
+                            resultado = sentencia.executeQuery(selectBloquearIban);
+                            resultado.next();
+                            int bloqueadaIban = resultado.getInt("cb.bloqueada");
+                            if (bloqueadaIban == 1) {
+                                JOptionPane.showMessageDialog(this, "Cuenta bancaria bloqueada, contacte con un administrador para su desbloqueo", "ERROR", JOptionPane.ERROR_MESSAGE);
+                                return false;
+                            } else {
+                                ibanRegistrado = resultado.getString("iban");
+                                tarjetaIngresada = numTarjeta;
+                                lblTarjeta.setBackground(Color.green);
+                                lblTicket.setBackground(Color.red);
+                                contenedor.setSelectedIndex(1);
+                                pantalla = contenedor.getSelectedIndex();
+                                return true;
+                            }
+                            //En caso contrario accedemos:
+
                         }
                     }
                 }
@@ -2117,9 +2211,7 @@ public class VentanaATM extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JLabel lbl0;
     private javax.swing.JLabel lbl1;
@@ -2155,9 +2247,11 @@ public class VentanaATM extends javax.swing.JFrame {
     private javax.swing.JPasswordField passwd2;
     private javax.swing.JPanel realizarTransferencia;
     private javax.swing.JPanel retirarSaldo;
+    private javax.swing.JTable tablaMovimientos;
     private javax.swing.JPanel tecladoPrincipal;
     private javax.swing.JTextField txfIngresar;
     private javax.swing.JTextField txfRetirar;
+    private javax.swing.JTextField txfSaldoTotal;
     // End of variables declaration//GEN-END:variables
     Connection conexion;
     Statement sentencia;
@@ -2172,5 +2266,5 @@ public class VentanaATM extends javax.swing.JFrame {
     int efectivo;
     Operacion operacion;
     Ticket ticket;
-    KeyboardFocusManager focoActual;
+    private DefaultTableModel modeloTabla;
 }

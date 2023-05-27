@@ -12,7 +12,7 @@ public enum Operacion {
     RE("Retirar efectivo",1),
     DE("Depositar efectivo",2),
     RT("Realizar transferencia",3),
-    CME("Cambiar a moneda extranjera",4),
+    CME("Cambiar moneda",4),
     PF("Pagar factura",5);
     
     private String nombre;
