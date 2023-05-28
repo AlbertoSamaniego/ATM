@@ -1051,10 +1051,10 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="295" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jTextField2" min="-2" pref="368" max="-2" attributes="0"/>
-                              <Component id="jLabel32" min="-2" pref="391" max="-2" attributes="0"/>
+                              <Component id="txfFactura" min="-2" pref="368" max="-2" attributes="0"/>
+                              <Component id="jLabel32" min="-2" pref="475" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="295" max="32767" attributes="0"/>
+                          <EmptySpace pref="211" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1064,7 +1064,7 @@
                           <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
                           <Component id="jLabel32" min="-2" pref="52" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                          <Component id="jTextField2" min="-2" pref="47" max="-2" attributes="0"/>
+                          <Component id="txfFactura" min="-2" pref="47" max="-2" attributes="0"/>
                           <EmptySpace pref="261" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -1073,13 +1073,13 @@
               <SubComponents>
                 <Component class="javax.swing.JLabel" name="jLabel32">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="factura"/>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe UI" size="24" style="3"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Introduzca el valor de la factura a pagar:"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="jTextField2">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="jTextField2"/>
-                  </Properties>
+                <Component class="javax.swing.JTextField" name="txfFactura">
                 </Component>
               </SubComponents>
             </Container>

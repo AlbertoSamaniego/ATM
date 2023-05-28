@@ -54,7 +54,7 @@ public class VentanaATM extends javax.swing.JFrame {
         initReloj();
         contenedor.setSelectedIndex(0);
         pantalla = contenedor.getSelectedIndex();
-        
+
     }
 
     private void initTransferencia() {
@@ -266,7 +266,7 @@ public class VentanaATM extends javax.swing.JFrame {
         jLabel31 = new javax.swing.JLabel();
         pagarFactura = new javax.swing.JPanel();
         jLabel32 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txfFactura = new javax.swing.JTextField();
         confirmarOperacion = new javax.swing.JPanel();
         jLabel33 = new javax.swing.JLabel();
         confirmarTicket = new javax.swing.JPanel();
@@ -844,9 +844,8 @@ public class VentanaATM extends javax.swing.JFrame {
 
         contenedor.addTab("tab8", cambiarMoneda);
 
-        jLabel32.setText("factura");
-
-        jTextField2.setText("jTextField2");
+        jLabel32.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
+        jLabel32.setText("Introduzca el valor de la factura a pagar:");
 
         javax.swing.GroupLayout pagarFacturaLayout = new javax.swing.GroupLayout(pagarFactura);
         pagarFactura.setLayout(pagarFacturaLayout);
@@ -855,9 +854,9 @@ public class VentanaATM extends javax.swing.JFrame {
             .addGroup(pagarFacturaLayout.createSequentialGroup()
                 .addGap(295, 295, 295)
                 .addGroup(pagarFacturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 391, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(295, Short.MAX_VALUE))
+                    .addComponent(txfFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 475, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(211, Short.MAX_VALUE))
         );
         pagarFacturaLayout.setVerticalGroup(
             pagarFacturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -865,7 +864,7 @@ public class VentanaATM extends javax.swing.JFrame {
                 .addGap(67, 67, 67)
                 .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txfFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(261, Short.MAX_VALUE))
         );
 
@@ -1360,6 +1359,15 @@ public class VentanaATM extends javax.swing.JFrame {
 
                 }
                 break;
+
+            case 8:
+                String factura = txfFactura.getText();
+                if (factura.length() != 4) {
+                    txfFactura.setText(factura + "1");
+                } else {
+                    evt.consume();
+                }
+                break;
             case 12:
                 String retirar = txfRetirar.getText();
                 if (retirar.length() != 4) {
@@ -1571,6 +1579,7 @@ public class VentanaATM extends javax.swing.JFrame {
         switch (pantalla) {
             case 1:
                 contenedor.setSelectedIndex(8);
+                pantalla = contenedor.getSelectedIndex();
                 operacion = Operacion.PF;
                 break;
             case 2:
@@ -1657,6 +1666,11 @@ public class VentanaATM extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "Por favor, seleccione la cuenta a la que quiere realizar la transferencia", "ERROR", JOptionPane.ERROR_MESSAGE);
                 }
                 break;
+            case 8:
+                contenedor.setSelectedIndex(9);
+                pantalla = contenedor.getSelectedIndex();
+                efectivo = Integer.parseInt(txfFactura.getText());
+                break;
             case 9:
                 if (operacion == Operacion.RE) {
                     if (comprobarCantidad(efectivo)) {
@@ -1674,13 +1688,19 @@ public class VentanaATM extends javax.swing.JFrame {
                     }
 
                 } else if (operacion == Operacion.RT) {
-                    if(comprobarCantidad(efectivo)){
+                    if (comprobarCantidad(efectivo)) {
                         insertarHistoricoOperacion();
                         contenedor.setSelectedIndex(10);
                         pantalla = contenedor.getSelectedIndex();
                     }
-                    
-                    
+
+                } else if (operacion == Operacion.PF) {
+                    if (comprobarCantidad(efectivo)) {
+                        insertarHistoricoOperacion();
+                        contenedor.setSelectedIndex(10);
+                        pantalla = contenedor.getSelectedIndex();
+                    }
+
                 } else {
                     if (operacion == null) {
                         contenedor.setSelectedIndex(11);
@@ -1741,6 +1761,15 @@ public class VentanaATM extends javax.swing.JFrame {
                 }
                 break;
 
+            case 8:
+                String factura = txfFactura.getText();
+                if (factura.length() != 4) {
+                    txfFactura.setText(factura + "3");
+                } else {
+                    evt.consume();
+                }
+                break;
+
             case 12:
                 String retirar = txfRetirar.getText();
                 if (retirar.length() != 4) {
@@ -1782,6 +1811,14 @@ public class VentanaATM extends javax.swing.JFrame {
                         evt.consume();
                     }
 
+                }
+                break;
+            case 8:
+                String factura = txfFactura.getText();
+                if (factura.length() != 4) {
+                    txfFactura.setText(factura + "4");
+                } else {
+                    evt.consume();
                 }
                 break;
             case 12:
@@ -1827,6 +1864,14 @@ public class VentanaATM extends javax.swing.JFrame {
 
                 }
                 break;
+            case 8:
+                String factura = txfFactura.getText();
+                if (factura.length() != 4) {
+                    txfFactura.setText(factura + "5");
+                } else {
+                    evt.consume();
+                }
+                break;
             case 12:
                 String retirar = txfRetirar.getText();
                 if (retirar.length() != 4) {
@@ -1868,6 +1913,14 @@ public class VentanaATM extends javax.swing.JFrame {
                         evt.consume();
                     }
 
+                }
+                break;
+            case 8:
+                String factura = txfFactura.getText();
+                if (factura.length() != 4) {
+                    txfFactura.setText(factura + "2");
+                } else {
+                    evt.consume();
                 }
                 break;
             case 12:
@@ -1913,6 +1966,14 @@ public class VentanaATM extends javax.swing.JFrame {
 
                 }
                 break;
+            case 8:
+                String factura = txfFactura.getText();
+                if (factura.length() != 4) {
+                    txfFactura.setText(factura + "6");
+                } else {
+                    evt.consume();
+                }
+                break;
             case 12:
                 String retirar = txfRetirar.getText();
                 if (retirar.length() != 4) {
@@ -1954,6 +2015,14 @@ public class VentanaATM extends javax.swing.JFrame {
                         evt.consume();
                     }
 
+                }
+                break;
+            case 8:
+                String factura = txfFactura.getText();
+                if (factura.length() != 4) {
+                    txfFactura.setText(factura + "7");
+                } else {
+                    evt.consume();
                 }
                 break;
             case 12:
@@ -1999,6 +2068,14 @@ public class VentanaATM extends javax.swing.JFrame {
 
                 }
                 break;
+            case 8:
+                String factura = txfFactura.getText();
+                if (factura.length() != 4) {
+                    txfFactura.setText(factura + "8");
+                } else {
+                    evt.consume();
+                }
+                break;
             case 12:
                 String retirar = txfRetirar.getText();
                 if (retirar.length() != 4) {
@@ -2040,6 +2117,14 @@ public class VentanaATM extends javax.swing.JFrame {
                         evt.consume();
                     }
 
+                }
+                break;
+            case 8:
+                String factura = txfFactura.getText();
+                if (factura.length() != 4) {
+                    txfFactura.setText(factura + "9");
+                } else {
+                    evt.consume();
                 }
                 break;
             case 12:
@@ -2087,6 +2172,14 @@ public class VentanaATM extends javax.swing.JFrame {
 
                 }
                 break;
+            case 8:
+                String factura = txfFactura.getText();
+                if (!factura.equals("") && factura.length() != 4) {
+                    txfFactura.setText(factura + "0");
+                } else {
+                    evt.consume();
+                }
+                break;
             case 12:
                 String retirar = txfRetirar.getText();
                 if (retirar.equals("") || retirar.length() == 4) {
@@ -2127,31 +2220,54 @@ public class VentanaATM extends javax.swing.JFrame {
 
     //Para el resto de operaciones meter tmb el tipo de operacion --> para saber el limite legal
     private boolean comprobarCantidad(int cantidad) {
-        
-        if(operacion == Operacion.RT){
-            if(cantidad > MAX_TRANSFERENCIA){
+        if (operacion == Operacion.RT) {
+            if (cantidad > MAX_TRANSFERENCIA) {
                 JOptionPane.showMessageDialog(this, "La cantidad a retirar es mayor que el limite de seguridad", "ERROR", JOptionPane.ERROR_MESSAGE);
                 contenedor.setSelectedIndex(15);
                 pantalla = contenedor.getSelectedIndex();
                 txfTransferencia.setText("");
                 return false;
-            }else{
+            } else {
                 try {
                     String selectSaldo = "select saldo from cuenta_bancaria where iban =\"" + ibanRegistrado + "\";";
                     resultado = sentencia.executeQuery(selectSaldo);
                     resultado.next();
                     double saldo = resultado.getDouble("saldo");
                     if (cantidad > saldo) {
-                    JOptionPane.showMessageDialog(this, "La cantidad a transferir es mayor que el saldo de su cuenta", "ERROR", JOptionPane.ERROR_MESSAGE);
-                    contenedor.setSelectedIndex(15);
-                    pantalla = contenedor.getSelectedIndex();
-                    txfTransferencia.setText("");
-                    return false;
-                }
-                    
+                        JOptionPane.showMessageDialog(this, "La cantidad a transferir es mayor que el saldo de su cuenta", "ERROR", JOptionPane.ERROR_MESSAGE);
+                        contenedor.setSelectedIndex(15);
+                        pantalla = contenedor.getSelectedIndex();
+                        txfTransferencia.setText("");
+                        return false;
+                    }
+
                 } catch (SQLException ex) {
                     Logger.getLogger(VentanaATM.class.getName()).log(Level.SEVERE, null, ex);
                 }
+            }
+        } else if (operacion == Operacion.PF) {
+            String selectSaldo = "select saldo from cuenta_bancaria where iban =\"" + ibanRegistrado + "\";";
+            double saldo = 0;
+            try {
+                resultado = sentencia.executeQuery(selectSaldo);
+                resultado.next();
+                saldo = resultado.getDouble("saldo");
+            } catch (SQLException ex) {
+                Logger.getLogger(VentanaATM.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            if (cantidad > saldo) {
+                JOptionPane.showMessageDialog(this, "No hay saldo suficiente en la cuenta", "ERROR", JOptionPane.ERROR_MESSAGE);
+                contenedor.setSelectedIndex(8);
+                pantalla = contenedor.getSelectedIndex();
+                txfFactura.setText("");
+                return false;
+            } else if (cantidad > MAX_CAJERO) {
+                JOptionPane.showMessageDialog(this, "No se puede pagar facturas de más de: " + MAX_CAJERO, "ERROR", JOptionPane.ERROR_MESSAGE);
+                contenedor.setSelectedIndex(8);
+                pantalla = contenedor.getSelectedIndex();
+                txfFactura.setText("");
+                return false;
             }
         }
         if (cantidad % 5 != 0) {
@@ -2209,9 +2325,17 @@ public class VentanaATM extends javax.swing.JFrame {
                 String fecha = ldtFecha.format(formato);
                 int idOperacion = operacion.getIdentificador();
                 //Comprobamos si la operacion es una transferencia o no:
-                String insert = "insert into historico_operacion (fecha_operacion, saldo_operacion, dniCliente, idOperacion, ibanEmisor, ibanReceptor)"
-                        + " values ('" + fecha + "', " + efectivo + ", \"" + dni + "\", " + idOperacion + ", \"" + ibanRegistrado + "\", \"" + ibanReceptor + "\");";
-                sentencia.executeUpdate(insert);
+                String insert;
+                if (operacion == Operacion.RT) {
+                    insert = "insert into historico_operacion (fecha_operacion, saldo_operacion, dniCliente, idOperacion, ibanEmisor, ibanReceptor)"
+                            + " values ('" + fecha + "', " + efectivo + ", \"" + dni + "\", " + idOperacion + ", \"" + ibanRegistrado + "\", \"" + ibanReceptor + "\");";
+                    sentencia.executeUpdate(insert);
+                }else{
+                    insert = "insert into historico_operacion (fecha_operacion, saldo_operacion, dniCliente, idOperacion, ibanEmisor, ibanReceptor)"
+                            + " values ('" + fecha + "', " + efectivo + ", \"" + dni + "\", " + idOperacion + ", \"" + ibanRegistrado + "\", NULL);";
+                    sentencia.executeUpdate(insert);
+                }
+
             }
         } catch (SQLException ex) {
             Logger.getLogger(VentanaATM.class.getName()).log(Level.SEVERE, null, ex);
@@ -2424,7 +2548,6 @@ public class VentanaATM extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JLabel lbl0;
     private javax.swing.JLabel lbl1;
     private javax.swing.JLabel lbl2;
@@ -2462,6 +2585,7 @@ public class VentanaATM extends javax.swing.JFrame {
     private javax.swing.JTable tablaMovimientos;
     private javax.swing.JTable tablaTransferencia;
     private javax.swing.JPanel tecladoPrincipal;
+    private javax.swing.JTextField txfFactura;
     private javax.swing.JTextField txfIngresar;
     private javax.swing.JTextField txfRetirar;
     private javax.swing.JTextField txfSaldoTotal;
@@ -2471,7 +2595,7 @@ public class VentanaATM extends javax.swing.JFrame {
     Statement sentencia;
     ResultSet resultado;
     private String ibanRegistrado;
-    private String ibanReceptor =null;
+    private String ibanReceptor = null;
     private String tarjetaIngresada;
     private int fallos;
     private Timer reloj;
