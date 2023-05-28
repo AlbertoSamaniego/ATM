@@ -19,7 +19,7 @@ public class Ticket extends JFrame {
         setTitle("Ticket obtenido");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(400, 300);
-        setLocation(400,600);
+        setLocation(1400,350);
         
         // Panel principal
         JPanel mainPanel = new JPanel();

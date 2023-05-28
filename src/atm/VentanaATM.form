@@ -1650,6 +1650,9 @@
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="lblClear">
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblClearMouseClicked"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="lblEnter">
               <Events>
