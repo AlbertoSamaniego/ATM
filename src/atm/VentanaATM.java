@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -39,7 +40,7 @@ public class VentanaATM extends javax.swing.JFrame {
     public static final int MAX_CAMBIO_MONEDA = 1000;
     public static final int MAX_TRANSFERENCIA = 2000;
     public static final int MAX_BILLETE = 50;
-    public static final int MAX_CAJERO = 300;
+    public static final int MAX_CAJERO = 10000;
     public static final int MAX_INACTIVIDAD = 60000;
 
     /**
@@ -257,7 +258,7 @@ public class VentanaATM extends javax.swing.JFrame {
         tablaTransferencia = new javax.swing.JTable();
         cambiarMoneda = new javax.swing.JPanel();
         jLabel25 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cmbMonedas = new javax.swing.JComboBox<>();
         jLabel26 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
@@ -284,6 +285,9 @@ public class VentanaATM extends javax.swing.JFrame {
         jPanel8 = new javax.swing.JPanel();
         jLabel39 = new javax.swing.JLabel();
         txfTransferencia = new javax.swing.JTextField();
+        jPanel9 = new javax.swing.JPanel();
+        jLabel40 = new javax.swing.JLabel();
+        txfIntercambio = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         btnInzquierda1 = new javax.swing.JButton();
         btnInzquierda2 = new javax.swing.JButton();
@@ -372,7 +376,7 @@ public class VentanaATM extends javax.swing.JFrame {
                 .addGroup(panelIdiomaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnIngles, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
                     .addComponent(btnEspanol, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(150, Short.MAX_VALUE))
+                .addContainerGap(154, Short.MAX_VALUE))
         );
 
         contenedor.addTab("tab1", panelIdioma);
@@ -522,7 +526,7 @@ public class VentanaATM extends javax.swing.JFrame {
                     .addGroup(retirarSaldoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
                 .addGroup(retirarSaldoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -591,7 +595,7 @@ public class VentanaATM extends javax.swing.JFrame {
                 .addGroup(depositarSaldoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                 .addGroup(depositarSaldoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -634,7 +638,7 @@ public class VentanaATM extends javax.swing.JFrame {
         cambiarPINLayout.setVerticalGroup(
             cambiarPINLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(cambiarPINLayout.createSequentialGroup()
-                .addContainerGap(139, Short.MAX_VALUE)
+                .addContainerGap(143, Short.MAX_VALUE)
                 .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(passwd1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -715,7 +719,7 @@ public class VentanaATM extends javax.swing.JFrame {
                 .addGroup(consultarAgendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txfSaldoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         contenedor.addTab("tab6", consultarAgenda);
@@ -766,7 +770,7 @@ public class VentanaATM extends javax.swing.JFrame {
             .addGroup(realizarTransferenciaLayout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33))
         );
@@ -775,20 +779,30 @@ public class VentanaATM extends javax.swing.JFrame {
 
         cambiarMoneda.setBorder(new javax.swing.border.MatteBorder(null));
 
-        jLabel25.setText("Eliga la moneda extranjera");
+        jLabel25.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
+        jLabel25.setText("Eliga la moneda extranjera:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbMonedas.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
 
+        jLabel26.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         jLabel26.setText("20");
 
+        jLabel27.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        jLabel27.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel27.setText("50");
 
+        jLabel28.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         jLabel28.setText("75");
 
+        jLabel29.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        jLabel29.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel29.setText("100");
 
+        jLabel30.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         jLabel30.setText("200");
 
+        jLabel31.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        jLabel31.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel31.setText("Otra cantidad");
 
         javax.swing.GroupLayout cambiarMonedaLayout = new javax.swing.GroupLayout(cambiarMoneda);
@@ -796,50 +810,48 @@ public class VentanaATM extends javax.swing.JFrame {
         cambiarMonedaLayout.setHorizontalGroup(
             cambiarMonedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(cambiarMonedaLayout.createSequentialGroup()
-                .addGap(88, 88, 88)
+                .addGap(89, 89, 89)
                 .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(86, 86, 86)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(85, 85, 85)
+                .addComponent(cmbMonedas, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(131, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cambiarMonedaLayout.createSequentialGroup()
-                .addGroup(cambiarMonedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addContainerGap()
+                .addGroup(cambiarMonedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(cambiarMonedaLayout.createSequentialGroup()
-                        .addGap(42, 42, 42)
                         .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, cambiarMonedaLayout.createSequentialGroup()
-                        .addGap(32, 32, 32)
+                        .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(cambiarMonedaLayout.createSequentialGroup()
                         .addGroup(cambiarMonedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(cambiarMonedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel31, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
-                            .addComponent(jLabel29, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(79, 79, 79))
+                        .addGroup(cambiarMonedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel29, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel31, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap())
         );
         cambiarMonedaLayout.setVerticalGroup(
             cambiarMonedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(cambiarMonedaLayout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addGroup(cambiarMonedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel25, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE))
-                .addGap(114, 114, 114)
+                .addGap(35, 35, 35)
+                .addGroup(cambiarMonedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbMonedas, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(119, 119, 119)
                 .addGroup(cambiarMonedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(52, 52, 52)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addGroup(cambiarMonedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
-                .addGroup(cambiarMonedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(40, 40, 40)
+                .addGroup(cambiarMonedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34))
+                .addContainerGap())
         );
 
         contenedor.addTab("tab8", cambiarMoneda);
@@ -865,7 +877,7 @@ public class VentanaATM extends javax.swing.JFrame {
                 .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
                 .addComponent(txfFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(261, Short.MAX_VALUE))
+                .addContainerGap(265, Short.MAX_VALUE))
         );
 
         contenedor.addTab("tab9", pagarFactura);
@@ -888,7 +900,7 @@ public class VentanaATM extends javax.swing.JFrame {
             .addGroup(confirmarOperacionLayout.createSequentialGroup()
                 .addGap(42, 42, 42)
                 .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(357, Short.MAX_VALUE))
+                .addContainerGap(361, Short.MAX_VALUE))
         );
 
         contenedor.addTab("tab10", confirmarOperacion);
@@ -910,7 +922,7 @@ public class VentanaATM extends javax.swing.JFrame {
             .addGroup(confirmarTicketLayout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(379, Short.MAX_VALUE))
+                .addContainerGap(383, Short.MAX_VALUE))
         );
 
         contenedor.addTab("tab11", confirmarTicket);
@@ -932,7 +944,7 @@ public class VentanaATM extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addComponent(jLabel35, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(393, Short.MAX_VALUE))
+                .addContainerGap(397, Short.MAX_VALUE))
         );
 
         contenedor.addTab("tab12", jPanel3);
@@ -964,7 +976,7 @@ public class VentanaATM extends javax.swing.JFrame {
                 .addComponent(jLabel36, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(64, 64, 64)
                 .addComponent(txfRetirar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(249, Short.MAX_VALUE))
+                .addContainerGap(253, Short.MAX_VALUE))
         );
 
         contenedor.addTab("tab13", jPanel5);
@@ -986,7 +998,7 @@ public class VentanaATM extends javax.swing.JFrame {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(118, 118, 118)
                 .addComponent(jLabel37, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(275, Short.MAX_VALUE))
+                .addContainerGap(279, Short.MAX_VALUE))
         );
 
         contenedor.addTab("tab14", jPanel6);
@@ -1016,7 +1028,7 @@ public class VentanaATM extends javax.swing.JFrame {
                 .addComponent(jLabel38, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(44, 44, 44)
                 .addComponent(txfIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(275, Short.MAX_VALUE))
+                .addContainerGap(279, Short.MAX_VALUE))
         );
 
         contenedor.addTab("tab15", jPanel7);
@@ -1047,10 +1059,38 @@ public class VentanaATM extends javax.swing.JFrame {
                 .addComponent(jLabel39, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(65, 65, 65)
                 .addComponent(txfTransferencia, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(237, Short.MAX_VALUE))
+                .addContainerGap(241, Short.MAX_VALUE))
         );
 
         contenedor.addTab("tab16", jPanel8);
+
+        jLabel40.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
+        jLabel40.setText("Introduce la cantidad a intercambiar:");
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
+                .addContainerGap(274, Short.MAX_VALUE)
+                .addComponent(jLabel40, javax.swing.GroupLayout.PREFERRED_SIZE, 459, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(248, 248, 248))
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addGap(397, 397, 397)
+                .addComponent(txfIntercambio, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addGap(49, 49, 49)
+                .addComponent(jLabel40, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
+                .addComponent(txfIntercambio, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(274, Short.MAX_VALUE))
+        );
+
+        contenedor.addTab("tab17", jPanel9);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel2.setLayout(new java.awt.GridLayout(4, 1, 0, 20));
@@ -1400,6 +1440,13 @@ public class VentanaATM extends javax.swing.JFrame {
                     evt.consume();
                 }
                 break;
+            case 16:
+                String intercambiar = txfIntercambio.getText();
+                if (validarTecla(intercambiar)) {
+                    txfIntercambio.setText(intercambiar + "1");
+                } else {
+                    evt.consume();
+                }
         }
     }//GEN-LAST:event_lbl1MouseClicked
 
@@ -1418,7 +1465,8 @@ public class VentanaATM extends javax.swing.JFrame {
     private void btnDineroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDineroActionPerformed
         switch (pantalla) {
             case 13:
-                
+                devolucion = new Devolucion(efectivo);
+                devolucion.setVisible(true);
                 moverPantalla(10);
                 break;
 
@@ -1474,6 +1522,12 @@ public class VentanaATM extends javax.swing.JFrame {
                 pantallaAnterior = contenedor.getSelectedIndex();
                 moverPantalla(9);
                 break;
+            case 7:
+                efectivo = 20;
+                if (comprobarMoneda()) {
+                    moverPantalla(9);
+                }
+                break;
         }
     }//GEN-LAST:event_btnInzquierda2ActionPerformed
 
@@ -1493,6 +1547,12 @@ public class VentanaATM extends javax.swing.JFrame {
                 pantallaAnterior = contenedor.getSelectedIndex();
                 moverPantalla(9);
                 break;
+            case 7:
+                efectivo = 75;
+                if (comprobarMoneda()) {
+                    moverPantalla(9);
+                }
+                break;
         }
     }//GEN-LAST:event_btnInzquierda3ActionPerformed
 
@@ -1511,6 +1571,12 @@ public class VentanaATM extends javax.swing.JFrame {
                 efectivo = 200;
                 pantallaAnterior = contenedor.getSelectedIndex();
                 moverPantalla(9);
+                break;
+            case 7:
+                efectivo = 200;
+                if (comprobarMoneda()) {
+                    moverPantalla(9);
+                }
                 break;
         }
     }//GEN-LAST:event_btnInzquierda4ActionPerformed
@@ -1542,14 +1608,21 @@ public class VentanaATM extends javax.swing.JFrame {
                 pantallaAnterior = contenedor.getSelectedIndex();
                 moverPantalla(9);
                 break;
+            case 7:
+                efectivo = 50;
+                if (comprobarMoneda()) {
+                    moverPantalla(9);
+                }
+                break;
         }
     }//GEN-LAST:event_btnDerecha2ActionPerformed
 
     private void btnDerecha3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDerecha3ActionPerformed
         switch (pantalla) {
             case 1:
-                moverPantalla(7);
                 operacion = Operacion.CME;
+                initComboBox();
+                moverPantalla(7);
                 break;
             case 2:
                 efectivo = 100;
@@ -1560,6 +1633,12 @@ public class VentanaATM extends javax.swing.JFrame {
                 efectivo = 100;
                 pantallaAnterior = contenedor.getSelectedIndex();
                 moverPantalla(9);
+                break;
+            case 7:
+                efectivo = 100;
+                if (comprobarMoneda()) {
+                    moverPantalla(9);
+                }
                 break;
         }
     }//GEN-LAST:event_btnDerecha3ActionPerformed
@@ -1578,6 +1657,13 @@ public class VentanaATM extends javax.swing.JFrame {
                 pantallaAnterior = contenedor.getSelectedIndex();
                 moverPantalla(14);
                 break;
+            case 7:
+                if (comprobarMoneda()) {
+                    pantallaAnterior = contenedor.getSelectedIndex();
+                    moverPantalla(16);
+                }
+
+                break;
 
         }
     }//GEN-LAST:event_btnDerecha4ActionPerformed
@@ -1593,6 +1679,9 @@ public class VentanaATM extends javax.swing.JFrame {
                 break;
             case 9:
                 vaciarCeldas();
+                if(operacion == Operacion.CME){
+                    initComboBox();
+                }
                 moverPantalla(pantallaAnterior);
                 break;
             case 10:
@@ -1674,6 +1763,11 @@ public class VentanaATM extends javax.swing.JFrame {
                         moverPantalla(10);
                     }
 
+                } else if (operacion == Operacion.CME) {
+                    if (comprobarCantidad(efectivo)) {
+                        insertarHistoricoOperacion();
+                        moverPantalla(10);
+                    }
                 } else {
                     if (operacion == null) {
                         moverPantalla(11);
@@ -1706,6 +1800,10 @@ public class VentanaATM extends javax.swing.JFrame {
             case 15:
                 moverPantalla(9);
                 efectivo = Integer.parseInt(txfTransferencia.getText());
+                break;
+            case 16:
+                moverPantalla(9);
+                efectivo = Integer.parseInt(txfIntercambio.getText());
                 break;
 
         }
@@ -1761,6 +1859,13 @@ public class VentanaATM extends javax.swing.JFrame {
                     evt.consume();
                 }
                 break;
+            case 16:
+                String intercambiar = txfIntercambio.getText();
+                if (validarTecla(intercambiar)) {
+                    txfIntercambio.setText(intercambiar + "3");
+                } else {
+                    evt.consume();
+                }
         }
     }//GEN-LAST:event_lbl3MouseClicked
 
@@ -1812,6 +1917,13 @@ public class VentanaATM extends javax.swing.JFrame {
                     evt.consume();
                 }
                 break;
+            case 16:
+                String intercambiar = txfIntercambio.getText();
+                if (validarTecla(intercambiar)) {
+                    txfIntercambio.setText(intercambiar + "4");
+                } else {
+                    evt.consume();
+                }
         }
     }//GEN-LAST:event_lbl4MouseClicked
 
@@ -1863,6 +1975,13 @@ public class VentanaATM extends javax.swing.JFrame {
                     evt.consume();
                 }
                 break;
+            case 16:
+                String intercambiar = txfIntercambio.getText();
+                if (validarTecla(intercambiar)) {
+                    txfIntercambio.setText(intercambiar + "5");
+                } else {
+                    evt.consume();
+                }
         }
     }//GEN-LAST:event_lbl5MouseClicked
 
@@ -1914,6 +2033,13 @@ public class VentanaATM extends javax.swing.JFrame {
                     evt.consume();
                 }
                 break;
+            case 16:
+                String intercambiar = txfIntercambio.getText();
+                if (validarTecla(intercambiar)) {
+                    txfIntercambio.setText(intercambiar + "2");
+                } else {
+                    evt.consume();
+                }
         }
     }//GEN-LAST:event_lbl2MouseClicked
 
@@ -1964,6 +2090,13 @@ public class VentanaATM extends javax.swing.JFrame {
                     evt.consume();
                 }
                 break;
+            case 16:
+                String intercambiar = txfIntercambio.getText();
+                if (validarTecla(intercambiar)) {
+                    txfIntercambio.setText(intercambiar + "6");
+                } else {
+                    evt.consume();
+                }
         }
     }//GEN-LAST:event_lbl6MouseClicked
 
@@ -2015,6 +2148,13 @@ public class VentanaATM extends javax.swing.JFrame {
                     evt.consume();
                 }
                 break;
+            case 16:
+                String intercambiar = txfIntercambio.getText();
+                if (validarTecla(intercambiar)) {
+                    txfIntercambio.setText(intercambiar + "7");
+                } else {
+                    evt.consume();
+                }
         }
     }//GEN-LAST:event_lbl7MouseClicked
 
@@ -2066,6 +2206,13 @@ public class VentanaATM extends javax.swing.JFrame {
                     evt.consume();
                 }
                 break;
+            case 16:
+                String intercambiar = txfIntercambio.getText();
+                if (validarTecla(intercambiar)) {
+                    txfIntercambio.setText(intercambiar + "8");
+                } else {
+                    evt.consume();
+                }
         }
     }//GEN-LAST:event_lbl8MouseClicked
 
@@ -2119,6 +2266,13 @@ public class VentanaATM extends javax.swing.JFrame {
                     evt.consume();
                 }
                 break;
+            case 16:
+                String intercambiar = txfIntercambio.getText();
+                if (validarTecla(intercambiar)) {
+                    txfIntercambio.setText(intercambiar + "9");
+                } else {
+                    evt.consume();
+                }
         }
     }//GEN-LAST:event_lbl9MouseClicked
 
@@ -2164,12 +2318,19 @@ public class VentanaATM extends javax.swing.JFrame {
                 break;
             case 15:
                 String transferir = txfTransferencia.getText();
-                if (validarTecla(transferir)) {
+                if (transferir.equals("") || !validarTecla(transferir)) {
                     txfTransferencia.setText(transferir + "0");
                 } else {
                     evt.consume();
                 }
                 break;
+            case 16:
+                String intercambiar = txfIntercambio.getText();
+                if (intercambiar.equals("") || !validarTecla(intercambiar)) {
+                    txfIntercambio.setText(intercambiar + "0");
+                } else {
+                    evt.consume();
+                }
 
         }
     }//GEN-LAST:event_lbl0MouseClicked
@@ -2179,6 +2340,9 @@ public class VentanaATM extends javax.swing.JFrame {
             case 4:
                 passwd1.setText("");
                 passwd2.setText("");
+                break;
+            case 7:
+                cmbMonedas.setSelectedIndex(-1);
                 break;
             case 8:
                 txfFactura.setText("");
@@ -2192,9 +2356,20 @@ public class VentanaATM extends javax.swing.JFrame {
             case 15:
                 txfTransferencia.setText("");
                 break;
+            case 16:
+                txfIntercambio.setText("");
+                break;
 
         }
     }//GEN-LAST:event_lblClearMouseClicked
+
+    private void initComboBox() {
+        cmbMonedas.addItem(MonedaExtranjera.DOLAR.getNombre());
+        cmbMonedas.addItem(MonedaExtranjera.FRANCO.getNombre());
+        cmbMonedas.addItem(MonedaExtranjera.LIBRA.getNombre());
+        cmbMonedas.addItem(MonedaExtranjera.YEN.getNombre());
+        cmbMonedas.setSelectedIndex(-1);
+    }
 
     private void vaciarCeldas() {
         passwd1.setText("");
@@ -2203,6 +2378,9 @@ public class VentanaATM extends javax.swing.JFrame {
         txfRetirar.setText("");
         txfIngresar.setText("");
         txfTransferencia.setText("");
+        cmbMonedas.setSelectedIndex(-1);
+        cmbMonedas.removeAllItems();
+        txfIntercambio.setText("");
     }
 
     private void moverPantalla(int pant) {
@@ -2221,6 +2399,28 @@ public class VentanaATM extends javax.swing.JFrame {
             sentencia.executeUpdate(updateContra);
         } catch (SQLException ex) {
             Logger.getLogger(VentanaATM.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private boolean comprobarMoneda() {
+        pantallaAnterior = contenedor.getSelectedIndex();
+        int moneda = cmbMonedas.getSelectedIndex();
+        switch (moneda) {
+            case 0:
+                monedaExtran = MonedaExtranjera.DOLAR;
+                return true;
+            case 1:
+                monedaExtran = MonedaExtranjera.DOLAR;
+                return true;
+            case 2:
+                monedaExtran = MonedaExtranjera.DOLAR;
+                return true;
+            case 3:
+                monedaExtran = MonedaExtranjera.DOLAR;
+                return true;
+            default:
+                JOptionPane.showMessageDialog(this, "Por favor, seleccione el tipo de moneda extranjera", "ERROR", JOptionPane.ERROR_MESSAGE);
+                return false;
         }
     }
 
@@ -2264,6 +2464,12 @@ public class VentanaATM extends javax.swing.JFrame {
             } else if (cantidad > MAX_CAJERO) {
                 JOptionPane.showMessageDialog(this, "No se puede pagar facturas de más de: " + MAX_CAJERO, "ERROR", JOptionPane.ERROR_MESSAGE);
                 moverPantalla(8);
+                return false;
+            }
+        } else if (operacion == Operacion.CME) {
+            if (cantidad > MAX_TRANSFERENCIA) {
+                JOptionPane.showMessageDialog(this, "No se puede intercambiar una cantidad a otra moneda mayor que: " + MAX_CAJERO, "ERROR", JOptionPane.ERROR_MESSAGE);
+                moverPantalla(16);
                 return false;
             }
         }
@@ -2488,12 +2694,12 @@ public class VentanaATM extends javax.swing.JFrame {
     private javax.swing.JButton btnTicket;
     private javax.swing.JPanel cambiarMoneda;
     private javax.swing.JPanel cambiarPIN;
+    private javax.swing.JComboBox<String> cmbMonedas;
     private javax.swing.JPanel confirmarOperacion;
     private javax.swing.JPanel confirmarTicket;
     private javax.swing.JPanel consultarAgenda;
     private javax.swing.JTabbedPane contenedor;
     private javax.swing.JPanel depositarSaldo;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -2528,6 +2734,7 @@ public class VentanaATM extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -2541,6 +2748,7 @@ public class VentanaATM extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lbl0;
@@ -2582,6 +2790,7 @@ public class VentanaATM extends javax.swing.JFrame {
     private javax.swing.JPanel tecladoPrincipal;
     private javax.swing.JTextField txfFactura;
     private javax.swing.JTextField txfIngresar;
+    private javax.swing.JTextField txfIntercambio;
     private javax.swing.JTextField txfRetirar;
     private javax.swing.JTextField txfSaldoTotal;
     private javax.swing.JTextField txfTransferencia;
@@ -2601,5 +2810,6 @@ public class VentanaATM extends javax.swing.JFrame {
     Operacion operacion;
     Ticket ticket;
     private DefaultTableModel modeloTabla;
-
+    Devolucion devolucion;
+    MonedaExtranjera monedaExtran;
 }

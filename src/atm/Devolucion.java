@@ -5,7 +5,6 @@
 package atm;
 
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.util.ArrayList;
@@ -24,7 +23,7 @@ public class Devolucion extends JFrame {
 
     public Devolucion(int cantidad) {
         setTitle("Minima Cantidad de Billetes");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         JPanel panel = new JPanel(new GridLayout(4, 5, 5, 5));
         panel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
@@ -88,12 +87,12 @@ public class Devolucion extends JFrame {
 
         pack();
         setLocationRelativeTo(null);
-        setVisible(true);
+        
     }
 
     public static void main(String[] args) {
-        int cantidad = 1475;
-        Devolucion frame = new Devolucion(cantidad);
+        int cantidad = 0;
+        new Devolucion(cantidad).setVisible(true);
     }
 
 }
