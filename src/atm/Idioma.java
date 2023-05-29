@@ -4,6 +4,8 @@
  */
 package atm;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
@@ -29,8 +31,8 @@ public Idioma(String idioma){
 }
 
 private void getProperties(String idioma) {
-    try {
-        this.load( getClass().getResourceAsStream(idioma) );
+    try (FileInputStream input = new FileInputStream(new File(System.getProperty("user.dir")+"\\src\\atm\\"+idioma))){
+        this.load(input);
     } catch (IOException ex) {
 
     }

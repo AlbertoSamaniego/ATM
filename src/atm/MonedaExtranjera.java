@@ -10,10 +10,11 @@ package atm;
  */
 public enum MonedaExtranjera {
     
-    DOLAR("Dólar Americano", 0.93),
-    LIBRA("Libra Esterlina", 1.15),
-    YEN("Yen Japonés", 0.0067),
-    FRANCO("Franco Suizo", 1.05);
+    EURO("Euro",1),
+    DOLAR("Dólar Americano", 1.07),
+    LIBRA("Libra Esterlina", 0.87),
+    YEN("Yen Japonés", 150.36),
+    FRANCO("Franco Suizo", 0.97);
     
     private String nombre;
     private double valor;

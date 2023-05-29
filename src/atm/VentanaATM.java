@@ -23,7 +23,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -55,7 +54,7 @@ public class VentanaATM extends javax.swing.JFrame {
         initReloj();
         contenedor.setSelectedIndex(0);
         pantalla = contenedor.getSelectedIndex();
-
+        dineroDisponible = MAX_CAJERO;
     }
 
     private void initTransferencia() {
@@ -1463,12 +1462,47 @@ public class VentanaATM extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTarjetaActionPerformed
 
     private void btnDineroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDineroActionPerformed
+        int cociente = 0;
         switch (pantalla) {
             case 13:
-                devolucion = new Devolucion(efectivo);
-                devolucion.setVisible(true);
-                moverPantalla(10);
-                break;
+                if (monedaExtran == null) {
+                    euros = new DevolucionEuros(efectivo);
+                    euros.setVisible(true);
+                    moverPantalla(10);
+                } else {
+                    switch (monedaExtran) {
+                        case DOLAR:
+                            efectivoExtranjero = (int) (efectivo * MonedaExtranjera.DOLAR.getValor());
+                            dolares = new DevolucionDolar(efectivoExtranjero);
+                            dolares.setVisible(true);
+                            moverPantalla(10);
+                            break;
+                        case FRANCO:
+                            efectivoExtranjero = (int) (efectivo * MonedaExtranjera.FRANCO.getValor());
+                            cociente = Math.round(efectivoExtranjero / 20);
+                            efectivoExtranjero = cociente * 20;
+                            francos = new DevolucionFranco(efectivoExtranjero);
+                            francos.setVisible(true);
+                            moverPantalla(10);
+                            break;
+                        case LIBRA:
+                            efectivoExtranjero = (int) (efectivo * MonedaExtranjera.LIBRA.getValor());
+                            cociente = Math.round(efectivoExtranjero / 5);
+                            efectivoExtranjero = cociente * 5;
+                            libras = new DevolucionLibra(efectivoExtranjero);
+                            libras.setVisible(true);
+                            moverPantalla(10);
+                            break;
+                        case YEN:
+                            efectivoExtranjero = (int) (efectivo * MonedaExtranjera.YEN.getValor());
+                            cociente = Math.round(efectivoExtranjero / 1000);
+                            efectivoExtranjero = cociente * 1000;
+                            yenes = new DevolucionYen(efectivoExtranjero);
+                            yenes.setVisible(true);
+                            moverPantalla(10);
+                            break;
+                    }
+                }
 
         }
     }//GEN-LAST:event_btnDineroActionPerformed
@@ -1679,7 +1713,7 @@ public class VentanaATM extends javax.swing.JFrame {
                 break;
             case 9:
                 vaciarCeldas();
-                if(operacion == Operacion.CME){
+                if (operacion == Operacion.CME) {
                     initComboBox();
                 }
                 moverPantalla(pantallaAnterior);
@@ -1690,7 +1724,7 @@ public class VentanaATM extends javax.swing.JFrame {
             case 11:
                 moverPantalla(0);
                 lblTarjeta.setBackground(Color.red);
-                //VACIAR TODOS LOS ELEMENTOS----------------------------------------------
+                vaciarCeldas();
                 break;
             case 12:
                 txfRetirar.setText("");
@@ -1700,13 +1734,22 @@ public class VentanaATM extends javax.swing.JFrame {
                 txfIngresar.setText("");
                 moverPantalla(3);
                 break;
+            case 15:
+                txfTransferencia.setText("");
+                moverPantalla(6);
+                break;
+            case 16:
+                txfIntercambio.setText("");
+                moverPantalla(7);
+                break;
         }
     }//GEN-LAST:event_lblCancelMouseClicked
 
     private void lblEnterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblEnterMouseClicked
-        String contr1, contr2;
         switch (pantalla) {
             case 4:
+                String contr1,
+                 contr2;
                 contr1 = String.valueOf(passwd1.getPassword());
                 contr2 = String.valueOf(passwd1.getPassword());
                 if (contr1.length() == 0) {
@@ -1740,6 +1783,7 @@ public class VentanaATM extends javax.swing.JFrame {
 
                 if (operacion == Operacion.RE) {
                     if (comprobarCantidad(efectivo)) {
+                        dineroDisponible -= efectivo;
                         insertarHistoricoOperacion();
                         moverPantalla(13);
                     }
@@ -1747,6 +1791,7 @@ public class VentanaATM extends javax.swing.JFrame {
                 } else if (operacion == Operacion.DE) {
 
                     if (comprobarCantidad(efectivo)) {
+                        dineroDisponible += efectivo;
                         insertarHistoricoOperacion();
                         moverPantalla(10);
                     }
@@ -1764,10 +1809,16 @@ public class VentanaATM extends javax.swing.JFrame {
                     }
 
                 } else if (operacion == Operacion.CME) {
-                    if (comprobarCantidad(efectivo)) {
+                    if (monedaExtran == MonedaExtranjera.EURO || monedaExtran == MonedaExtranjera.LIBRA) {
+                        if (comprobarCantidad(efectivo)) {
+                            insertarHistoricoOperacion();
+                            moverPantalla(13);
+                        }
+                    } else {
                         insertarHistoricoOperacion();
-                        moverPantalla(10);
+                        moverPantalla(13);
                     }
+                    dineroDisponible += efectivo;
                 } else {
                     if (operacion == null) {
                         moverPantalla(11);
@@ -2318,7 +2369,7 @@ public class VentanaATM extends javax.swing.JFrame {
                 break;
             case 15:
                 String transferir = txfTransferencia.getText();
-                if (transferir.equals("") || !validarTecla(transferir)) {
+                if (!transferir.equals("") && validarTecla(transferir)) {
                     txfTransferencia.setText(transferir + "0");
                 } else {
                     evt.consume();
@@ -2326,7 +2377,7 @@ public class VentanaATM extends javax.swing.JFrame {
                 break;
             case 16:
                 String intercambiar = txfIntercambio.getText();
-                if (intercambiar.equals("") || !validarTecla(intercambiar)) {
+                if (!intercambiar.equals("") && validarTecla(intercambiar)) {
                     txfIntercambio.setText(intercambiar + "0");
                 } else {
                     evt.consume();
@@ -2410,13 +2461,13 @@ public class VentanaATM extends javax.swing.JFrame {
                 monedaExtran = MonedaExtranjera.DOLAR;
                 return true;
             case 1:
-                monedaExtran = MonedaExtranjera.DOLAR;
+                monedaExtran = MonedaExtranjera.FRANCO;
                 return true;
             case 2:
-                monedaExtran = MonedaExtranjera.DOLAR;
+                monedaExtran = MonedaExtranjera.LIBRA;
                 return true;
             case 3:
-                monedaExtran = MonedaExtranjera.DOLAR;
+                monedaExtran = MonedaExtranjera.YEN;
                 return true;
             default:
                 JOptionPane.showMessageDialog(this, "Por favor, seleccione el tipo de moneda extranjera", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -2425,93 +2476,99 @@ public class VentanaATM extends javax.swing.JFrame {
     }
 
     private boolean comprobarCantidad(int cantidad) {
-        if (operacion == Operacion.RT) {
-            if (cantidad > MAX_TRANSFERENCIA) {
-                JOptionPane.showMessageDialog(this, "La cantidad a retirar es mayor que el limite de seguridad", "ERROR", JOptionPane.ERROR_MESSAGE);
-                moverPantalla(15);
-                return false;
-            } else {
+        switch (operacion) {
+            case RT:
+                if (cantidad > dineroDisponible) {
+                    JOptionPane.showMessageDialog(this, "La cantidad a retirar es mayor que el limite de seguridad", "ERROR", JOptionPane.ERROR_MESSAGE);
+                    moverPantalla(15);
+                    return false;
+                } else {
+                    try {
+                        String selectSaldo = "select saldo from cuenta_bancaria where iban =\"" + ibanRegistrado + "\";";
+                        resultado = sentencia.executeQuery(selectSaldo);
+                        resultado.next();
+                        double saldo = resultado.getDouble("saldo");
+                        if (cantidad > saldo) {
+                            JOptionPane.showMessageDialog(this, "La cantidad a transferir es mayor que el saldo de su cuenta", "ERROR", JOptionPane.ERROR_MESSAGE);
+                            moverPantalla(15);
+                            return false;
+                        }
+
+                    } catch (SQLException ex) {
+                        Logger.getLogger(VentanaATM.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                break;
+            case PF:
+                String selectSaldo = "select saldo from cuenta_bancaria where iban =\"" + ibanRegistrado + "\";";
+                double saldo = 0;
                 try {
-                    String selectSaldo = "select saldo from cuenta_bancaria where iban =\"" + ibanRegistrado + "\";";
                     resultado = sentencia.executeQuery(selectSaldo);
                     resultado.next();
-                    double saldo = resultado.getDouble("saldo");
-                    if (cantidad > saldo) {
-                        JOptionPane.showMessageDialog(this, "La cantidad a transferir es mayor que el saldo de su cuenta", "ERROR", JOptionPane.ERROR_MESSAGE);
-                        moverPantalla(15);
-                        return false;
-                    }
-
+                    saldo = resultado.getDouble("saldo");
                 } catch (SQLException ex) {
                     Logger.getLogger(VentanaATM.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            }
-        } else if (operacion == Operacion.PF) {
-            String selectSaldo = "select saldo from cuenta_bancaria where iban =\"" + ibanRegistrado + "\";";
-            double saldo = 0;
-            try {
-                resultado = sentencia.executeQuery(selectSaldo);
-                resultado.next();
-                saldo = resultado.getDouble("saldo");
-            } catch (SQLException ex) {
-                Logger.getLogger(VentanaATM.class.getName()).log(Level.SEVERE, null, ex);
-            }
 
-            if (cantidad > saldo) {
-                JOptionPane.showMessageDialog(this, "No hay saldo suficiente en la cuenta", "ERROR", JOptionPane.ERROR_MESSAGE);
-                moverPantalla(8);
-                return false;
-            } else if (cantidad > MAX_CAJERO) {
-                JOptionPane.showMessageDialog(this, "No se puede pagar facturas de más de: " + MAX_CAJERO, "ERROR", JOptionPane.ERROR_MESSAGE);
-                moverPantalla(8);
-                return false;
-            }
-        } else if (operacion == Operacion.CME) {
-            if (cantidad > MAX_TRANSFERENCIA) {
-                JOptionPane.showMessageDialog(this, "No se puede intercambiar una cantidad a otra moneda mayor que: " + MAX_CAJERO, "ERROR", JOptionPane.ERROR_MESSAGE);
-                moverPantalla(16);
-                return false;
-            }
-        }
-        if (cantidad % 5 != 0) {
-            JOptionPane.showMessageDialog(this, "La cantidad debe de ser multiplo de 5", "ERROR", JOptionPane.ERROR_MESSAGE);
-            moverPantalla(12);
-            return false;
-        } else if (cantidad > MAX_INGRESO_RETIRAR) {
-            if (operacion == Operacion.RE) {
-                JOptionPane.showMessageDialog(this, "La cantidad a retirar es mayor que el limite de seguridad", "ERROR", JOptionPane.ERROR_MESSAGE);
-                moverPantalla(12);
-                return false;
-            } else if (operacion == Operacion.DE) {
-                JOptionPane.showMessageDialog(this, "La cantidad a ingresar es mayor que el limite de seguridad", "ERROR", JOptionPane.ERROR_MESSAGE);
-                moverPantalla(14);
-                return false;
-            }
-
-        } else {
-            if (cantidad > MAX_CAJERO) {
-                JOptionPane.showMessageDialog(this, "El cajero no tiene suficiente dinero para llevar a cabo la operacion", "ERROR", JOptionPane.ERROR_MESSAGE);
-                moverPantalla(12);
-                return false;
-            }
-            try {
-                sentencia = conexion.createStatement();
-                String selectSaldo = "select saldo from cuenta_bancaria where iban =\"" + ibanRegistrado + "\";";
-                resultado = sentencia.executeQuery(selectSaldo);
-                resultado.next();
-                double saldo = resultado.getDouble("saldo");
                 if (cantidad > saldo) {
-                    JOptionPane.showMessageDialog(this, "La cantidad a retirar es mayor que el saldo de su cuenta", "ERROR", JOptionPane.ERROR_MESSAGE);
-                    contenedor.setSelectedIndex(12);
-                    pantalla = contenedor.getSelectedIndex();
-                    txfRetirar.setText("");
+                    JOptionPane.showMessageDialog(this, "No hay saldo suficiente en la cuenta", "ERROR", JOptionPane.ERROR_MESSAGE);
+                    moverPantalla(8);
+                    return false;
+                } else if (cantidad > MAX_CAJERO) {
+                    JOptionPane.showMessageDialog(this, "No se puede pagar facturas de más de: " + MAX_CAJERO, "ERROR", JOptionPane.ERROR_MESSAGE);
+                    moverPantalla(8);
                     return false;
                 }
-            } catch (SQLException ex) {
-                Logger.getLogger(VentanaATM.class.getName()).log(Level.SEVERE, null, ex);
-            }
+                break;
+            case CME:
+                if (cantidad > MAX_TRANSFERENCIA) {
+                    JOptionPane.showMessageDialog(this, "No se puede intercambiar una cantidad a otra moneda mayor que: " + MAX_TRANSFERENCIA, "ERROR", JOptionPane.ERROR_MESSAGE);
+                    moverPantalla(16);
+                    return false;
+                }
+                break;
+            default:
+                if (cantidad % 5 != 0) {
+                    JOptionPane.showMessageDialog(this, "La cantidad debe de ser multiplo de 5", "ERROR", JOptionPane.ERROR_MESSAGE);
+                    moverPantalla(12);
+                    return false;
+                } else if (cantidad > MAX_INGRESO_RETIRAR) {
+                    if (operacion == Operacion.RE) {
+                        JOptionPane.showMessageDialog(this, "La cantidad a retirar es mayor que el limite de seguridad", "ERROR", JOptionPane.ERROR_MESSAGE);
+                        moverPantalla(12);
+                        return false;
+                    } else if (operacion == Operacion.DE) {
+                        JOptionPane.showMessageDialog(this, "La cantidad a ingresar es mayor que el limite de seguridad", "ERROR", JOptionPane.ERROR_MESSAGE);
+                        moverPantalla(14);
+                        return false;
+                    }
 
+                } else {
+                    if (cantidad > MAX_CAJERO) {
+                        JOptionPane.showMessageDialog(this, "El cajero no tiene suficiente dinero para llevar a cabo la operacion", "ERROR", JOptionPane.ERROR_MESSAGE);
+                        moverPantalla(12);
+                        return false;
+                    }
+                    try {
+                        sentencia = conexion.createStatement();
+                        selectSaldo = "select saldo from cuenta_bancaria where iban =\"" + ibanRegistrado + "\";";
+                        resultado = sentencia.executeQuery(selectSaldo);
+                        resultado.next();
+                        saldo = resultado.getDouble("saldo");
+                        if (cantidad > saldo) {
+                            JOptionPane.showMessageDialog(this, "La cantidad a retirar es mayor que el saldo de su cuenta", "ERROR", JOptionPane.ERROR_MESSAGE);
+                            contenedor.setSelectedIndex(12);
+                            pantalla = contenedor.getSelectedIndex();
+                            txfRetirar.setText("");
+                            return false;
+                        }
+                    } catch (SQLException ex) {
+                        Logger.getLogger(VentanaATM.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                }
         }
+
         return true;
     }
 
@@ -2807,9 +2864,15 @@ public class VentanaATM extends javax.swing.JFrame {
     int pantalla;
     int pantallaAnterior;
     int efectivo;
+    int efectivoExtranjero;
+    int dineroDisponible;
     Operacion operacion;
     Ticket ticket;
     private DefaultTableModel modeloTabla;
-    Devolucion devolucion;
+    DevolucionEuros euros;
+    DevolucionDolar dolares;
+    DevolucionLibra libras;
+    DevolucionYen yenes;
+    DevolucionFranco francos;
     MonedaExtranjera monedaExtran;
 }
