@@ -53,6 +53,13 @@ public class DevolucionEuros extends JFrame {
             billete5 = (int) (cantidad / 5);
             cantidad %= 5;
         }
+        
+        if (billete50 == 1) {
+            billete50 = 0;
+            billete20 = 2;
+            billete10 = 2;
+            billete5 = 2;
+        }
 
         for (int i = 0; i < billete50; i++) {
             ImageIcon billete50Icon = new ImageIcon("./src/ATM_Images/50Euros.png");

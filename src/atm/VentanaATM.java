@@ -5,11 +5,28 @@
 package atm;
 
 import bases_datos.Conexion;
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -23,6 +40,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -55,6 +77,12 @@ public class VentanaATM extends javax.swing.JFrame {
         contenedor.setSelectedIndex(0);
         pantalla = contenedor.getSelectedIndex();
         dineroDisponible = MAX_CAJERO;
+
+        int tabCount = contenedor.getTabCount();
+        for (int i = tabCount - 1; i >= 0; i--) {
+            contenedor.remove(i);
+        }
+
     }
 
     private void initTransferencia() {
@@ -1390,7 +1418,7 @@ public class VentanaATM extends javax.swing.JFrame {
 
 
     private void lbl1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl1MouseClicked
-
+        reproducirSonido(".\\src\\ATM_Images\\tecla.wav");
         switch (pantalla) {
             case 4:
                 String contr1 = String.valueOf(passwd1.getPassword());
@@ -1450,6 +1478,7 @@ public class VentanaATM extends javax.swing.JFrame {
     }//GEN-LAST:event_lbl1MouseClicked
 
     private void btnTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTarjetaActionPerformed
+        reproducirSonido(".\\src\\ATM_Images\\tecla.wav");
         if (lblTarjeta.getBackground().equals(Color.red)) {
             boolean dialogoCerrado = false;
             while (fallos < 3 && !dialogoCerrado) {
@@ -1462,6 +1491,7 @@ public class VentanaATM extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTarjetaActionPerformed
 
     private void btnDineroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDineroActionPerformed
+        reproducirSonido(".\\src\\ATM_Images\\dinero.wav");
         int cociente = 0;
         switch (pantalla) {
             case 13:
@@ -1508,14 +1538,23 @@ public class VentanaATM extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDineroActionPerformed
 
     private void btnTicketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTicketActionPerformed
+        reproducirSonido(".\\src\\ATM_Images\\ticket.wav");
         if (lblTicket.getBackground().equals(Color.green)) {
             ticket = new Ticket(efectivo, operacion, tarjetaIngresada);
             ticket.setVisible(true);
             lblTicket.setBackground(Color.red);
+            try {
+                imprimirPDFTicket();
+            } catch (DocumentException ex) {
+                Logger.getLogger(VentanaATM.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(VentanaATM.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_btnTicketActionPerformed
 
     private void btnEspanolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEspanolActionPerformed
+        reproducirSonido(".\\src\\ATM_Images\\tecla.wav");
         idioma = new Idioma("Español");
         lblIntroduccion.setText(idioma.getProperty("lblIdioma"));
         if (lblTarjeta.getBackground().equals(Color.green)) {
@@ -1525,6 +1564,7 @@ public class VentanaATM extends javax.swing.JFrame {
 
 
     private void btnInglesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInglesActionPerformed
+        reproducirSonido(".\\src\\ATM_Images\\tecla.wav");
         idioma = new Idioma("Ingles");
         lblIntroduccion.setText(idioma.getProperty("lblIdioma"));
         if (lblTarjeta.getBackground().equals(Color.green)) {
@@ -1533,6 +1573,7 @@ public class VentanaATM extends javax.swing.JFrame {
     }//GEN-LAST:event_btnInglesActionPerformed
 
     private void btnInzquierda1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInzquierda1ActionPerformed
+        reproducirSonido(".\\src\\ATM_Images\\tecla.wav");
         switch (pantalla) {
             case 1:
                 moverPantalla(0);
@@ -1541,6 +1582,7 @@ public class VentanaATM extends javax.swing.JFrame {
     }//GEN-LAST:event_btnInzquierda1ActionPerformed
 
     private void btnInzquierda2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInzquierda2ActionPerformed
+        reproducirSonido(".\\src\\ATM_Images\\tecla.wav");
         switch (pantalla) {
             case 1:
                 moverPantalla(2);
@@ -1566,6 +1608,7 @@ public class VentanaATM extends javax.swing.JFrame {
     }//GEN-LAST:event_btnInzquierda2ActionPerformed
 
     private void btnInzquierda3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInzquierda3ActionPerformed
+        reproducirSonido(".\\src\\ATM_Images\\tecla.wav");
         switch (pantalla) {
             case 1:
                 moverPantalla(3);
@@ -1591,6 +1634,7 @@ public class VentanaATM extends javax.swing.JFrame {
     }//GEN-LAST:event_btnInzquierda3ActionPerformed
 
     private void btnInzquierda4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInzquierda4ActionPerformed
+        reproducirSonido(".\\src\\ATM_Images\\tecla.wav");
         switch (pantalla) {
             case 1:
                 moverPantalla(4);
@@ -1616,6 +1660,7 @@ public class VentanaATM extends javax.swing.JFrame {
     }//GEN-LAST:event_btnInzquierda4ActionPerformed
 
     private void btnDerecha1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDerecha1ActionPerformed
+        reproducirSonido(".\\src\\ATM_Images\\tecla.wav");
         switch (pantalla) {
             case 1:
                 moverPantalla(5);
@@ -1626,6 +1671,7 @@ public class VentanaATM extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDerecha1ActionPerformed
 
     private void btnDerecha2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDerecha2ActionPerformed
+        reproducirSonido(".\\src\\ATM_Images\\tecla.wav");
         switch (pantalla) {
             case 1:
                 moverPantalla(6);
@@ -1652,6 +1698,7 @@ public class VentanaATM extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDerecha2ActionPerformed
 
     private void btnDerecha3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDerecha3ActionPerformed
+        reproducirSonido(".\\src\\ATM_Images\\tecla.wav");
         switch (pantalla) {
             case 1:
                 operacion = Operacion.CME;
@@ -1678,6 +1725,7 @@ public class VentanaATM extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDerecha3ActionPerformed
 
     private void btnDerecha4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDerecha4ActionPerformed
+        reproducirSonido(".\\src\\ATM_Images\\tecla.wav");
         switch (pantalla) {
             case 1:
                 moverPantalla(8);
@@ -1703,6 +1751,7 @@ public class VentanaATM extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDerecha4ActionPerformed
 
     private void lblCancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCancelMouseClicked
+        reproducirSonido(".\\src\\ATM_Images\\tecla.wav");
         switch (pantalla) {
             case 1:
                 moverPantalla(0);
@@ -1746,6 +1795,7 @@ public class VentanaATM extends javax.swing.JFrame {
     }//GEN-LAST:event_lblCancelMouseClicked
 
     private void lblEnterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblEnterMouseClicked
+        reproducirSonido(".\\src\\ATM_Images\\tecla.wav");
         switch (pantalla) {
             case 4:
                 String contr1,
@@ -1836,6 +1886,7 @@ public class VentanaATM extends javax.swing.JFrame {
                 lblTicket.setBackground(Color.green);
                 moverPantalla(11);
                 break;
+
             case 11:
                 vaciarCeldas();
                 moverPantalla(1);
@@ -1861,6 +1912,7 @@ public class VentanaATM extends javax.swing.JFrame {
     }//GEN-LAST:event_lblEnterMouseClicked
 
     private void lbl3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl3MouseClicked
+        reproducirSonido(".\\src\\ATM_Images\\tecla.wav");
         switch (pantalla) {
             case 4:
                 String contr1 = String.valueOf(passwd1.getPassword());
@@ -1921,6 +1973,7 @@ public class VentanaATM extends javax.swing.JFrame {
     }//GEN-LAST:event_lbl3MouseClicked
 
     private void lbl4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl4MouseClicked
+        reproducirSonido(".\\src\\ATM_Images\\tecla.wav");
         switch (pantalla) {
             case 4:
                 String contr1 = String.valueOf(passwd1.getPassword());
@@ -1979,6 +2032,7 @@ public class VentanaATM extends javax.swing.JFrame {
     }//GEN-LAST:event_lbl4MouseClicked
 
     private void lbl5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl5MouseClicked
+        reproducirSonido(".\\src\\ATM_Images\\tecla.wav");
         switch (pantalla) {
             case 4:
                 String contr1 = String.valueOf(passwd1.getPassword());
@@ -2037,6 +2091,7 @@ public class VentanaATM extends javax.swing.JFrame {
     }//GEN-LAST:event_lbl5MouseClicked
 
     private void lbl2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl2MouseClicked
+        reproducirSonido(".\\src\\ATM_Images\\tecla.wav");
         switch (pantalla) {
             case 4:
                 String contr1 = String.valueOf(passwd1.getPassword());
@@ -2152,6 +2207,7 @@ public class VentanaATM extends javax.swing.JFrame {
     }//GEN-LAST:event_lbl6MouseClicked
 
     private void lbl7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl7MouseClicked
+        reproducirSonido(".\\src\\ATM_Images\\tecla.wav");
         switch (pantalla) {
             case 4:
                 String contr1 = String.valueOf(passwd1.getPassword());
@@ -2210,6 +2266,7 @@ public class VentanaATM extends javax.swing.JFrame {
     }//GEN-LAST:event_lbl7MouseClicked
 
     private void lbl8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl8MouseClicked
+        reproducirSonido(".\\src\\ATM_Images\\tecla.wav");
         switch (pantalla) {
             case 4:
                 String contr1 = String.valueOf(passwd1.getPassword());
@@ -2268,6 +2325,7 @@ public class VentanaATM extends javax.swing.JFrame {
     }//GEN-LAST:event_lbl8MouseClicked
 
     private void lbl9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl9MouseClicked
+        reproducirSonido(".\\src\\ATM_Images\\tecla.wav");
         switch (pantalla) {
             case 4:
                 String contr1 = String.valueOf(passwd1.getPassword());
@@ -2328,6 +2386,7 @@ public class VentanaATM extends javax.swing.JFrame {
     }//GEN-LAST:event_lbl9MouseClicked
 
     private void lbl0MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl0MouseClicked
+        reproducirSonido(".\\src\\ATM_Images\\tecla.wav");
         switch (pantalla) {
             case 4:
                 String contr1 = String.valueOf(passwd1.getPassword());
@@ -2387,6 +2446,7 @@ public class VentanaATM extends javax.swing.JFrame {
     }//GEN-LAST:event_lbl0MouseClicked
 
     private void lblClearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblClearMouseClicked
+        reproducirSonido(".\\src\\ATM_Images\\tecla.wav");
         switch (pantalla) {
             case 4:
                 passwd1.setText("");
@@ -2449,6 +2509,74 @@ public class VentanaATM extends javax.swing.JFrame {
             String updateContra = "update tarjeta_bancaria set pin = " + Integer.parseInt(contra2) + " where numero_tarjeta = \"" + tarjetaIngresada + "\";";
             sentencia.executeUpdate(updateContra);
         } catch (SQLException ex) {
+            Logger.getLogger(VentanaATM.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void imprimirPDFTicket() throws DocumentException, IOException {
+        String rutaPDF = "Ticket.pdf";
+        Document documento = new Document(PageSize.A6);
+        try {
+            PdfWriter writer = PdfWriter.getInstance(documento, new FileOutputStream(rutaPDF));
+            Font fuenteTitulo = new Font(FontFactory.getFont("Arial", 20));
+            documento.open();
+
+            //Titulo del ticket
+            fuenteTitulo.setColor(BaseColor.BLUE);
+            String titulo = "BANCO GALILEO";
+            Paragraph parrafo = new Paragraph(titulo, fuenteTitulo);
+            parrafo.setSpacingBefore(20F);
+            parrafo.setSpacingAfter(10F);
+            parrafo.setAlignment(1);
+            documento.add(parrafo);
+
+            //Logo del banco
+            Image imagen = Image.getInstance(".\\src\\ATM_Images\\logoBanco.png");
+            imagen.scaleToFit(100, 100);
+            imagen.setAlignment(1);
+            documento.add(imagen);
+
+            //Contenido del ticket
+            PdfPTable tabla = new PdfPTable(2);
+            PdfPCell celda11 = new PdfPCell(new Phrase("Fecha de la operacion"));
+            PdfPCell celda12 = new PdfPCell(new Phrase(ticket.getFecha()));
+            PdfPCell celda21 = new PdfPCell(new Phrase("Tipo de transaccion"));
+            PdfPCell celda22 = new PdfPCell(new Phrase(ticket.getOperacion().getNombre()));
+            PdfPCell celda31 = new PdfPCell(new Phrase("Importe en euros"));
+            PdfPCell celda32 = new PdfPCell(new Phrase(String.valueOf(ticket.getEfectivo())));
+            PdfPCell celda41 = new PdfPCell(new Phrase("Numero de la tarjeta"));
+            PdfPCell celda42 = new PdfPCell(new Phrase(ticket.getTarjeta()));
+            tabla.addCell(celda11);
+            tabla.addCell(celda12);
+            tabla.addCell(celda21);
+            tabla.addCell(celda22);
+            tabla.addCell(celda31);
+            tabla.addCell(celda32);
+            tabla.addCell(celda41);
+            tabla.addCell(celda42);
+            documento.add(tabla);
+
+            documento.close();
+            File file = new File(rutaPDF);
+            Desktop.getDesktop().open(file);
+
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(VentanaATM.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void reproducirSonido(String ruta) {
+        File archivoSonido = new File(ruta);
+        try {
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(archivoSonido);
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioStream);
+            clip.start();
+        } catch (UnsupportedAudioFileException ex) {
+            Logger.getLogger(VentanaATM.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(VentanaATM.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (LineUnavailableException ex) {
             Logger.getLogger(VentanaATM.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

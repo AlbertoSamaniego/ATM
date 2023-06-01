@@ -15,7 +15,16 @@ import java.time.format.DateTimeFormatter;
 
 public class Ticket extends JFrame {
     
+    private int efectivo;
+    private Operacion operacion;
+    private String tarjeta;
+    private String fecha;
+    
     public Ticket(int efectivo, Operacion operacion, String tarjeta) {
+        this.efectivo = efectivo;
+        this.operacion = operacion;
+        this.tarjeta = tarjeta;
+        
         setTitle("Ticket obtenido");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(400, 300);
@@ -39,7 +48,7 @@ public class Ticket extends JFrame {
         contentPanel.setBackground(Color.WHITE);
         LocalDateTime ldtFecha = LocalDateTime.now();
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        String fecha= ldtFecha.format(formato);
+        fecha= ldtFecha.format(formato);
         // Agregar elementos al panel de contenido
         contentPanel.add(new JLabel("Fecha de la operacion: "));
         contentPanel.add(new JLabel(fecha));
@@ -56,6 +65,22 @@ public class Ticket extends JFrame {
         
         // Agregar panel principal a la ventana
         add(mainPanel);
+    }
+    
+    public String getFecha() {
+        return fecha;
+    }
+    
+    public int getEfectivo() {
+        return efectivo;
+    }
+
+    public Operacion getOperacion() {
+        return operacion;
+    }
+
+    public String getTarjeta() {
+        return tarjeta;
     }
     
 
