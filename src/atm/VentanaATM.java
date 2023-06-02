@@ -23,6 +23,7 @@ import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -65,9 +66,9 @@ public class VentanaATM extends javax.swing.JFrame {
     public static final int MAX_INACTIVIDAD = 60000;
 
     /**
-     * Contructor de la ventana principal del proyecto.
-     * Se inicializa los componentes graficos, la base de datos y el temporizador.
-     * Se indica las dimensiones y posicion de la ventana del ATM, además de indicar la
+     * Contructor de la ventana principal del proyecto. Se inicializa los
+     * componentes graficos, la base de datos y el temporizador. Se indica las
+     * dimensiones y posicion de la ventana del ATM, además de indicar la
      * pantalla de inicio.
      */
     public VentanaATM() {
@@ -78,14 +79,14 @@ public class VentanaATM extends javax.swing.JFrame {
         initComponents();
         initBD();
         initReloj();
-        contenedor.setSelectedIndex(0);
-        pantalla = contenedor.getSelectedIndex();
+        moverPantalla(0);
         dineroDisponible = MAX_CAJERO;
     }
 
     /**
-     * Método que inicializa la tabla de la ventana donde se realiza las transferencias bancarias.
-     * Rellena la tabla con las cuentas bancarias disponibles en la BD que no estén bloqueadas.
+     * Método que inicializa la tabla de la ventana donde se realiza las
+     * transferencias bancarias. Rellena la tabla con las cuentas bancarias
+     * disponibles en la BD que no estén bloqueadas.
      */
     private void initTransferencia() {
         modeloTabla = (DefaultTableModel) tablaTransferencia.getModel();
@@ -114,8 +115,9 @@ public class VentanaATM extends javax.swing.JFrame {
     }
 
     /**
-     * Método que inicializa la tabla de los movimientos y el saldo de la cuenta bancaria registrada.
-     * Rellena la tabla con los movimientos de la cuenta e indica el saldo disponible de esta.
+     * Método que inicializa la tabla de los movimientos y el saldo de la cuenta
+     * bancaria registrada. Rellena la tabla con los movimientos de la cuenta e
+     * indica el saldo disponible de esta.
      */
     private void initMovimientos() {
         modeloTabla = (DefaultTableModel) tablaMovimientos.getModel();
@@ -178,10 +180,11 @@ public class VentanaATM extends javax.swing.JFrame {
     }
 
     /**
-     * Método que inicializa el reloj para determinar cuando se expira la sesión de un usuario.
-     * Se almacenan en un array todos los botones del JFrame y a cada uno de ellos se le asgina el escuchador.
-     * Si uno de ellos es pulsado (actionPerformed) el reloj iniciará la cuenta atrás de nuevo a 0.
-     * Si el reloj sobrepasa 60 segundos, se cierra la sesión.
+     * Método que inicializa el reloj para determinar cuando se expira la sesión
+     * de un usuario. Se almacenan en un array todos los botones del JFrame y a
+     * cada uno de ellos se le asgina el escuchador. Si uno de ellos es pulsado
+     * (actionPerformed) el reloj iniciará la cuenta atrás de nuevo a 0. Si el
+     * reloj sobrepasa 60 segundos, se cierra la sesión.
      */
     private void initReloj() {
         List<JButton> buttons = new ArrayList<>();
@@ -367,10 +370,13 @@ public class VentanaATM extends javax.swing.JFrame {
         btnTarjeta = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
+        lblDerecha = new javax.swing.JLabel();
+        lblizquierda = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("ATM");
         setResizable(false);
+        getContentPane().setLayout(null);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -1231,12 +1237,17 @@ public class VentanaATM extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        getContentPane().add(jPanel1);
+        jPanel1.setBounds(28, 6, 1177, 513);
+
         btnDinero.setBackground(new java.awt.Color(153, 153, 153));
         btnDinero.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDineroActionPerformed(evt);
             }
         });
+        getContentPane().add(btnDinero);
+        btnDinero.setBounds(262, 545, 678, 81);
 
         tecladoPrincipal.setBackground(new java.awt.Color(0, 0, 0));
         tecladoPrincipal.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -1347,12 +1358,19 @@ public class VentanaATM extends javax.swing.JFrame {
 
         tecladoPrincipal.add(panelAcciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 40, 120, 361));
 
+        getContentPane().add(tecladoPrincipal);
+        tecladoPrincipal.setBounds(262, 644, 678, 430);
+
         lblTicket.setBackground(new java.awt.Color(255, 0, 0));
         lblTicket.setOpaque(true);
+        getContentPane().add(lblTicket);
+        lblTicket.setBounds(1255, 144, 515, 40);
 
         lblTarjeta.setBackground(new java.awt.Color(255, 0, 0));
         lblTarjeta.setFocusable(false);
         lblTarjeta.setOpaque(true);
+        getContentPane().add(lblTarjeta);
+        lblTarjeta.setBounds(1255, 644, 515, 40);
 
         btnTicket.setBackground(new java.awt.Color(153, 153, 153));
         btnTicket.addActionListener(new java.awt.event.ActionListener() {
@@ -1360,6 +1378,8 @@ public class VentanaATM extends javax.swing.JFrame {
                 btnTicketActionPerformed(evt);
             }
         });
+        getContentPane().add(btnTicket);
+        btnTicket.setBounds(1255, 224, 515, 42);
 
         btnTarjeta.setBackground(new java.awt.Color(153, 153, 153));
         btnTarjeta.addActionListener(new java.awt.event.ActionListener() {
@@ -1367,75 +1387,41 @@ public class VentanaATM extends javax.swing.JFrame {
                 btnTarjetaActionPerformed(evt);
             }
         });
+        getContentPane().add(btnTarjeta);
+        btnTarjeta.setBounds(1255, 720, 515, 40);
 
         jLabel3.setIcon(new javax.swing.ImageIcon(System.getProperty("user.dir")+"\\src\\ATM_Images\\insertarTarjeta.png"));
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(1410, 798, 332, 0);
 
         jLabel21.setIcon(new javax.swing.ImageIcon(System.getProperty("user.dir")+"\\src\\ATM_Images\\ticket.png"));
+        getContentPane().add(jLabel21);
+        jLabel21.setBounds(1372, 284, 335, 342);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(262, 262, 262)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(tecladoPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(btnDinero, javax.swing.GroupLayout.DEFAULT_SIZE, 678, Short.MAX_VALUE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 515, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 515, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 515, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 515, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(62, 62, 62))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(125, 125, 125))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(90, 90, 90))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(lblTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(40, 40, 40)
-                        .addComponent(btnTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26)
-                        .addComponent(btnDinero, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(36, 36, 36)
-                        .addComponent(btnTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(38, 38, 38)
-                        .addComponent(jLabel3))
-                    .addComponent(tecladoPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(65, 65, 65))
-        );
+        lblDerecha.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblDerechaMouseClicked(evt);
+            }
+        });
+        getContentPane().add(lblDerecha);
+        lblDerecha.setBounds(1800, 0, 30, 50);
+
+        lblizquierda.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblizquierdaMouseClicked(evt);
+            }
+        });
+        getContentPane().add(lblizquierda);
+        lblizquierda.setBounds(0, 0, 30, 50);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-
     /**
-     * Método en el que se indica, dependiendo de la pantalla en el que encuentre el usuario,
-     * las acciones que se realizan si se pulsa la tecla 1.
+     * Método en el que se indica, dependiendo de la pantalla en el que
+     * encuentre el usuario, las acciones que se realizan si se pulsa la tecla
+     * 1.
+     *
      * @param evt objeto del evento que se ha producido
      */
     private void lbl1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl1MouseClicked
@@ -1499,7 +1485,9 @@ public class VentanaATM extends javax.swing.JFrame {
     }//GEN-LAST:event_lbl1MouseClicked
 
     /**
-     * Método en el que se indica las acciones que ocurren si se pulsa el botón donde se introduce la tarjeta.
+     * Método en el que se indica las acciones que ocurren si se pulsa el botón
+     * donde se introduce la tarjeta.
+     *
      * @param evt objeto del evento que se ha producido
      */
     private void btnTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTarjetaActionPerformed
@@ -1516,10 +1504,13 @@ public class VentanaATM extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTarjetaActionPerformed
 
     /**
-     * Método en el que se indica las acciones que ocurren si se pulsa el botón donde se obtiene el efectivo.
-     * En caso de que se haya retirado efectivo, se obtiene una pantalla con la cantidad de billetes(€) correspondientes.
-     * En caso de que se haya cambiado una cantidad a otra moneda, se obtiene una pantalla con la correspondiente cantidad
-     * de billetes según la moneda elegida.
+     * Método en el que se indica las acciones que ocurren si se pulsa el botón
+     * donde se obtiene el efectivo. En caso de que se haya retirado efectivo,
+     * se obtiene una pantalla con la cantidad de billetes(€) correspondientes.
+     * En caso de que se haya cambiado una cantidad a otra moneda, se obtiene
+     * una pantalla con la correspondiente cantidad de billetes según la moneda
+     * elegida.
+     *
      * @param evt objeto del evento que se ha producido
      */
     private void btnDineroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDineroActionPerformed
@@ -1570,9 +1561,11 @@ public class VentanaATM extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDineroActionPerformed
 
     /**
-     * Método en el que se indica las acciones que ocurren si se pulsa el botón donde se obtiene el ticket.
-     * Se obtiene un PDF dentro de la carpeta del proyecto con la información de la operación, además de una
-     * ventana con la misma información
+     * Método en el que se indica las acciones que ocurren si se pulsa el botón
+     * donde se obtiene el ticket. Se obtiene un PDF dentro de la carpeta del
+     * proyecto con la información de la operación, además de una ventana con la
+     * misma información
+     *
      * @param evt objeto del evento que se ha producido
      */
     private void btnTicketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTicketActionPerformed
@@ -1593,6 +1586,7 @@ public class VentanaATM extends javax.swing.JFrame {
 
     /**
      * Método en el que se cambia el idioma de la aplicación a Español
+     *
      * @param evt objeto del evento que se ha producido
      */
     private void btnEspanolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEspanolActionPerformed
@@ -1604,9 +1598,9 @@ public class VentanaATM extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnEspanolActionPerformed
 
-
     /**
      * Método en el que se cambia el idioma de la aplicación a Inglés
+     *
      * @param evt objeto del evento que se ha producido
      */
     private void btnInglesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInglesActionPerformed
@@ -1619,7 +1613,9 @@ public class VentanaATM extends javax.swing.JFrame {
     }//GEN-LAST:event_btnInglesActionPerformed
 
     /**
-     * Método en el que se definen las acciones realizadas si se pulsa el boton superior izquierdo de la pantalla.
+     * Método en el que se definen las acciones realizadas si se pulsa el boton
+     * superior izquierdo de la pantalla.
+     *
      * @param evt objeto del evento que se ha producido
      */
     private void btnInzquierda1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInzquierda1ActionPerformed
@@ -1632,7 +1628,9 @@ public class VentanaATM extends javax.swing.JFrame {
     }//GEN-LAST:event_btnInzquierda1ActionPerformed
 
     /**
-     * Método en el que se definen las acciones realizadas si se pulsa el segundo boton superior izquierdo de la pantalla.
+     * Método en el que se definen las acciones realizadas si se pulsa el
+     * segundo boton superior izquierdo de la pantalla.
+     *
      * @param evt objeto del evento que se ha producido
      */
     private void btnInzquierda2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInzquierda2ActionPerformed
@@ -1662,7 +1660,9 @@ public class VentanaATM extends javax.swing.JFrame {
     }//GEN-LAST:event_btnInzquierda2ActionPerformed
 
     /**
-     * Método en el que se definen las acciones realizadas si se pulsa el segundo boton inferior izquierdo de la pantalla.
+     * Método en el que se definen las acciones realizadas si se pulsa el
+     * segundo boton inferior izquierdo de la pantalla.
+     *
      * @param evt objeto del evento que se ha producido
      */
     private void btnInzquierda3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInzquierda3ActionPerformed
@@ -1692,7 +1692,9 @@ public class VentanaATM extends javax.swing.JFrame {
     }//GEN-LAST:event_btnInzquierda3ActionPerformed
 
     /**
-     * Método en el que se definen las acciones realizadas si se pulsa el boton inferior izquierdo de la pantalla.
+     * Método en el que se definen las acciones realizadas si se pulsa el boton
+     * inferior izquierdo de la pantalla.
+     *
      * @param evt objeto del evento que se ha producido
      */
     private void btnInzquierda4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInzquierda4ActionPerformed
@@ -1722,7 +1724,9 @@ public class VentanaATM extends javax.swing.JFrame {
     }//GEN-LAST:event_btnInzquierda4ActionPerformed
 
     /**
-     * Método en el que se definen las acciones realizadas si se pulsa el boton superior derecho de la pantalla.
+     * Método en el que se definen las acciones realizadas si se pulsa el boton
+     * superior derecho de la pantalla.
+     *
      * @param evt objeto del evento que se ha producido
      */
     private void btnDerecha1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDerecha1ActionPerformed
@@ -1737,7 +1741,9 @@ public class VentanaATM extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDerecha1ActionPerformed
 
     /**
-     * Método en el que se definen las acciones realizadas si se pulsa el segundo boton superior derecho de la pantalla.
+     * Método en el que se definen las acciones realizadas si se pulsa el
+     * segundo boton superior derecho de la pantalla.
+     *
      * @param evt objeto del evento que se ha producido
      */
     private void btnDerecha2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDerecha2ActionPerformed
@@ -1768,7 +1774,9 @@ public class VentanaATM extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDerecha2ActionPerformed
 
     /**
-     * Método en el que se definen las acciones realizadas si se pulsa el segundo boton inferior derecho de la pantalla.
+     * Método en el que se definen las acciones realizadas si se pulsa el
+     * segundo boton inferior derecho de la pantalla.
+     *
      * @param evt objeto del evento que se ha producido
      */
     private void btnDerecha3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDerecha3ActionPerformed
@@ -1799,7 +1807,9 @@ public class VentanaATM extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDerecha3ActionPerformed
 
     /**
-     * Método en el que se definen las acciones realizadas si se pulsa el boton inferior derecho de la pantalla.
+     * Método en el que se definen las acciones realizadas si se pulsa el boton
+     * inferior derecho de la pantalla.
+     *
      * @param evt objeto del evento que se ha producido
      */
     private void btnDerecha4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDerecha4ActionPerformed
@@ -1829,7 +1839,9 @@ public class VentanaATM extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDerecha4ActionPerformed
 
     /**
-     * Método en el que se definen las acciones realizadas si se pulsa el boton "CANCEL" del teclado
+     * Método en el que se definen las acciones realizadas si se pulsa el boton
+     * "CANCEL" del teclado
+     *
      * @param evt objeto del evento que se ha producido
      */
     private void lblCancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCancelMouseClicked
@@ -1877,14 +1889,17 @@ public class VentanaATM extends javax.swing.JFrame {
     }//GEN-LAST:event_lblCancelMouseClicked
 
     /**
-     * Método en el que se definen las acciones realizadas si se pulsa el boton "ENTER" del teclado
+     * Método en el que se definen las acciones realizadas si se pulsa el boton
+     * "ENTER" del teclado
+     *
      * @param evt objeto del evento que se ha producido
      */
     private void lblEnterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblEnterMouseClicked
         reproducirSonido(".\\src\\ATM_Images\\tecla.wav");
         switch (pantalla) {
             case 4:
-                String contr1,contr2;
+                String contr1,
+                 contr2;
                 contr1 = String.valueOf(passwd1.getPassword());
                 contr2 = String.valueOf(passwd2.getPassword());
                 if (contr1.length() == 0) {
@@ -1997,8 +2012,10 @@ public class VentanaATM extends javax.swing.JFrame {
     }//GEN-LAST:event_lblEnterMouseClicked
 
     /**
-     * Método en el que se indica, dependiendo de la pantalla en el que encuentre el usuario,
-     * las acciones que se realizan si se pulsa la tecla 3.
+     * Método en el que se indica, dependiendo de la pantalla en el que
+     * encuentre el usuario, las acciones que se realizan si se pulsa la tecla
+     * 3.
+     *
      * @param evt objeto del evento que se ha producido
      */
     private void lbl3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl3MouseClicked
@@ -2063,8 +2080,10 @@ public class VentanaATM extends javax.swing.JFrame {
     }//GEN-LAST:event_lbl3MouseClicked
 
     /**
-     * Método en el que se indica, dependiendo de la pantalla en el que encuentre el usuario,
-     * las acciones que se realizan si se pulsa la tecla 4.
+     * Método en el que se indica, dependiendo de la pantalla en el que
+     * encuentre el usuario, las acciones que se realizan si se pulsa la tecla
+     * 4.
+     *
      * @param evt objeto del evento que se ha producido
      */
     private void lbl4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl4MouseClicked
@@ -2127,8 +2146,10 @@ public class VentanaATM extends javax.swing.JFrame {
     }//GEN-LAST:event_lbl4MouseClicked
 
     /**
-     * Método en el que se indica, dependiendo de la pantalla en el que encuentre el usuario,
-     * las acciones que se realizan si se pulsa la tecla 5.
+     * Método en el que se indica, dependiendo de la pantalla en el que
+     * encuentre el usuario, las acciones que se realizan si se pulsa la tecla
+     * 5.
+     *
      * @param evt objeto del evento que se ha producido
      */
     private void lbl5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl5MouseClicked
@@ -2191,8 +2212,10 @@ public class VentanaATM extends javax.swing.JFrame {
     }//GEN-LAST:event_lbl5MouseClicked
 
     /**
-     * Método en el que se indica, dependiendo de la pantalla en el que encuentre el usuario,
-     * las acciones que se realizan si se pulsa la tecla 2.
+     * Método en el que se indica, dependiendo de la pantalla en el que
+     * encuentre el usuario, las acciones que se realizan si se pulsa la tecla
+     * 2.
+     *
      * @param evt objeto del evento que se ha producido
      */
     private void lbl2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl2MouseClicked
@@ -2255,8 +2278,10 @@ public class VentanaATM extends javax.swing.JFrame {
     }//GEN-LAST:event_lbl2MouseClicked
 
     /**
-     * Método en el que se indica, dependiendo de la pantalla en el que encuentre el usuario,
-     * las acciones que se realizan si se pulsa la tecla 6.
+     * Método en el que se indica, dependiendo de la pantalla en el que
+     * encuentre el usuario, las acciones que se realizan si se pulsa la tecla
+     * 6.
+     *
      * @param evt objeto del evento que se ha producido
      */
     private void lbl6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl6MouseClicked
@@ -2318,8 +2343,10 @@ public class VentanaATM extends javax.swing.JFrame {
     }//GEN-LAST:event_lbl6MouseClicked
 
     /**
-     * Método en el que se indica, dependiendo de la pantalla en el que encuentre el usuario,
-     * las acciones que se realizan si se pulsa la tecla 7.
+     * Método en el que se indica, dependiendo de la pantalla en el que
+     * encuentre el usuario, las acciones que se realizan si se pulsa la tecla
+     * 7.
+     *
      * @param evt objeto del evento que se ha producido
      */
     private void lbl7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl7MouseClicked
@@ -2382,8 +2409,10 @@ public class VentanaATM extends javax.swing.JFrame {
     }//GEN-LAST:event_lbl7MouseClicked
 
     /**
-     * Método en el que se indica, dependiendo de la pantalla en el que encuentre el usuario,
-     * las acciones que se realizan si se pulsa la tecla 8.
+     * Método en el que se indica, dependiendo de la pantalla en el que
+     * encuentre el usuario, las acciones que se realizan si se pulsa la tecla
+     * 8.
+     *
      * @param evt objeto del evento que se ha producido
      */
     private void lbl8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl8MouseClicked
@@ -2446,8 +2475,10 @@ public class VentanaATM extends javax.swing.JFrame {
     }//GEN-LAST:event_lbl8MouseClicked
 
     /**
-     * Método en el que se indica, dependiendo de la pantalla en el que encuentre el usuario,
-     * las acciones que se realizan si se pulsa la tecla 9.
+     * Método en el que se indica, dependiendo de la pantalla en el que
+     * encuentre el usuario, las acciones que se realizan si se pulsa la tecla
+     * 9.
+     *
      * @param evt objeto del evento que se ha producido
      */
     private void lbl9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl9MouseClicked
@@ -2512,8 +2543,10 @@ public class VentanaATM extends javax.swing.JFrame {
     }//GEN-LAST:event_lbl9MouseClicked
 
     /**
-     * Método en el que se indica, dependiendo de la pantalla en el que encuentre el usuario,
-     * las acciones que se realizan si se pulsa la tecla 0.
+     * Método en el que se indica, dependiendo de la pantalla en el que
+     * encuentre el usuario, las acciones que se realizan si se pulsa la tecla
+     * 0.
+     *
      * @param evt objeto del evento que se ha producido
      */
     private void lbl0MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl0MouseClicked
@@ -2577,7 +2610,9 @@ public class VentanaATM extends javax.swing.JFrame {
     }//GEN-LAST:event_lbl0MouseClicked
 
     /**
-     * Método en el que se definen las acciones realizadas si se pulsa el boton "CLEAR" del teclado
+     * Método en el que se definen las acciones realizadas si se pulsa el boton
+     * "CLEAR" del teclado
+     *
      * @param evt objeto del evento que se ha producido
      */
     private void lblClearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblClearMouseClicked
@@ -2609,9 +2644,92 @@ public class VentanaATM extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_lblClearMouseClicked
 
+    private void lblizquierdaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblizquierdaMouseClicked
+        eventoIzquierda = evt;
+
+    }//GEN-LAST:event_lblizquierdaMouseClicked
+
+    private void lblDerechaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblDerechaMouseClicked
+        eventoDerecha = evt;
+        if (comprobarCombAdmin(eventoIzquierda, eventoDerecha)) {
+            fallosAdmin = 0;
+            boolean autenticacionCorrecta = false;
+            while (fallosAdmin < 3 && !autenticacionCorrecta) {
+                autenticacionCorrecta = comprobarAdministrador();
+            }
+            if (fallosAdmin == 3) {
+                JOptionPane.showMessageDialog(this, "El ATM se cerrará por motivo de seguridad", "ERROR", JOptionPane.ERROR_MESSAGE);
+                System.exit(0);
+            }
+            fallosAdmin = 0;
+            this.setEnabled(false);
+            VentanaAdministrador ventanaAdmin = new VentanaAdministrador(administrador);
+            ventanaAdmin.setVisible(true);
+        }
+
+    }//GEN-LAST:event_lblDerechaMouseClicked
+
+    private boolean comprobarCombAdmin(MouseEvent izquierda, MouseEvent derecha) {
+        if (izquierda != null && derecha != null) {
+            eventoIzquierda = null;
+            eventoDerecha = null;
+            return true;
+        }
+        eventoIzquierda = null;
+        eventoDerecha = null;
+        return false;
+    }
+
+    private boolean comprobarAdministrador() {
+        JTextField numeroAdmin = new JTextField();
+        JPasswordField contrasena = new JPasswordField();
+        Object[] campos = {"Número de administrador: ", numeroAdmin, "Número secreto: ", contrasena};
+        int respuesta = JOptionPane.showConfirmDialog(this, campos, "Login", JOptionPane.OK_CANCEL_OPTION);
+        String numAdmin = numeroAdmin.getText().trim();
+        String contr = String.valueOf(contrasena.getPassword()).trim();
+
+        //Si falta por meter alguna credencial:
+        if (numAdmin.equals("") && !contr.equals("") && respuesta == JOptionPane.OK_OPTION) {
+            JOptionPane.showMessageDialog(this, "Introduce el numero de administrador", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return false;
+        } else if (!numAdmin.equals("") && contr.equals("") && respuesta == JOptionPane.OK_OPTION) {
+            JOptionPane.showMessageDialog(this, "Introduce el numero secreto", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return false;
+        } else if (numAdmin.equals("") && contr.equals("") && respuesta == JOptionPane.OK_OPTION) {
+            JOptionPane.showMessageDialog(this, "No has insertado las credenciales", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        
+        try {
+            sentencia = conexion.createStatement();
+            String selectNum = "SELECT numero_identificativo from administrador where numero_identificativo= '" + numAdmin + "';";
+            resultado = sentencia.executeQuery(selectNum);
+            if (resultado.next()) {
+                String selectPin = "SELECT numero_secreto from administrador where numero_secreto='" + contr + "';";
+                resultado = sentencia.executeQuery(selectPin);
+                if (resultado.next()) {
+                    administrador = Integer.parseInt(numAdmin);
+                    return true;
+                } else {
+                    fallosAdmin++;
+                    JOptionPane.showMessageDialog(this, "Número secreto incorrecto. Intentos restantes: " + (NUM_INTENTOS - fallosAdmin), "ERROR", JOptionPane.ERROR_MESSAGE);
+                    return false;
+                }
+            } else {
+                fallosAdmin++;
+                JOptionPane.showMessageDialog(this, "Número de administrador incorrecto. Intentos restantes: " + (NUM_INTENTOS - fallosAdmin), "ERROR", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(VentanaATM.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return respuesta != JOptionPane.CLOSED_OPTION || respuesta != JOptionPane.CANCEL_OPTION;
+    }
+
     /**
-     * Método en el que se inicializa el objeto ComboBox con las diferentes monedas 
-     * si se elige la operacion "Cambiar a moneda extranjera"
+     * Método en el que se inicializa el objeto ComboBox con las diferentes
+     * monedas si se elige la operacion "Cambiar a moneda extranjera"
      */
     private void initComboBox() {
         cmbMonedas.addItem(MonedaExtranjera.DOLAR.getNombre());
@@ -2622,8 +2740,9 @@ public class VentanaATM extends javax.swing.JFrame {
     }
 
     /**
-     * Método el cuál elimina el valor de todos los elementos en los que el usuario puede escribir.
-     * Este método se llama cada vez que el usuario realice con éxito una operación
+     * Método el cuál elimina el valor de todos los elementos en los que el
+     * usuario puede escribir. Este método se llama cada vez que el usuario
+     * realice con éxito una operación
      */
     private void vaciarCeldas() {
         passwd1.setText("");
@@ -2638,7 +2757,9 @@ public class VentanaATM extends javax.swing.JFrame {
     }
 
     /**
-     * Método el cuál cambia la pantalla del ATM de la actual a la indicada por parámetro
+     * Método el cuál cambia la pantalla del ATM de la actual a la indicada por
+     * parámetro
+     *
      * @param pant el índice de la pantalla a la que se quiere cambiar
      */
     private void moverPantalla(int pant) {
@@ -2647,17 +2768,23 @@ public class VentanaATM extends javax.swing.JFrame {
     }
 
     /**
-     * Método en el que se comprueba que el usuario no puede introducir más de 4 caracteres con el teclado del ATM.
+     * Método en el que se comprueba que el usuario no puede introducir más de 4
+     * caracteres con el teclado del ATM.
+     *
      * @param texto cadena de texto a evaluar
-     * @return false o true dependiendo si el parámetro supera o no el límite de 4 caracteres, respectivamente
+     * @return false o true dependiendo si el parámetro supera o no el límite de
+     * 4 caracteres, respectivamente
      */
     private boolean validarTecla(String texto) {
         return texto.length() != 4;
     }
 
     /**
-     * Método en el que se realiza el cambio de contraseña de la tarjeta en la base de datos.
-     * @param contra2 nuevo valor que va a tomar la contraseña de la tarjeta introducida
+     * Método en el que se realiza el cambio de contraseña de la tarjeta en la
+     * base de datos.
+     *
+     * @param contra2 nuevo valor que va a tomar la contraseña de la tarjeta
+     * introducida
      */
     private void cambiarContrasena(String contra2) {
         try {
@@ -2670,9 +2797,11 @@ public class VentanaATM extends javax.swing.JFrame {
     }
 
     /**
-     * Método en el que se realiza el documento PDF del ticket con los datos de la operación realizada y la ventana emergente con la misma información.
+     * Método en el que se realiza el documento PDF del ticket con los datos de
+     * la operación realizada y la ventana emergente con la misma información.
+     *
      * @throws DocumentException
-     * @throws IOException 
+     * @throws IOException
      */
     private void imprimirPDFTicket() throws DocumentException, IOException {
         String rutaPDF = "Ticket.pdf";
@@ -2728,7 +2857,9 @@ public class VentanaATM extends javax.swing.JFrame {
 
     /**
      * Método en el que se reproduce la pista de sonido indicada por parámetro
-     * @param ruta la ruta de la pista del archivo .wav (las pistas de sonido se encuentran en el paquete ATM_Images)
+     *
+     * @param ruta la ruta de la pista del archivo .wav (las pistas de sonido se
+     * encuentran en el paquete ATM_Images)
      */
     private void reproducirSonido(String ruta) {
         File archivoSonido = new File(ruta);
@@ -2747,9 +2878,11 @@ public class VentanaATM extends javax.swing.JFrame {
     }
 
     /**
-     * Método en el que se comprueba si se ha seleccionado una moneda extranjera a la hora de intercambiar
-     * una cantidad por una de ellas.
-     * @return true o false dependiendo si se ha seleccionado una moneda del objeto ComboBox o no, respectivamente
+     * Método en el que se comprueba si se ha seleccionado una moneda extranjera
+     * a la hora de intercambiar una cantidad por una de ellas.
+     *
+     * @return true o false dependiendo si se ha seleccionado una moneda del
+     * objeto ComboBox o no, respectivamente
      */
     private boolean comprobarMoneda() {
         pantallaAnterior = contenedor.getSelectedIndex();
@@ -2774,9 +2907,13 @@ public class VentanaATM extends javax.swing.JFrame {
     }
 
     /**
-     * Método en el que se comprueba si se puede realizar la operación elegida con la cantidad de efectivo indicado por el usuario
-     * @param cantidad valor el cuál se va a someter a unas restricciones, dependiendo de la operación elegida
-     * @return true o false si la cantidad indicada por el usuario es admitida o no, respectivamente
+     * Método en el que se comprueba si se puede realizar la operación elegida
+     * con la cantidad de efectivo indicado por el usuario
+     *
+     * @param cantidad valor el cuál se va a someter a unas restricciones,
+     * dependiendo de la operación elegida
+     * @return true o false si la cantidad indicada por el usuario es admitida o
+     * no, respectivamente
      */
     private boolean comprobarCantidad(int cantidad) {
         switch (operacion) {
@@ -2876,7 +3013,8 @@ public class VentanaATM extends javax.swing.JFrame {
     }
 
     /**
-     * Método en el que se inserta un registro en la base de datos sobre la operación realizada por el usuario
+     * Método en el que se inserta un registro en la base de datos sobre la
+     * operación realizada por el usuario
      */
     private void insertarHistoricoOperacion() {
         String selectDni = "select dniCliente from cuenta_bancaria where iban=\"" + ibanRegistrado + "\";";
@@ -2909,8 +3047,11 @@ public class VentanaATM extends javax.swing.JFrame {
     }
 
     /**
-     * Método en el que comprueba si las credenciales introducidas por el usuario para iniciar sesón son correctas o no.
-     * @return true o false dependiendo si las credenciales introducidas son correctas o no, respectivamente.
+     * Método en el que comprueba si las credenciales introducidas por el
+     * usuario para iniciar sesón son correctas o no.
+     *
+     * @return true o false dependiendo si las credenciales introducidas son
+     * correctas o no, respectivamente.
      */
     private boolean getCuentaBancaria() {
         JTextField numeroTajeta = new JTextField();
@@ -3003,7 +3144,8 @@ public class VentanaATM extends javax.swing.JFrame {
     }
 
     /**
-     * Método en el que se cambia el texto de la aplicación ATM a Español, en caso de que se eliga ese idioma
+     * Método en el que se cambia el texto de la aplicación ATM a Español, en
+     * caso de que se eliga ese idioma
      */
     private void initEspanol() {
         lblIntroduccion.setText(idioma.getProperty("lblIntro"));
@@ -3038,7 +3180,8 @@ public class VentanaATM extends javax.swing.JFrame {
     }
 
     /**
-     * Método en el que se cambia el texto de la aplicación ATM a Inglés, en caso de que se eliga ese idioma
+     * Método en el que se cambia el texto de la aplicación ATM a Inglés, en
+     * caso de que se eliga ese idioma
      */
     private void initIngles() {
         lblIntroduccion.setText(idioma.getProperty("lblIntro"));
@@ -3192,6 +3335,7 @@ public class VentanaATM extends javax.swing.JFrame {
     private javax.swing.JLabel lblConfirmacion;
     private javax.swing.JLabel lblCuentasTransferencia;
     private javax.swing.JLabel lblDepositar;
+    private javax.swing.JLabel lblDerecha;
     private javax.swing.JLabel lblEnter;
     private javax.swing.JLabel lblFactura;
     private javax.swing.JLabel lblIdioma;
@@ -3212,6 +3356,7 @@ public class VentanaATM extends javax.swing.JFrame {
     private javax.swing.JLabel lblTicket;
     private javax.swing.JLabel lblTransferencia;
     private javax.swing.JLabel lblValorFactura;
+    private javax.swing.JLabel lblizquierda;
     private javax.swing.JLabel lblotra1;
     private javax.swing.JPanel menuPrincipal;
     private javax.swing.JPanel pagarFactura;
@@ -3239,6 +3384,8 @@ public class VentanaATM extends javax.swing.JFrame {
     private String ibanReceptor = null;
     private String tarjetaIngresada;
     private int fallos;
+    private int fallosAdmin;
+    private int administrador;
     private Timer reloj;
     Idioma idioma;
     int pantalla;
@@ -3255,4 +3402,7 @@ public class VentanaATM extends javax.swing.JFrame {
     DevolucionYen yenes;
     DevolucionFranco francos;
     MonedaExtranjera monedaExtran;
+    MouseEvent eventoIzquierda;
+    MouseEvent eventoDerecha;
+
 }
