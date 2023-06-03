@@ -25,6 +25,10 @@ public class Cliente implements Comparable<Cliente>{
         this.numeroAdministrador = numeroAdministrador;
     }
 
+    public Cliente(String dni) {
+        this.dni = dni;
+    }
+
     public String getDni() {
         return dni;
     }
