@@ -27,6 +27,15 @@ public class TarjetaBancaria {
         this.numeroAdministrador = numeroAdministrador;
     }
 
+    public TarjetaBancaria(String dniCliente, String numeroTarjeta, int pin, String iban) {
+        this.dniCliente = dniCliente;
+        this.numeroTarjeta = numeroTarjeta;
+        this.pin = pin;
+        this.iban = iban;
+    }
+
+    
+    
     public String getNumeroTarjeta() {
         return numeroTarjeta;
     }
@@ -80,5 +89,6 @@ public class TarjetaBancaria {
         final TarjetaBancaria other = (TarjetaBancaria) obj;
         return Objects.equals(this.numeroTarjeta, other.numeroTarjeta);
     }
+    
     
 }

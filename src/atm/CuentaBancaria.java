@@ -25,8 +25,9 @@ public class CuentaBancaria {
         this.numeroAdministrador = numeroAdministrador;
     }
 
-    public CuentaBancaria(String iban) {
+    public CuentaBancaria(String iban, String dniCliente) {
         this.iban = iban;
+        this.dniCliente = dniCliente;
     }
     
     
@@ -80,11 +81,4 @@ public class CuentaBancaria {
         final CuentaBancaria other = (CuentaBancaria) obj;
         return Objects.equals(this.iban.toUpperCase(), other.iban.toUpperCase());
     }
-
-    @Override
-    public String toString() {
-        return iban + " " + saldo;
-    }
-    
-    
 }

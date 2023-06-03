@@ -24,15 +24,19 @@ import javax.swing.table.DefaultTableModel;
  */
 public class VentanaAdministrador extends JFrame {
 
+    private static final int MAX_CAJERO = 10000;
     private int administrador;
+    private int dineroDisponible;
 
     /**
      * Creates new form VentanaAdministrador
      */
-    public VentanaAdministrador(int administrador) {
+    public VentanaAdministrador(int administrador, int dineroDisponible) {
         this.administrador = administrador;
+        this.dineroDisponible = dineroDisponible;
         clientes = new ArrayList<>();
         cuentas = new ArrayList<>();
+        tarjetas = new ArrayList<>();
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setPreferredSize(new Dimension(770, 490));
         setLocation(600, 200);
@@ -40,9 +44,14 @@ public class VentanaAdministrador extends JFrame {
         initBD();
         initClientes();
         initCuentas();
+        initTarjetas();
         moverPantalla(0);
     }
 
+    public int getDineroDisponible(){
+        return dineroDisponible;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -95,8 +104,31 @@ public class VentanaAdministrador extends JFrame {
         btnBloquearCuenta = new javax.swing.JButton();
         btnDesbloquearCuenta = new javax.swing.JButton();
         darAltaTarjeta = new javax.swing.JPanel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        tablaAltaTarjetas = new javax.swing.JTable();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        txfAddNumTarjeta = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        txfIbanAddTarjeta = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        txfContrasenaTarjetaAlta = new javax.swing.JTextField();
+        btnAddTarjeta = new javax.swing.JButton();
         darBajaTarjeta = new javax.swing.JPanel();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        tablaBajaTarjetas = new javax.swing.JTable();
+        btnEliminarTarjeta = new javax.swing.JButton();
         bloquearDesbloquearTarjeta = new javax.swing.JPanel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        tablaBloqDesbloqTarjeta = new javax.swing.JTable();
+        btnBloquearTarjeta = new javax.swing.JButton();
+        btnDesbloquearTarjeta = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        txfDineroBanco = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        txfCantidadIntroducir = new javax.swing.JTextField();
+        btnIntroducirDinero = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         btnAltaUsuario = new javax.swing.JMenuItem();
@@ -108,12 +140,12 @@ public class VentanaAdministrador extends JFrame {
         jMenu3 = new javax.swing.JMenu();
         btnAltaTarjeta = new javax.swing.JMenuItem();
         btnBajaTarjeta = new javax.swing.JMenuItem();
-        btnBloquearTarjeta = new javax.swing.JMenuItem();
-        btnDesbloquearTarjeta = new javax.swing.JMenuItem();
+        btnBloquDesbloquTarjeta = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         btnRellenarCajero = new javax.swing.JMenuItem();
         btnApagarCajero = new javax.swing.JMenuItem();
-        jMenu5 = new javax.swing.JMenu();
+        menuSalir = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Administrador ATM");
@@ -127,7 +159,7 @@ public class VentanaAdministrador extends JFrame {
         paginaPrincipal.setLayout(paginaPrincipalLayout);
         paginaPrincipalLayout.setHorizontalGroup(
             paginaPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblFondo, javax.swing.GroupLayout.DEFAULT_SIZE, 807, Short.MAX_VALUE)
+            .addComponent(lblFondo, javax.swing.GroupLayout.DEFAULT_SIZE, 801, Short.MAX_VALUE)
         );
         paginaPrincipalLayout.setVerticalGroup(
             paginaPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -215,7 +247,7 @@ public class VentanaAdministrador extends JFrame {
                     .addGroup(darAltaUsuarioLayout.createSequentialGroup()
                         .addGap(57, 57, 57)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 433, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(80, Short.MAX_VALUE))
+                .addContainerGap(74, Short.MAX_VALUE))
         );
         darAltaUsuarioLayout.setVerticalGroup(
             darAltaUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -270,7 +302,7 @@ public class VentanaAdministrador extends JFrame {
         darBajaUsuarioLayout.setHorizontalGroup(
             darBajaUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(darBajaUsuarioLayout.createSequentialGroup()
-                .addContainerGap(43, Short.MAX_VALUE)
+                .addContainerGap(37, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 735, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29))
             .addGroup(darBajaUsuarioLayout.createSequentialGroup()
@@ -355,7 +387,7 @@ public class VentanaAdministrador extends JFrame {
                 .addGroup(darAltaCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnAddCuenta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(93, Short.MAX_VALUE))
+                .addContainerGap(87, Short.MAX_VALUE))
         );
         darAltaCuentaLayout.setVerticalGroup(
             darAltaCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -424,7 +456,7 @@ public class VentanaAdministrador extends JFrame {
                 .addGroup(darBajaCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEliminarCuenta))
-                .addContainerGap(140, Short.MAX_VALUE))
+                .addContainerGap(134, Short.MAX_VALUE))
         );
         darBajaCuentaLayout.setVerticalGroup(
             darBajaCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -493,7 +525,7 @@ public class VentanaAdministrador extends JFrame {
                 .addGroup(bloquearDesbloquearCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnBloquearCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnDesbloquearCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(80, Short.MAX_VALUE))
+                .addContainerGap(74, Short.MAX_VALUE))
         );
         bloquearDesbloquearCuentaLayout.setVerticalGroup(
             bloquearDesbloquearCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -512,44 +544,280 @@ public class VentanaAdministrador extends JFrame {
 
         contenedor.addTab("tab6", bloquearDesbloquearCuenta);
 
+        tablaAltaTarjetas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "DNI", "IBAN", "Número de tarjeta"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tablaAltaTarjetas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaAltaTarjetasMouseClicked(evt);
+            }
+        });
+        jScrollPane6.setViewportView(tablaAltaTarjetas);
+
+        jPanel4.setLayout(new java.awt.GridLayout(6, 1, 0, 20));
+
+        jLabel7.setText("Número de tarjeta:");
+        jPanel4.add(jLabel7);
+
+        txfAddNumTarjeta.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txfAddNumTarjetaKeyTyped(evt);
+            }
+        });
+        jPanel4.add(txfAddNumTarjeta);
+
+        jLabel8.setText("IBAN vinculado a la tarjeta");
+        jPanel4.add(jLabel8);
+
+        txfIbanAddTarjeta.setFocusable(false);
+        jPanel4.add(txfIbanAddTarjeta);
+
+        jLabel9.setText("Contraseña de la tarjeta");
+        jPanel4.add(jLabel9);
+
+        txfContrasenaTarjetaAlta.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txfContrasenaTarjetaAltaKeyTyped(evt);
+            }
+        });
+        jPanel4.add(txfContrasenaTarjetaAlta);
+
+        btnAddTarjeta.setText("Dar de alta tarjeta");
+        btnAddTarjeta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddTarjetaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout darAltaTarjetaLayout = new javax.swing.GroupLayout(darAltaTarjeta);
         darAltaTarjeta.setLayout(darAltaTarjetaLayout);
         darAltaTarjetaLayout.setHorizontalGroup(
             darAltaTarjetaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 807, Short.MAX_VALUE)
+            .addGroup(darAltaTarjetaLayout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(darAltaTarjetaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(darAltaTarjetaLayout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(btnAddTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(darAltaTarjetaLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(106, Short.MAX_VALUE))
         );
         darAltaTarjetaLayout.setVerticalGroup(
             darAltaTarjetaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 436, Short.MAX_VALUE)
+            .addGroup(darAltaTarjetaLayout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addGroup(darAltaTarjetaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGap(30, 30, 30)
+                .addComponent(btnAddTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         contenedor.addTab("tab7", darAltaTarjeta);
+
+        tablaBajaTarjetas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "DNI", "IBAN", "Número de tarjeta"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane8.setViewportView(tablaBajaTarjetas);
+
+        btnEliminarTarjeta.setText("Dar de baja tarjeta");
+        btnEliminarTarjeta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarTarjetaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout darBajaTarjetaLayout = new javax.swing.GroupLayout(darBajaTarjeta);
         darBajaTarjeta.setLayout(darBajaTarjetaLayout);
         darBajaTarjetaLayout.setHorizontalGroup(
             darBajaTarjetaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 807, Short.MAX_VALUE)
+            .addGroup(darBajaTarjetaLayout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 509, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnEliminarTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(79, Short.MAX_VALUE))
         );
         darBajaTarjetaLayout.setVerticalGroup(
             darBajaTarjetaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 436, Short.MAX_VALUE)
+            .addGroup(darBajaTarjetaLayout.createSequentialGroup()
+                .addGroup(darBajaTarjetaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(darBajaTarjetaLayout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(darBajaTarjetaLayout.createSequentialGroup()
+                        .addGap(172, 172, 172)
+                        .addComponent(btnEliminarTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
 
         contenedor.addTab("tab8", darBajaTarjeta);
+
+        tablaBloqDesbloqTarjeta.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "DNI", "IBAN", "Número de tarjeta", "Estado"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane7.setViewportView(tablaBloqDesbloqTarjeta);
+
+        btnBloquearTarjeta.setText("Bloquear tarjeta");
+        btnBloquearTarjeta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBloquearTarjetaActionPerformed(evt);
+            }
+        });
+
+        btnDesbloquearTarjeta.setText("Desbloquear tarjeta");
+        btnDesbloquearTarjeta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDesbloquearTarjetaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout bloquearDesbloquearTarjetaLayout = new javax.swing.GroupLayout(bloquearDesbloquearTarjeta);
         bloquearDesbloquearTarjeta.setLayout(bloquearDesbloquearTarjetaLayout);
         bloquearDesbloquearTarjetaLayout.setHorizontalGroup(
             bloquearDesbloquearTarjetaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 807, Short.MAX_VALUE)
+            .addGroup(bloquearDesbloquearTarjetaLayout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 691, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(72, Short.MAX_VALUE))
+            .addGroup(bloquearDesbloquearTarjetaLayout.createSequentialGroup()
+                .addGap(116, 116, 116)
+                .addComponent(btnBloquearTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnDesbloquearTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(177, 177, 177))
         );
         bloquearDesbloquearTarjetaLayout.setVerticalGroup(
             bloquearDesbloquearTarjetaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 436, Short.MAX_VALUE)
+            .addGroup(bloquearDesbloquearTarjetaLayout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(bloquearDesbloquearTarjetaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnBloquearTarjeta, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
+                    .addComponent(btnDesbloquearTarjeta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
         contenedor.addTab("tab9", bloquearDesbloquearTarjeta);
+
+        jLabel10.setText("Total de dinero disponible en el banco:");
+
+        txfDineroBanco.setFocusable(false);
+
+        jLabel11.setText("Total de dinero a introducir en el banco (MAX: 10000)");
+
+        txfCantidadIntroducir.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txfCantidadIntroducirKeyTyped(evt);
+            }
+        });
+
+        btnIntroducirDinero.setText("Introducir dinero");
+        btnIntroducirDinero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIntroducirDineroActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(143, 143, 143)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnIntroducirDinero, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(txfDineroBanco)
+                        .addComponent(txfCantidadIntroducir, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)))
+                .addContainerGap(184, Short.MAX_VALUE))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(90, 90, 90)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txfDineroBanco, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(45, 45, 45)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txfCantidadIntroducir, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE))
+                .addGap(43, 43, 43)
+                .addComponent(btnIntroducirDinero, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(120, Short.MAX_VALUE))
+        );
+
+        contenedor.addTab("tab10", jPanel5);
 
         jMenu1.setText("Administrar usuarios");
 
@@ -617,21 +885,16 @@ public class VentanaAdministrador extends JFrame {
         });
         jMenu3.add(btnBajaTarjeta);
 
-        btnBloquearTarjeta.setText("Bloquear tarjeta");
-        btnBloquearTarjeta.addActionListener(new java.awt.event.ActionListener() {
+        btnBloquDesbloquTarjeta.setText("Bloquear/desbloquear tarjeta");
+        btnBloquDesbloquTarjeta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBloquearTarjetaActionPerformed(evt);
+                btnBloquDesbloquTarjetaActionPerformed(evt);
             }
         });
-        jMenu3.add(btnBloquearTarjeta);
+        jMenu3.add(btnBloquDesbloquTarjeta);
 
-        btnDesbloquearTarjeta.setText("Desbloquear tarjeta");
-        btnDesbloquearTarjeta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDesbloquearTarjetaActionPerformed(evt);
-            }
-        });
-        jMenu3.add(btnDesbloquearTarjeta);
+        jMenuItem1.setText("Cambiar PIN");
+        jMenu3.add(jMenuItem1);
 
         jMenuBar1.add(jMenu3);
 
@@ -655,13 +918,13 @@ public class VentanaAdministrador extends JFrame {
 
         jMenuBar1.add(jMenu4);
 
-        jMenu5.setText("Salir");
-        jMenu5.addMouseListener(new java.awt.event.MouseAdapter() {
+        menuSalir.setText("Salir");
+        menuSalir.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenu5MouseClicked(evt);
+                menuSalirMouseClicked(evt);
             }
         });
-        jMenuBar1.add(jMenu5);
+        jMenuBar1.add(menuSalir);
 
         setJMenuBar(jMenuBar1);
 
@@ -707,32 +970,33 @@ public class VentanaAdministrador extends JFrame {
     }//GEN-LAST:event_btnBloquDesbloquCuentaActionPerformed
 
     private void btnAltaTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAltaTarjetaActionPerformed
-
+        moverPantalla(6);
+        initTablaTarjetas();
     }//GEN-LAST:event_btnAltaTarjetaActionPerformed
 
     private void btnBajaTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBajaTarjetaActionPerformed
-
+        moverPantalla(7);
+        initTablaTarjetas2();
     }//GEN-LAST:event_btnBajaTarjetaActionPerformed
 
-    private void btnBloquearTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBloquearTarjetaActionPerformed
-
-    }//GEN-LAST:event_btnBloquearTarjetaActionPerformed
-
-    private void btnDesbloquearTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDesbloquearTarjetaActionPerformed
-
-    }//GEN-LAST:event_btnDesbloquearTarjetaActionPerformed
+    private void btnBloquDesbloquTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBloquDesbloquTarjetaActionPerformed
+        moverPantalla(8);
+        initTablaTarjetasBloqDesbloq();
+    }//GEN-LAST:event_btnBloquDesbloquTarjetaActionPerformed
 
     private void btnRellenarCajeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRellenarCajeroActionPerformed
-
+        moverPantalla(9);
+        txfDineroBanco.setText(String.valueOf(dineroDisponible));
+        txfCantidadIntroducir.setText(String.valueOf((MAX_CAJERO-dineroDisponible)));
     }//GEN-LAST:event_btnRellenarCajeroActionPerformed
 
     private void btnApagarCajeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApagarCajeroActionPerformed
-
+        System.exit(0);
     }//GEN-LAST:event_btnApagarCajeroActionPerformed
 
-    private void jMenu5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu5MouseClicked
-        System.exit(0);
-    }//GEN-LAST:event_jMenu5MouseClicked
+    private void menuSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuSalirMouseClicked
+        dispose();
+    }//GEN-LAST:event_menuSalirMouseClicked
 
     private void btnAddClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddClienteActionPerformed
         String dni = txfDNI.getText();
@@ -851,10 +1115,11 @@ public class VentanaAdministrador extends JFrame {
         int filaSelec = tablaCuentasEliminar.getSelectedRow();
         if (filaSelec != -1) {
             String iban = (String) modeloTablaCuentas.getValueAt(filaSelec, 1);
-            CuentaBancaria cbEliminar = new CuentaBancaria(iban);
+            String dni = (String) modeloTablaCuentas.getValueAt(filaSelec, 0);
+            CuentaBancaria cbEliminar = new CuentaBancaria(iban, dni);
             cuentas.remove(cbEliminar);
             modeloTablaCuentas.removeRow(filaSelec);
-            String deleteCuenta = "delete from cuenta_bancaria where iban ='"+iban+"'";
+            String deleteCuenta = "delete from cuenta_bancaria where iban ='" + iban + "'";
             try {
                 sentencia.executeUpdate(deleteCuenta);
             } catch (SQLException ex) {
@@ -883,11 +1148,11 @@ public class VentanaAdministrador extends JFrame {
         int filaSelec = tablaCuentasBloquDesbloqu.getSelectedRow();
         if (filaSelec != -1) {
             String bloqueada = (String) modeloTablaCuentas.getValueAt(filaSelec, 2);
-            String iban = (String) modeloTablaCuentas.getValueAt(filaSelec,1);
-            if(bloqueada.equals("Desbloqueada")){
+            String iban = (String) modeloTablaCuentas.getValueAt(filaSelec, 1);
+            if (bloqueada.equals("Desbloqueada")) {
                 bloqueada = "Bloqueada";
                 modeloTablaCuentas.setValueAt(bloqueada, filaSelec, 2);
-                String updateCuenta = "update cuenta_bancaria set bloqueada=1 where iban='"+iban+"';";
+                String updateCuenta = "update cuenta_bancaria set bloqueada=1 where iban='" + iban + "';";
                 try {
                     sentencia.executeUpdate(updateCuenta);
                 } catch (SQLException ex) {
@@ -901,11 +1166,11 @@ public class VentanaAdministrador extends JFrame {
         int filaSelec = tablaCuentasBloquDesbloqu.getSelectedRow();
         if (filaSelec != -1) {
             String bloqueada = (String) modeloTablaCuentas.getValueAt(filaSelec, 2);
-            String iban = (String) modeloTablaCuentas.getValueAt(filaSelec,1);
-            if(bloqueada.equals("Bloqueada")){
+            String iban = (String) modeloTablaCuentas.getValueAt(filaSelec, 1);
+            if (bloqueada.equals("Bloqueada")) {
                 bloqueada = "Desbloqueada";
                 modeloTablaCuentas.setValueAt(bloqueada, filaSelec, 2);
-                String updateCuenta = "update cuenta_bancaria set bloqueada=0 where iban='"+iban+"'";
+                String updateCuenta = "update cuenta_bancaria set bloqueada=0 where iban='" + iban + "'";
                 try {
                     sentencia.executeUpdate(updateCuenta);
                 } catch (SQLException ex) {
@@ -914,6 +1179,236 @@ public class VentanaAdministrador extends JFrame {
             }
         }
     }//GEN-LAST:event_btnDesbloquearCuentaActionPerformed
+
+    private void tablaAltaTarjetasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaAltaTarjetasMouseClicked
+        int filaSelec = tablaAltaTarjetas.getSelectedRow();
+        if (filaSelec != -1) {
+            String iban = (String) modeloTablaTarjetas.getValueAt(filaSelec, 1);
+            txfIbanAddTarjeta.setText(iban);
+        }
+    }//GEN-LAST:event_tablaAltaTarjetasMouseClicked
+
+    private void btnAddTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddTarjetaActionPerformed
+        String numero = txfAddNumTarjeta.getText();
+        String iban = txfIbanAddTarjeta.getText();
+        String contrasena = txfContrasenaTarjetaAlta.getText();
+        //Si los campos estan vacios:
+        if (numero.equals("") || iban.equals("") || contrasena.equals("")) {
+            JOptionPane.showMessageDialog(this, "Introduza todos los datos por favor", "ERROR", JOptionPane.ERROR_MESSAGE);
+            //En caso contrario:
+        } else {
+            String selectDni = "select dniCliente from cuenta_bancaria where iban='" + iban + "';";
+            try {
+                resultado = sentencia.executeQuery(selectDni);
+                resultado.next();
+                String dni = resultado.getString("dniCliente");
+                TarjetaBancaria tarjeta = new TarjetaBancaria(dni, numero, Integer.parseInt(contrasena), iban);
+                //Si la tarjeta ya existe:
+                if (tarjetas.contains(tarjeta)) {
+                    JOptionPane.showMessageDialog(this, "La tarjeta ya existe", "ERROR", JOptionPane.ERROR_MESSAGE);
+                    txfAddNumTarjeta.setText("");
+                    //En caso contrario:
+                } else {
+                    //Si la cuenta bancaria a la que queremos vincular la nueva tarjeta no tiene vinculada ninguna:
+                    boolean tieneTarjeta = true;
+                    for (int fila = 0; fila < modeloTablaTarjetas.getRowCount(); fila++) {
+                        if (modeloTablaTarjetas.getValueAt(fila, 2) == null) {
+                            String ibanSinTarjeta = (String) modeloTablaTarjetas.getValueAt(fila, 1);
+                            if (ibanSinTarjeta.equalsIgnoreCase(iban)) {
+                                tieneTarjeta = false;
+                                modeloTablaTarjetas.setValueAt(numero, fila, 2);
+                                tarjetas.add(tarjeta);
+                            }
+                        }
+                    }
+
+                    //Si ya tiene vinculada minimo 1 tarjeta:
+                    if (tieneTarjeta) {
+                        Object[] nuevaFila = {dni, iban, numero};
+                        modeloTablaTarjetas.addRow(nuevaFila);
+                        tarjetas.add(tarjeta);
+                    }
+
+                    //Añadir a la base de datos
+                    String insertNuevaTarjeta = "INSERT into tarjeta_bancaria (numero_tarjeta, pin, dniCliente, iban, numeroAdministrador) values ('" + numero + "', " + txfContrasenaTarjetaAlta.getText() + ", '" + dni + "', '" + iban + "', " + administrador + ");";
+                    sentencia.executeUpdate(insertNuevaTarjeta);
+                }
+
+            } catch (SQLException ex) {
+                Logger.getLogger(VentanaAdministrador.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_btnAddTarjetaActionPerformed
+
+    private void txfAddNumTarjetaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfAddNumTarjetaKeyTyped
+        char caracter = evt.getKeyChar();
+        if (txfAddNumTarjeta.getText().length() == 19 || Character.isLetter(caracter)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txfAddNumTarjetaKeyTyped
+
+    private void txfContrasenaTarjetaAltaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfContrasenaTarjetaAltaKeyTyped
+        char caracter = evt.getKeyChar();
+        if (txfContrasenaTarjetaAlta.getText().length() == 4 || Character.isLetter(caracter)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txfContrasenaTarjetaAltaKeyTyped
+
+    private void btnEliminarTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarTarjetaActionPerformed
+        int filaSelec = tablaBajaTarjetas.getSelectedRow();
+        if (filaSelec != -1) {
+            String tarjeta = (String) modeloTablaTarjetas.getValueAt(filaSelec, 2);
+            String getTarjeta = "SELECT * FROM tarjeta_bancaria where numero_tarjeta = '" + tarjeta + "';";
+            try {
+                resultado = sentencia.executeQuery(getTarjeta);
+                while (resultado.next()) {
+                    int pin = resultado.getInt("pin");
+                    boolean bloqueada = resultado.getBoolean("bloqueada");
+                    String dni = resultado.getString("dniCliente");
+                    String iban = resultado.getString("iban");
+                    int admin = resultado.getInt("numeroAdministrador");
+                    TarjetaBancaria tarjetaEliminada = new TarjetaBancaria(tarjeta, pin, bloqueada, dni, iban, admin);
+                    tarjetas.remove(tarjetaEliminada);
+                    modeloTablaTarjetas.removeRow(filaSelec);
+                }
+
+                String deleteTarjeta = "DELETE FROM tarjeta_bancaria where numero_tarjeta = '" + tarjeta + "';";
+                sentencia.executeUpdate(deleteTarjeta);
+
+            } catch (SQLException ex) {
+                Logger.getLogger(VentanaAdministrador.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+    }//GEN-LAST:event_btnEliminarTarjetaActionPerformed
+
+    private void btnBloquearTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBloquearTarjetaActionPerformed
+        int filaSelec = tablaBloqDesbloqTarjeta.getSelectedRow();
+        if (filaSelec != -1) {
+            String bloqueada = (String) modeloTablaTarjetas.getValueAt(filaSelec, 3);
+            String tarjeta = (String) modeloTablaTarjetas.getValueAt(filaSelec, 2);
+            if(bloqueada.equalsIgnoreCase("Desbloqueada")){
+                bloqueada = "Bloqueada";
+                modeloTablaTarjetas.setValueAt(bloqueada, filaSelec, 3);
+                String updateTarjeta = "update tarjeta_bancaria set bloqueada=1 where numero_tarjeta='"+tarjeta+"';";
+                try {
+                    sentencia.executeUpdate(updateTarjeta);
+                } catch (SQLException ex) {
+                    Logger.getLogger(VentanaAdministrador.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }//GEN-LAST:event_btnBloquearTarjetaActionPerformed
+
+    private void btnDesbloquearTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDesbloquearTarjetaActionPerformed
+        int filaSelec = tablaBloqDesbloqTarjeta.getSelectedRow();
+        if (filaSelec != -1) {
+            String bloqueada = (String) modeloTablaTarjetas.getValueAt(filaSelec, 3);
+            String tarjeta = (String) modeloTablaTarjetas.getValueAt(filaSelec, 2);
+            if(bloqueada.equalsIgnoreCase("Bloqueada")){
+                bloqueada = "Desbloqueada";
+                modeloTablaTarjetas.setValueAt(bloqueada, filaSelec, 3);
+                String updateTarjeta = "update tarjeta_bancaria set bloqueada=0 where numero_tarjeta='"+tarjeta+"';";
+                try {
+                    sentencia.executeUpdate(updateTarjeta);
+                } catch (SQLException ex) {
+                    Logger.getLogger(VentanaAdministrador.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }//GEN-LAST:event_btnDesbloquearTarjetaActionPerformed
+
+    private void btnIntroducirDineroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIntroducirDineroActionPerformed
+        int cantidadIngresar = Integer.parseInt(txfCantidadIntroducir.getText());
+        if(dineroDisponible+cantidadIngresar > MAX_CAJERO){
+            dineroDisponible = MAX_CAJERO;
+            txfDineroBanco.setText(String.valueOf(MAX_CAJERO));
+            txfCantidadIntroducir.setText("0");
+        }else{
+            dineroDisponible += cantidadIngresar;
+            txfDineroBanco.setText(String.valueOf(dineroDisponible));
+            txfCantidadIntroducir.setText(String.valueOf(MAX_CAJERO-dineroDisponible));
+        }
+        
+    }//GEN-LAST:event_btnIntroducirDineroActionPerformed
+
+    private void txfCantidadIntroducirKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfCantidadIntroducirKeyTyped
+        char tecla = evt.getKeyChar();
+        if(Character.isLetter(tecla)){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txfCantidadIntroducirKeyTyped
+
+    private void initTablaTarjetasBloqDesbloq() {
+        modeloTablaTarjetas = (DefaultTableModel) tablaBloqDesbloqTarjeta.getModel();
+        tablaBloqDesbloqTarjeta.setModel(modeloTablaTarjetas);
+        tablaBloqDesbloqTarjeta.getColumnModel().getColumn(0).setPreferredWidth(150);
+        tablaBloqDesbloqTarjeta.getColumnModel().getColumn(1).setPreferredWidth(340);
+        tablaBloqDesbloqTarjeta.getColumnModel().getColumn(2).setPreferredWidth(320);
+        tablaBloqDesbloqTarjeta.getColumnModel().getColumn(3).setPreferredWidth(130);
+        modeloTablaTarjetas.setRowCount(0);
+        String bloqueada;
+        for (TarjetaBancaria tarjeta : tarjetas) {
+            if (tarjeta.getNumeroTarjeta() != null) {
+                if (tarjeta.isBloqueada()) {
+                    bloqueada = "Bloqueada";
+                } else {
+                    bloqueada = "Desbloqueada";
+                }
+                Object[] fila = {tarjeta.getDniCliente(), tarjeta.getIban(), tarjeta.getNumeroTarjeta(), bloqueada};
+                modeloTablaTarjetas.addRow(fila);
+            }
+        }
+
+    }
+
+    private void initTablaTarjetas2() {
+        modeloTablaTarjetas = (DefaultTableModel) tablaBajaTarjetas.getModel();
+        tablaBajaTarjetas.setModel(modeloTablaTarjetas);
+        tablaBajaTarjetas.getColumnModel().getColumn(0).setPreferredWidth(150);
+        tablaBajaTarjetas.getColumnModel().getColumn(1).setPreferredWidth(340);
+        tablaBajaTarjetas.getColumnModel().getColumn(2).setPreferredWidth(290);
+        modeloTablaTarjetas.setRowCount(0);
+
+        for (TarjetaBancaria tarjeta : tarjetas) {
+            Object[] fila = {tarjeta.getDniCliente(), tarjeta.getIban(), tarjeta.getNumeroTarjeta()};
+            if (tarjeta.getNumeroTarjeta() != null) {
+                modeloTablaTarjetas.addRow(fila);
+            }
+        }
+    }
+
+    private void initTablaTarjetas() {
+        modeloTablaTarjetas = (DefaultTableModel) tablaAltaTarjetas.getModel();
+        tablaAltaTarjetas.setModel(modeloTablaTarjetas);
+        tablaAltaTarjetas.getColumnModel().getColumn(0).setPreferredWidth(150);
+        tablaAltaTarjetas.getColumnModel().getColumn(1).setPreferredWidth(340);
+        tablaAltaTarjetas.getColumnModel().getColumn(2).setPreferredWidth(290);
+        modeloTablaTarjetas.setRowCount(0);
+        for (TarjetaBancaria tarjeta : tarjetas) {
+            Object[] fila = {tarjeta.getDniCliente(), tarjeta.getIban(), tarjeta.getNumeroTarjeta()};
+            modeloTablaTarjetas.addRow(fila);
+        }
+    }
+
+    private void initTarjetas() {
+        String consulta = "select * from cuenta_bancaria tb LEFT JOIN tarjeta_bancaria cb using(iban);";
+        try {
+            resultado = sentencia.executeQuery(consulta);
+            while (resultado.next()) {
+                String numero = resultado.getString("numero_tarjeta");
+                int pin = resultado.getInt("pin");
+                boolean bloqueada = resultado.getBoolean("bloqueada");
+                String dni = resultado.getString("dniCliente");
+                String iban = resultado.getString("iban");
+                TarjetaBancaria tarjeta = new TarjetaBancaria(numero, pin, bloqueada, dni, iban, administrador);
+                tarjetas.add(tarjeta);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(VentanaAdministrador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
 
     private void initCuentas() {
         String consulta = "SELECT cb.* from cliente c join cuenta_bancaria cb on c.dni=cb.dniCliente order by c.dni;";
@@ -933,7 +1428,7 @@ public class VentanaAdministrador extends JFrame {
         }
     }
 
-    private void initTablaBloqueos(){
+    private void initTablaBloqueos() {
         modeloTablaCuentas = (DefaultTableModel) tablaCuentasBloquDesbloqu.getModel();
         tablaCuentasBloquDesbloqu.setModel(modeloTablaCuentas);
         tablaCuentasBloquDesbloqu.getColumnModel().getColumn(0).setPreferredWidth(130);
@@ -942,16 +1437,16 @@ public class VentanaAdministrador extends JFrame {
         modeloTablaCuentas.setRowCount(0);
         String bloqueada;
         for (CuentaBancaria cb : cuentas) {
-            if(cb.isBloqueada()){
+            if (cb.isBloqueada()) {
                 bloqueada = "Bloqueada";
-            }else{
+            } else {
                 bloqueada = "Desbloqueada";
             }
             Object[] fila = {cb.getDniCliente(), cb.getIban(), bloqueada};
             modeloTablaCuentas.addRow(fila);
         }
     }
-    
+
     private void initTablaCuentas() {
         modeloTablaCuentas = (DefaultTableModel) tablaCuentaBancaria.getModel();
         tablaCuentaBancaria.setModel(modeloTablaCuentas);
@@ -1063,7 +1558,8 @@ public class VentanaAdministrador extends JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 int numAdmin = 5572;
-                new VentanaAdministrador(numAdmin).setVisible(true);
+                int dineroDispon = 1200;
+                new VentanaAdministrador(numAdmin, dineroDispon).setVisible(true);
             }
         });
     }
@@ -1073,6 +1569,7 @@ public class VentanaAdministrador extends JFrame {
     private javax.swing.JPanel bloquearDesbloquearTarjeta;
     private javax.swing.JButton btnAddCliente;
     private javax.swing.JButton btnAddCuenta;
+    private javax.swing.JButton btnAddTarjeta;
     private javax.swing.JMenuItem btnAltaCuenta;
     private javax.swing.JMenuItem btnAltaTarjeta;
     private javax.swing.JMenuItem btnAltaUsuario;
@@ -1081,12 +1578,15 @@ public class VentanaAdministrador extends JFrame {
     private javax.swing.JMenuItem btnBajaTarjeta;
     private javax.swing.JMenuItem btnBajaUsuario;
     private javax.swing.JMenuItem btnBloquDesbloquCuenta;
+    private javax.swing.JMenuItem btnBloquDesbloquTarjeta;
     private javax.swing.JButton btnBloquearCuenta;
-    private javax.swing.JMenuItem btnBloquearTarjeta;
+    private javax.swing.JButton btnBloquearTarjeta;
     private javax.swing.JButton btnDesbloquearCuenta;
-    private javax.swing.JMenuItem btnDesbloquearTarjeta;
+    private javax.swing.JButton btnDesbloquearTarjeta;
     private javax.swing.JButton btnEliminarCliente;
     private javax.swing.JButton btnEliminarCuenta;
+    private javax.swing.JButton btnEliminarTarjeta;
+    private javax.swing.JButton btnIntroducirDinero;
     private javax.swing.JMenuItem btnRellenarCajero;
     private javax.swing.JTabbedPane contenedor;
     private javax.swing.JPanel darAltaCuenta;
@@ -1096,40 +1596,59 @@ public class VentanaAdministrador extends JFrame {
     private javax.swing.JPanel darBajaTarjeta;
     private javax.swing.JPanel darBajaUsuario;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JLabel lblFondo;
     private javax.swing.JList<Cliente> listaClientes;
+    private javax.swing.JMenu menuSalir;
     private javax.swing.JPanel paginaPrincipal;
+    private javax.swing.JTable tablaAltaTarjetas;
+    private javax.swing.JTable tablaBajaTarjetas;
+    private javax.swing.JTable tablaBloqDesbloqTarjeta;
     private javax.swing.JTable tablaClientes;
     private javax.swing.JTable tablaCuentaBancaria;
     private javax.swing.JTable tablaCuentasBloquDesbloqu;
     private javax.swing.JTable tablaCuentasEliminar;
     private javax.swing.JTextField txfAddIban;
     private javax.swing.JTextField txfAddIbanDni;
+    private javax.swing.JTextField txfAddNumTarjeta;
     private javax.swing.JTextField txfApellido1;
     private javax.swing.JTextField txfApellido2;
+    private javax.swing.JTextField txfCantidadIntroducir;
     private javax.swing.JTextField txfClienteCuentaEliminar;
+    private javax.swing.JTextField txfContrasenaTarjetaAlta;
     private javax.swing.JTextField txfCuentaSaldoEliminar;
     private javax.swing.JTextField txfDNI;
+    private javax.swing.JTextField txfDineroBanco;
     private javax.swing.JTextField txfIBANEliminar;
+    private javax.swing.JTextField txfIbanAddTarjeta;
     private javax.swing.JTextField txfNombre;
     // End of variables declaration//GEN-END:variables
     private int pantalla;
@@ -1138,7 +1657,9 @@ public class VentanaAdministrador extends JFrame {
     ResultSet resultado;
     private ArrayList<Cliente> clientes;
     private ArrayList<CuentaBancaria> cuentas;
+    private ArrayList<TarjetaBancaria> tarjetas;
     DefaultListModel<Cliente> modeloListaClientes;
     DefaultTableModel modeloTablaClientes;
     DefaultTableModel modeloTablaCuentas;
+    DefaultTableModel modeloTablaTarjetas;
 }

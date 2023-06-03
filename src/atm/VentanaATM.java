@@ -65,6 +65,7 @@ public class VentanaATM extends JFrame {
     public static final int MAX_BILLETE = 50;
     public static final int MAX_CAJERO = 10000;
     public static final int MAX_INACTIVIDAD = 60000;
+    private int dineroDisponible;
 
     /**
      * Contructor de la ventana principal del proyecto. Se inicializa los
@@ -82,6 +83,10 @@ public class VentanaATM extends JFrame {
         initReloj();
         moverPantalla(0);
         dineroDisponible = MAX_CAJERO;
+    }
+    
+    public void setDineroDisponible(int cantidad){
+        dineroDisponible = cantidad;
     }
 
     /**
@@ -1979,7 +1984,11 @@ public class VentanaATM extends JFrame {
 
                 if (operacion == Operacion.RE) {
                     if (comprobarCantidad(efectivo)) {
-                        dineroDisponible -= efectivo;
+                        if(dineroDisponible-efectivo < 0){
+                            dineroDisponible = 0;
+                        }else{
+                            dineroDisponible -= efectivo;
+                        }
                         insertarHistoricoOperacion();
                         moverPantalla(13);
                     }
@@ -1987,7 +1996,11 @@ public class VentanaATM extends JFrame {
                 } else if (operacion == Operacion.DE) {
 
                     if (comprobarCantidad(efectivo)) {
-                        dineroDisponible += efectivo;
+                        if(dineroDisponible+efectivo > MAX_CAJERO){
+                            dineroDisponible = MAX_CAJERO;
+                        }else{
+                            dineroDisponible += efectivo;
+                        }
                         insertarHistoricoOperacion();
                         moverPantalla(10);
                     }
@@ -2697,7 +2710,7 @@ public class VentanaATM extends JFrame {
 
     private void lblDerechaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblDerechaMouseClicked
         eventoDerecha = evt;
-        if (comprobarCombAdmin(eventoIzquierda, eventoDerecha)) {
+        if (comprobarCombAdmin(eventoIzquierda, eventoDerecha) && lblTarjeta.getBackground().equals(Color.red)) {
             fallosAdmin = 0;
             boolean autenticacionCorrecta = false;
             while (fallosAdmin < 3 && !autenticacionCorrecta) {
@@ -2708,8 +2721,9 @@ public class VentanaATM extends JFrame {
                 System.exit(0);
             }
             if (administrador != 0) {
-                ventanaAdmin = new VentanaAdministrador(administrador);
+                ventanaAdmin = new VentanaAdministrador(administrador, dineroDisponible);
                 ventanaAdmin.setVisible(true);
+                
             }
             fallosAdmin = 0;
         }
@@ -3440,7 +3454,6 @@ public class VentanaATM extends JFrame {
     int pantallaAnterior;
     int efectivo;
     int efectivoExtranjero;
-    int dineroDisponible;
     Operacion operacion;
     Ticket ticket;
     private DefaultTableModel modeloTabla;

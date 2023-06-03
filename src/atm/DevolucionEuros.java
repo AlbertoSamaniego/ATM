@@ -54,7 +54,7 @@ public class DevolucionEuros extends JFrame {
             cantidad %= 5;
         }
         
-        if (billete50 == 1) {
+        if (billete50 == 1 && billete20 == 0 && billete10 == 0 && billete5 == 0) {
             billete50 = 0;
             billete20 = 1;
             billete10 = 2;
