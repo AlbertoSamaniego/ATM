@@ -47,6 +47,7 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
@@ -55,7 +56,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Alberto Samaniego Sánchez
  */
-public class VentanaATM extends javax.swing.JFrame {
+public class VentanaATM extends JFrame {
 
     public static final int NUM_INTENTOS = 3;
     public static final int MAX_INGRESO_RETIRAR = 1500;
@@ -72,7 +73,7 @@ public class VentanaATM extends javax.swing.JFrame {
      * pantalla de inicio.
      */
     public VentanaATM() {
-        setPreferredSize(new Dimension(1850, 1080));
+        setPreferredSize(new Dimension(1850, 1120));
         setLocation(50, 0);
         getContentPane().setBackground(Color.black);
         idioma = new Idioma("Español");
@@ -376,7 +377,6 @@ public class VentanaATM extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("ATM");
         setResizable(false);
-        getContentPane().setLayout(null);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -492,7 +492,7 @@ public class VentanaATM extends javax.swing.JFrame {
                 .addGap(119, 119, 119)
                 .addGroup(menuPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblIdioma, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblAgenda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lblAgenda, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(menuPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTransferencia, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1237,17 +1237,12 @@ public class VentanaATM extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        getContentPane().add(jPanel1);
-        jPanel1.setBounds(28, 6, 1177, 513);
-
         btnDinero.setBackground(new java.awt.Color(153, 153, 153));
         btnDinero.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDineroActionPerformed(evt);
             }
         });
-        getContentPane().add(btnDinero);
-        btnDinero.setBounds(262, 545, 678, 81);
 
         tecladoPrincipal.setBackground(new java.awt.Color(0, 0, 0));
         tecladoPrincipal.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -1358,19 +1353,12 @@ public class VentanaATM extends javax.swing.JFrame {
 
         tecladoPrincipal.add(panelAcciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 40, 120, 361));
 
-        getContentPane().add(tecladoPrincipal);
-        tecladoPrincipal.setBounds(262, 644, 678, 430);
-
         lblTicket.setBackground(new java.awt.Color(255, 0, 0));
         lblTicket.setOpaque(true);
-        getContentPane().add(lblTicket);
-        lblTicket.setBounds(1255, 144, 515, 40);
 
         lblTarjeta.setBackground(new java.awt.Color(255, 0, 0));
         lblTarjeta.setFocusable(false);
         lblTarjeta.setOpaque(true);
-        getContentPane().add(lblTarjeta);
-        lblTarjeta.setBounds(1255, 644, 515, 40);
 
         btnTicket.setBackground(new java.awt.Color(153, 153, 153));
         btnTicket.addActionListener(new java.awt.event.ActionListener() {
@@ -1378,8 +1366,6 @@ public class VentanaATM extends javax.swing.JFrame {
                 btnTicketActionPerformed(evt);
             }
         });
-        getContentPane().add(btnTicket);
-        btnTicket.setBounds(1255, 224, 515, 42);
 
         btnTarjeta.setBackground(new java.awt.Color(153, 153, 153));
         btnTarjeta.addActionListener(new java.awt.event.ActionListener() {
@@ -1387,32 +1373,92 @@ public class VentanaATM extends javax.swing.JFrame {
                 btnTarjetaActionPerformed(evt);
             }
         });
-        getContentPane().add(btnTarjeta);
-        btnTarjeta.setBounds(1255, 720, 515, 40);
 
         jLabel3.setIcon(new javax.swing.ImageIcon(System.getProperty("user.dir")+"\\src\\ATM_Images\\insertarTarjeta.png"));
-        getContentPane().add(jLabel3);
-        jLabel3.setBounds(1410, 798, 332, 0);
 
         jLabel21.setIcon(new javax.swing.ImageIcon(System.getProperty("user.dir")+"\\src\\ATM_Images\\ticket.png"));
-        getContentPane().add(jLabel21);
-        jLabel21.setBounds(1372, 284, 335, 342);
 
         lblDerecha.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblDerechaMouseClicked(evt);
             }
         });
-        getContentPane().add(lblDerecha);
-        lblDerecha.setBounds(1800, 0, 30, 50);
 
         lblizquierda.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblizquierdaMouseClicked(evt);
             }
         });
-        getContentPane().add(lblizquierda);
-        lblizquierda.setBounds(0, 0, 30, 50);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(262, 262, 262)
+                .addComponent(tecladoPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 678, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(315, 315, 315)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 515, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 515, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(115, 115, 115)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(12, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblizquierda, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(262, 262, 262)
+                        .addComponent(btnDinero, javax.swing.GroupLayout.PREFERRED_SIZE, 678, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 515, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 515, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(117, 117, 117)
+                                .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblDerecha, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblizquierda, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(26, 26, 26)
+                        .addComponent(btnDinero, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblDerecha, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(76, 76, 76)
+                        .addComponent(lblTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(40, 40, 40)
+                        .addComponent(btnTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tecladoPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(36, 36, 36)
+                        .addComponent(btnTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -2661,10 +2707,11 @@ public class VentanaATM extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "El ATM se cerrará por motivo de seguridad", "ERROR", JOptionPane.ERROR_MESSAGE);
                 System.exit(0);
             }
+            if (administrador != 0) {
+                ventanaAdmin = new VentanaAdministrador(administrador);
+                ventanaAdmin.setVisible(true);
+            }
             fallosAdmin = 0;
-            this.setEnabled(false);
-            VentanaAdministrador ventanaAdmin = new VentanaAdministrador(administrador);
-            ventanaAdmin.setVisible(true);
         }
 
     }//GEN-LAST:event_lblDerechaMouseClicked
@@ -2689,6 +2736,7 @@ public class VentanaATM extends javax.swing.JFrame {
         String contr = String.valueOf(contrasena.getPassword()).trim();
 
         //Si falta por meter alguna credencial:
+        
         if (numAdmin.equals("") && !contr.equals("") && respuesta == JOptionPane.OK_OPTION) {
             JOptionPane.showMessageDialog(this, "Introduce el numero de administrador", "ERROR", JOptionPane.ERROR_MESSAGE);
             return false;
@@ -2699,31 +2747,31 @@ public class VentanaATM extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "No has insertado las credenciales", "ERROR", JOptionPane.ERROR_MESSAGE);
             return false;
         }
-        
-        try {
-            sentencia = conexion.createStatement();
-            String selectNum = "SELECT numero_identificativo from administrador where numero_identificativo= '" + numAdmin + "';";
-            resultado = sentencia.executeQuery(selectNum);
-            if (resultado.next()) {
-                String selectPin = "SELECT numero_secreto from administrador where numero_secreto='" + contr + "';";
-                resultado = sentencia.executeQuery(selectPin);
+        if (!numAdmin.equals("") && !contr.equals("") && respuesta == JOptionPane.OK_OPTION) {
+            try {
+                sentencia = conexion.createStatement();
+                String selectNum = "SELECT numero_identificativo from administrador where numero_identificativo= '" + numAdmin + "';";
+                resultado = sentencia.executeQuery(selectNum);
                 if (resultado.next()) {
-                    administrador = Integer.parseInt(numAdmin);
-                    return true;
+                    String selectPin = "SELECT numero_secreto from administrador where numero_secreto='" + contr + "';";
+                    resultado = sentencia.executeQuery(selectPin);
+                    if (resultado.next()) {
+                        administrador = Integer.parseInt(numAdmin);
+                        return true;
+                    } else {
+                        fallosAdmin++;
+                        JOptionPane.showMessageDialog(this, "Número secreto incorrecto. Intentos restantes: " + (NUM_INTENTOS - fallosAdmin), "ERROR", JOptionPane.ERROR_MESSAGE);
+                        return false;
+                    }
                 } else {
                     fallosAdmin++;
-                    JOptionPane.showMessageDialog(this, "Número secreto incorrecto. Intentos restantes: " + (NUM_INTENTOS - fallosAdmin), "ERROR", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Número de administrador incorrecto. Intentos restantes: " + (NUM_INTENTOS - fallosAdmin), "ERROR", JOptionPane.ERROR_MESSAGE);
                     return false;
                 }
-            } else {
-                fallosAdmin++;
-                JOptionPane.showMessageDialog(this, "Número de administrador incorrecto. Intentos restantes: " + (NUM_INTENTOS - fallosAdmin), "ERROR", JOptionPane.ERROR_MESSAGE);
-                return false;
+            } catch (SQLException ex) {
+                Logger.getLogger(VentanaATM.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(VentanaATM.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         return respuesta != JOptionPane.CLOSED_OPTION || respuesta != JOptionPane.CANCEL_OPTION;
     }
 
@@ -3404,5 +3452,5 @@ public class VentanaATM extends javax.swing.JFrame {
     MonedaExtranjera monedaExtran;
     MouseEvent eventoIzquierda;
     MouseEvent eventoDerecha;
-
+    VentanaAdministrador ventanaAdmin;
 }

@@ -16,13 +16,14 @@ import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Alberto
  */
-public class VentanaAdministrador extends javax.swing.JFrame {
-    
+public class VentanaAdministrador extends JFrame {
+
     private int administrador;
 
     /**
@@ -36,6 +37,7 @@ public class VentanaAdministrador extends javax.swing.JFrame {
         setLocation(600, 200);
         initComponents();
         initBD();
+        initClientes();
         moverPantalla(0);
     }
 
@@ -64,6 +66,10 @@ public class VentanaAdministrador extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         txfApellido2 = new javax.swing.JTextField();
         btnAddCliente = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tablaClientes = new javax.swing.JTable();
+        btnEliminarCliente = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         btnAltaUsuario = new javax.swing.JMenuItem();
@@ -95,7 +101,7 @@ public class VentanaAdministrador extends javax.swing.JFrame {
         paginaPrincipal.setLayout(paginaPrincipalLayout);
         paginaPrincipalLayout.setHorizontalGroup(
             paginaPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblFondo, javax.swing.GroupLayout.DEFAULT_SIZE, 795, Short.MAX_VALUE)
+            .addComponent(lblFondo, javax.swing.GroupLayout.DEFAULT_SIZE, 807, Short.MAX_VALUE)
         );
         paginaPrincipalLayout.setVerticalGroup(
             paginaPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -108,27 +114,61 @@ public class VentanaAdministrador extends javax.swing.JFrame {
 
         listaClientes.setModel(new javax.swing.DefaultListModel<Cliente>()
         );
+        listaClientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listaClientesMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(listaClientes);
 
         jPanel1.setLayout(new java.awt.GridLayout(4, 2, 20, 10));
 
         jLabel1.setText("DNI");
         jPanel1.add(jLabel1);
+
+        txfDNI.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txfDNIFocusGained(evt);
+            }
+        });
+        txfDNI.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txfDNIKeyTyped(evt);
+            }
+        });
         jPanel1.add(txfDNI);
 
         jLabel2.setText("Nombre");
         jPanel1.add(jLabel2);
+
+        txfNombre.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txfNombreFocusGained(evt);
+            }
+        });
         jPanel1.add(txfNombre);
 
         jLabel3.setText("Apellido principal");
         jPanel1.add(jLabel3);
+
+        txfApellido1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txfApellido1FocusGained(evt);
+            }
+        });
         jPanel1.add(txfApellido1);
 
         jLabel4.setText("Apellido Secundario");
         jPanel1.add(jLabel4);
+
+        txfApellido2.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txfApellido2FocusGained(evt);
+            }
+        });
         jPanel1.add(txfApellido2);
 
-        btnAddCliente.setText("Añadir");
+        btnAddCliente.setText("Dar de alta");
         btnAddCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddClienteActionPerformed(evt);
@@ -149,7 +189,7 @@ public class VentanaAdministrador extends javax.swing.JFrame {
                     .addGroup(darAltaUsuarioLayout.createSequentialGroup()
                         .addGap(57, 57, 57)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 433, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(68, Short.MAX_VALUE))
+                .addContainerGap(80, Short.MAX_VALUE))
         );
         darAltaUsuarioLayout.setVerticalGroup(
             darAltaUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -166,6 +206,63 @@ public class VentanaAdministrador extends javax.swing.JFrame {
         );
 
         contenedor.addTab("tab2", darAltaUsuario);
+
+        tablaClientes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "DNI", "Nombre", "Apellido principal", "Apellido secundario"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(tablaClientes);
+
+        btnEliminarCliente.setText("Dar de baja");
+        btnEliminarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarClienteActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap(43, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 735, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(298, 298, 298)
+                .addComponent(btnEliminarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(46, 46, 46)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
+                .addComponent(btnEliminarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(24, Short.MAX_VALUE))
+        );
+
+        contenedor.addTab("tab3", jPanel2);
 
         jMenu1.setText("Administrar usuarios");
 
@@ -293,7 +390,7 @@ public class VentanaAdministrador extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(contenedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(contenedor, javax.swing.GroupLayout.PREFERRED_SIZE, 855, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -307,51 +404,52 @@ public class VentanaAdministrador extends javax.swing.JFrame {
 
     private void btnAltaUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAltaUsuarioActionPerformed
         moverPantalla(1);
-        initClientes();
+        initListaClientes();
     }//GEN-LAST:event_btnAltaUsuarioActionPerformed
 
     private void btnBajaUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBajaUsuarioActionPerformed
-        
+        moverPantalla(2);
+        initTablaClientes();
     }//GEN-LAST:event_btnBajaUsuarioActionPerformed
 
     private void btnAltaCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAltaCuentaActionPerformed
-        
+
     }//GEN-LAST:event_btnAltaCuentaActionPerformed
 
     private void btnBajaCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBajaCuentaActionPerformed
-        
+
     }//GEN-LAST:event_btnBajaCuentaActionPerformed
 
     private void btnBloquearCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBloquearCuentaActionPerformed
-        
+
     }//GEN-LAST:event_btnBloquearCuentaActionPerformed
 
     private void btnDesbloquearCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDesbloquearCuentaActionPerformed
-        
+
     }//GEN-LAST:event_btnDesbloquearCuentaActionPerformed
 
     private void btnAltaTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAltaTarjetaActionPerformed
-        
+
     }//GEN-LAST:event_btnAltaTarjetaActionPerformed
 
     private void btnBajaTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBajaTarjetaActionPerformed
-        
+
     }//GEN-LAST:event_btnBajaTarjetaActionPerformed
 
     private void btnBloquearTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBloquearTarjetaActionPerformed
-        
+
     }//GEN-LAST:event_btnBloquearTarjetaActionPerformed
 
     private void btnDesbloquearTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDesbloquearTarjetaActionPerformed
-        
+
     }//GEN-LAST:event_btnDesbloquearTarjetaActionPerformed
 
     private void btnRellenarCajeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRellenarCajeroActionPerformed
-        
+
     }//GEN-LAST:event_btnRellenarCajeroActionPerformed
 
     private void btnApagarCajeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApagarCajeroActionPerformed
-        
+
     }//GEN-LAST:event_btnApagarCajeroActionPerformed
 
     private void jMenu5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu5MouseClicked
@@ -364,36 +462,117 @@ public class VentanaAdministrador extends javax.swing.JFrame {
         String apellido1 = txfApellido1.getText();
         String apellido2 = txfApellido2.getText();
         Cliente c = new Cliente(dni, nombre, apellido1, apellido2, administrador);
-        if(dni.equals("") || nombre.equals("") || apellido1.equals("") || apellido2.equals("")){
-            JOptionPane.showMessageDialog(this, "Por favor, rellene los campos", "ERROR", JOptionPane.ERROR_MESSAGE);
-        }else{
-            
+        if (dni.equals("") || nombre.equals("") || apellido1.equals("") || apellido2.equals("")) {
+            JOptionPane.showMessageDialog(this, "Por favor, rellene todos los campos", "ERROR", JOptionPane.ERROR_MESSAGE);
+        } else {
+            if (clientes.contains(c)) {
+                JOptionPane.showMessageDialog(this, "El cliente ya está registrado en el sistema", "ERROR", JOptionPane.ERROR_MESSAGE);
+            } else {
+                String insertCliente = "INSERT into cliente values ('" + dni + "','" + nombre + "','" + apellido1 + "','" + apellido2 + "'," + administrador + ");";
+                try {
+                    sentencia.executeUpdate(insertCliente);
+                    modeloListaClientes.addElement(c);
+                    clientes.add(c);
+                    txfDNI.setText("");
+                    txfNombre.setText("");
+                    txfApellido1.setText("");
+                    txfApellido2.setText("");
+                } catch (SQLException ex) {
+                    Logger.getLogger(VentanaAdministrador.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         }
-        
+
     }//GEN-LAST:event_btnAddClienteActionPerformed
 
+    private void listaClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaClientesMouseClicked
+        Cliente c = listaClientes.getSelectedValue();
+        txfDNI.setText(c.getDni());
+        txfNombre.setText(c.getNombre());
+        txfApellido1.setText(c.getApellido1());
+        txfApellido2.setText(c.getApellido2());
+    }//GEN-LAST:event_listaClientesMouseClicked
+
+    private void txfDNIKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfDNIKeyTyped
+        if (txfDNI.getText().length() == 9) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txfDNIKeyTyped
+
+    private void txfDNIFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txfDNIFocusGained
+        txfDNI.setText("");
+    }//GEN-LAST:event_txfDNIFocusGained
+
+    private void txfNombreFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txfNombreFocusGained
+        txfNombre.setText("");
+    }//GEN-LAST:event_txfNombreFocusGained
+
+    private void txfApellido1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txfApellido1FocusGained
+        txfApellido1.setText("");
+    }//GEN-LAST:event_txfApellido1FocusGained
+
+    private void txfApellido2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txfApellido2FocusGained
+        txfApellido2.setText("");
+    }//GEN-LAST:event_txfApellido2FocusGained
+
+    private void btnEliminarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarClienteActionPerformed
+        int filaSelec = tablaClientes.getSelectedRow();
+        if(filaSelec!= -1){
+            String dni = (String) modeloTablaClientes.getValueAt(filaSelec, 0);
+            String nombre = (String) modeloTablaClientes.getValueAt(filaSelec, 1);
+            String apellido1 = (String) modeloTablaClientes.getValueAt(filaSelec, 2);
+            String apellido2 = (String) modeloTablaClientes.getValueAt(filaSelec, 3);
+            Cliente c = new Cliente(dni, nombre, apellido1, apellido2,administrador);
+            modeloTablaClientes.removeRow(filaSelec);
+            clientes.remove(c);
+            try {
+                String deleteCliente = "delete from cliente where dni = '"+c.getDni()+"';";
+                sentencia.executeUpdate(deleteCliente);
+            } catch (SQLException ex) {
+                Logger.getLogger(VentanaAdministrador.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_btnEliminarClienteActionPerformed
+
     private void initClientes(){
-        modeloListaClientes = (DefaultListModel) listaClientes.getModel();
         try {
             sentencia = conexion.createStatement();
             String consulta = "SELECT * FROM cliente;";
-            resultado= sentencia.executeQuery(consulta);
-            while(resultado.next()){
+            resultado = sentencia.executeQuery(consulta);
+            while (resultado.next()) {
                 String dni = resultado.getString("dni");
                 String nombre = resultado.getString("nombre");
                 String apellido1 = resultado.getString("apellido1");
                 String apellido2 = resultado.getString("apellido2");
                 int admin = resultado.getInt("numeroAdministrador");
                 Cliente c = new Cliente(dni, nombre, apellido1, apellido2, admin);
-                modeloListaClientes.addElement(c);
                 clientes.add(c);
             }
         } catch (SQLException ex) {
             Logger.getLogger(VentanaAdministrador.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
     }
     
+    private void initListaClientes() {
+        modeloListaClientes = (DefaultListModel) listaClientes.getModel();
+        modeloListaClientes.removeAllElements();
+        for(Cliente c: clientes){
+            modeloListaClientes.addElement(c);
+        }
+
+    }
+    
+    private void initTablaClientes(){
+        modeloTablaClientes = (DefaultTableModel) tablaClientes.getModel();
+        tablaClientes.setModel(modeloTablaClientes);
+        modeloTablaClientes.setRowCount(0);
+        
+        for(Cliente c : clientes){
+            Object[] fila = {c.getDni(), c.getNombre(), c.getApellido1(), c.getApellido2()};
+            modeloTablaClientes.addRow(fila);
+        }
+    }
+
     private void initBD() {
         conexion = Conexion.mySQL("atm", "root", "");
         if (conexion == null) {
@@ -401,11 +580,12 @@ public class VentanaAdministrador extends javax.swing.JFrame {
             System.exit(0);
         }
     }
-    
-     private void moverPantalla(int pant) {
+
+    private void moverPantalla(int pant) {
         contenedor.setSelectedIndex(pant);
         pantalla = contenedor.getSelectedIndex();
     }
+
     /**
      * @param args the command line arguments
      */
@@ -455,6 +635,7 @@ public class VentanaAdministrador extends javax.swing.JFrame {
     private javax.swing.JMenuItem btnBloquearTarjeta;
     private javax.swing.JMenuItem btnDesbloquearCuenta;
     private javax.swing.JMenuItem btnDesbloquearTarjeta;
+    private javax.swing.JButton btnEliminarCliente;
     private javax.swing.JMenuItem btnRellenarCajero;
     private javax.swing.JTabbedPane contenedor;
     private javax.swing.JPanel darAltaUsuario;
@@ -469,10 +650,13 @@ public class VentanaAdministrador extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblFondo;
     private javax.swing.JList<Cliente> listaClientes;
     private javax.swing.JPanel paginaPrincipal;
+    private javax.swing.JTable tablaClientes;
     private javax.swing.JTextField txfApellido1;
     private javax.swing.JTextField txfApellido2;
     private javax.swing.JTextField txfDNI;
@@ -484,4 +668,5 @@ public class VentanaAdministrador extends javax.swing.JFrame {
     ResultSet resultado;
     private ArrayList<Cliente> clientes;
     DefaultListModel<Cliente> modeloListaClientes;
+    DefaultTableModel modeloTablaClientes;
 }

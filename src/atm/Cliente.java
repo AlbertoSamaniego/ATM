@@ -68,7 +68,7 @@ public class Cliente implements Comparable<Cliente>{
             return false;
         }
         final Cliente other = (Cliente) obj;
-        return Objects.equals(this.dni, other.dni);
+        return Objects.equals(this.dni.toUpperCase(), other.dni.toUpperCase());
     }
 
     @Override
