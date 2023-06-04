@@ -48,10 +48,10 @@ public class VentanaAdministrador extends JFrame {
         moverPantalla(0);
     }
 
-    public int getDineroDisponible(){
+    public int getDineroDisponible() {
         return dineroDisponible;
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -123,6 +123,15 @@ public class VentanaAdministrador extends JFrame {
         tablaBloqDesbloqTarjeta = new javax.swing.JTable();
         btnBloquearTarjeta = new javax.swing.JButton();
         btnDesbloquearTarjeta = new javax.swing.JButton();
+        jPanel6 = new javax.swing.JPanel();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        listaTarjetas = new javax.swing.JList<>();
+        jPanel7 = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
+        txfPINAntiguo = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        txfPINNuevo = new javax.swing.JTextField();
+        btnCambiarPIN = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         txfDineroBanco = new javax.swing.JTextField();
@@ -343,6 +352,11 @@ public class VentanaAdministrador extends JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tablaCuentaBancaria.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaCuentaBancariaMouseClicked(evt);
             }
         });
         jScrollPane3.setViewportView(tablaCuentaBancaria);
@@ -765,6 +779,70 @@ public class VentanaAdministrador extends JFrame {
 
         contenedor.addTab("tab9", bloquearDesbloquearTarjeta);
 
+        listaTarjetas.setModel(new javax.swing.DefaultListModel<TarjetaBancaria>()
+        );
+        listaTarjetas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listaTarjetasMouseClicked(evt);
+            }
+        });
+        jScrollPane9.setViewportView(listaTarjetas);
+
+        jPanel7.setLayout(new java.awt.GridLayout(4, 1, 0, 15));
+
+        jLabel12.setText("Contraseña antigua:");
+        jPanel7.add(jLabel12);
+
+        txfPINAntiguo.setFocusable(false);
+        jPanel7.add(txfPINAntiguo);
+
+        jLabel13.setText("Contraseña nueva");
+        jPanel7.add(jLabel13);
+
+        txfPINNuevo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txfPINNuevoKeyTyped(evt);
+            }
+        });
+        jPanel7.add(txfPINNuevo);
+
+        btnCambiarPIN.setText("Cambiar contraseña");
+        btnCambiarPIN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCambiarPINActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(138, 138, 138)
+                        .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(73, 73, 73)
+                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(269, 269, 269)
+                        .addComponent(btnCambiarPIN, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(215, Short.MAX_VALUE))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)
+                    .addComponent(jScrollPane9))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnCambiarPIN, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(31, Short.MAX_VALUE))
+        );
+
+        contenedor.addTab("tab10", jPanel6);
+
         jLabel10.setText("Total de dinero disponible en el banco:");
 
         txfDineroBanco.setFocusable(false);
@@ -796,9 +874,8 @@ public class VentanaAdministrador extends JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnIntroducirDinero, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
-                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(txfDineroBanco)
-                        .addComponent(txfCantidadIntroducir, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)))
+                    .addComponent(txfDineroBanco)
+                    .addComponent(txfCantidadIntroducir, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE))
                 .addContainerGap(184, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
@@ -817,7 +894,7 @@ public class VentanaAdministrador extends JFrame {
                 .addContainerGap(120, Short.MAX_VALUE))
         );
 
-        contenedor.addTab("tab10", jPanel5);
+        contenedor.addTab("tab11", jPanel5);
 
         jMenu1.setText("Administrar usuarios");
 
@@ -894,6 +971,11 @@ public class VentanaAdministrador extends JFrame {
         jMenu3.add(btnBloquDesbloquTarjeta);
 
         jMenuItem1.setText("Cambiar PIN");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem1);
 
         jMenuBar1.add(jMenu3);
@@ -985,9 +1067,9 @@ public class VentanaAdministrador extends JFrame {
     }//GEN-LAST:event_btnBloquDesbloquTarjetaActionPerformed
 
     private void btnRellenarCajeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRellenarCajeroActionPerformed
-        moverPantalla(9);
+        moverPantalla(10);
         txfDineroBanco.setText(String.valueOf(dineroDisponible));
-        txfCantidadIntroducir.setText(String.valueOf((MAX_CAJERO-dineroDisponible)));
+        txfCantidadIntroducir.setText(String.valueOf((MAX_CAJERO - dineroDisponible)));
     }//GEN-LAST:event_btnRellenarCajeroActionPerformed
 
     private void btnApagarCajeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApagarCajeroActionPerformed
@@ -1077,25 +1159,40 @@ public class VentanaAdministrador extends JFrame {
     }//GEN-LAST:event_btnEliminarClienteActionPerformed
 
     private void btnAddCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCuentaActionPerformed
+        String dni = txfAddIbanDni.getText().trim().toUpperCase();
+        String iban = txfAddIban.getText().trim().toUpperCase();
+
         if (txfAddIban.getText().equals("") || txfAddIbanDni.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Rellene los datos por favor", "ERROR", JOptionPane.ERROR_MESSAGE);
         } else {
-            Cliente c = new Cliente(txfAddIbanDni.getText());
-            if (clientes.contains(c)) {
-                CuentaBancaria cb = new CuentaBancaria(txfAddIban.getText(), 0.0, false, txfAddIbanDni.getText(), administrador);
-                String insertCuenta = "insert into cuenta_bancaria(iban, dniCliente, numeroAdministrador) VALUES ('" + txfAddIban.getText() + "', '" + txfAddIbanDni.getText() + "', " + administrador + ");";
-                cuentas.add(cb);
-                Object[] filaNueva = {cb.getDniCliente(), cb.getIban(), cb.getSaldo()};
-                modeloTablaCuentas.addRow(filaNueva);
+            CuentaBancaria cb = new CuentaBancaria(iban, dni);
+            if (cuentas.contains(cb)) {
+                JOptionPane.showMessageDialog(this, "La cuenta bancaria ya existe", "ERROR", JOptionPane.ERROR_MESSAGE);
+                txfAddIban.setText("");
+            } else {
+                boolean tieneCuenta = true;
+                for (int fila = 0; fila < modeloTablaCuentas.getRowCount(); fila++) {
+                    if (modeloTablaCuentas.getValueAt(fila, 1) == null) {
+                        String dniSinCuenta = (String) modeloTablaCuentas.getValueAt(fila, 0);
+                        if (dniSinCuenta.equalsIgnoreCase(dni)) {
+                            tieneCuenta = false;
+                            modeloTablaCuentas.setValueAt(iban, fila, 1);
+                            cuentas.add(cb);
+                        }
+                    }
+                }
+                if (tieneCuenta) {
+                    Object[] filaNueva = {dni, iban, 0};
+                    modeloTablaCuentas.addRow(filaNueva);
+                    cuentas.add(cb);
+                }
+                String insertCuentaNueva = "INSERT into cuenta_bancaria (iban, dniCliente, numeroAdministrador) values('" + iban + "', '" + dni + "', " + administrador + ");";
                 try {
-                    sentencia.executeUpdate(insertCuenta);
+                    sentencia.executeUpdate(insertCuentaNueva);
                 } catch (SQLException ex) {
                     Logger.getLogger(VentanaAdministrador.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            } else {
-                JOptionPane.showMessageDialog(this, "El cliente no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
             }
-
         }
     }//GEN-LAST:event_btnAddCuentaActionPerformed
 
@@ -1152,7 +1249,12 @@ public class VentanaAdministrador extends JFrame {
             if (bloqueada.equals("Desbloqueada")) {
                 bloqueada = "Bloqueada";
                 modeloTablaCuentas.setValueAt(bloqueada, filaSelec, 2);
-                String updateCuenta = "update cuenta_bancaria set bloqueada=1 where iban='" + iban + "';";
+                for (CuentaBancaria cb : cuentas) {
+                    if (cb.getIban().equalsIgnoreCase(iban)) {
+                        cb.setBloqueada(true);
+                    }
+                }
+                String updateCuenta = "update cuenta_bancaria set bloqueada=1, numeroAdministrador = " + administrador + " where iban='" + iban + "';";
                 try {
                     sentencia.executeUpdate(updateCuenta);
                 } catch (SQLException ex) {
@@ -1170,7 +1272,12 @@ public class VentanaAdministrador extends JFrame {
             if (bloqueada.equals("Bloqueada")) {
                 bloqueada = "Desbloqueada";
                 modeloTablaCuentas.setValueAt(bloqueada, filaSelec, 2);
-                String updateCuenta = "update cuenta_bancaria set bloqueada=0 where iban='" + iban + "'";
+                for (CuentaBancaria cb : cuentas) {
+                    if (cb.getIban().equalsIgnoreCase(iban)) {
+                        cb.setBloqueada(false);
+                    }
+                }
+                String updateCuenta = "update cuenta_bancaria set bloqueada=0, numeroAdministrador = " + administrador + " where iban='" + iban + "'";
                 try {
                     sentencia.executeUpdate(updateCuenta);
                 } catch (SQLException ex) {
@@ -1287,10 +1394,15 @@ public class VentanaAdministrador extends JFrame {
         if (filaSelec != -1) {
             String bloqueada = (String) modeloTablaTarjetas.getValueAt(filaSelec, 3);
             String tarjeta = (String) modeloTablaTarjetas.getValueAt(filaSelec, 2);
-            if(bloqueada.equalsIgnoreCase("Desbloqueada")){
+            if (bloqueada.equalsIgnoreCase("Desbloqueada")) {
                 bloqueada = "Bloqueada";
                 modeloTablaTarjetas.setValueAt(bloqueada, filaSelec, 3);
-                String updateTarjeta = "update tarjeta_bancaria set bloqueada=1 where numero_tarjeta='"+tarjeta+"';";
+                for (TarjetaBancaria tb : tarjetas) {
+                    if (tb.getNumeroTarjeta() != null && tb.getNumeroTarjeta().equalsIgnoreCase(tarjeta)) {
+                        tb.setBloqueada(true);
+                    }
+                }
+                String updateTarjeta = "update tarjeta_bancaria set bloqueada=1, numeroAdministrador = " + administrador + " where numero_tarjeta='" + tarjeta + "';";
                 try {
                     sentencia.executeUpdate(updateTarjeta);
                 } catch (SQLException ex) {
@@ -1305,10 +1417,15 @@ public class VentanaAdministrador extends JFrame {
         if (filaSelec != -1) {
             String bloqueada = (String) modeloTablaTarjetas.getValueAt(filaSelec, 3);
             String tarjeta = (String) modeloTablaTarjetas.getValueAt(filaSelec, 2);
-            if(bloqueada.equalsIgnoreCase("Bloqueada")){
+            if (bloqueada.equalsIgnoreCase("Bloqueada")) {
                 bloqueada = "Desbloqueada";
                 modeloTablaTarjetas.setValueAt(bloqueada, filaSelec, 3);
-                String updateTarjeta = "update tarjeta_bancaria set bloqueada=0 where numero_tarjeta='"+tarjeta+"';";
+                for (TarjetaBancaria tb : tarjetas) {
+                    if (tb.getNumeroTarjeta() != null && tb.getNumeroTarjeta().equalsIgnoreCase(tarjeta)) {
+                        tb.setBloqueada(false);
+                    }
+                }
+                String updateTarjeta = "update tarjeta_bancaria set bloqueada=0, numeroAdministrador = " + administrador + " where numero_tarjeta='" + tarjeta + "';";
                 try {
                     sentencia.executeUpdate(updateTarjeta);
                 } catch (SQLException ex) {
@@ -1320,24 +1437,98 @@ public class VentanaAdministrador extends JFrame {
 
     private void btnIntroducirDineroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIntroducirDineroActionPerformed
         int cantidadIngresar = Integer.parseInt(txfCantidadIntroducir.getText());
-        if(dineroDisponible+cantidadIngresar > MAX_CAJERO){
+        if (dineroDisponible + cantidadIngresar > MAX_CAJERO) {
             dineroDisponible = MAX_CAJERO;
             txfDineroBanco.setText(String.valueOf(MAX_CAJERO));
             txfCantidadIntroducir.setText("0");
-        }else{
+        } else {
             dineroDisponible += cantidadIngresar;
             txfDineroBanco.setText(String.valueOf(dineroDisponible));
-            txfCantidadIntroducir.setText(String.valueOf(MAX_CAJERO-dineroDisponible));
+            txfCantidadIntroducir.setText(String.valueOf(MAX_CAJERO - dineroDisponible));
         }
-        
+
     }//GEN-LAST:event_btnIntroducirDineroActionPerformed
 
     private void txfCantidadIntroducirKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfCantidadIntroducirKeyTyped
         char tecla = evt.getKeyChar();
-        if(Character.isLetter(tecla)){
+        if (Character.isLetter(tecla)) {
             evt.consume();
         }
     }//GEN-LAST:event_txfCantidadIntroducirKeyTyped
+
+    private void tablaCuentaBancariaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaCuentaBancariaMouseClicked
+        int filaSelec = tablaCuentaBancaria.getSelectedRow();
+        if (filaSelec != -1) {
+            String cliente = (String) modeloTablaCuentas.getValueAt(filaSelec, 0);
+            txfAddIbanDni.setText(cliente);
+        }
+    }//GEN-LAST:event_tablaCuentaBancariaMouseClicked
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        moverPantalla(9);
+        initListaTarjetas();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void listaTarjetasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaTarjetasMouseClicked
+        TarjetaBancaria tarjetaSelec = listaTarjetas.getSelectedValue();
+        String numeroTarjeta = tarjetaSelec.getNumeroTarjeta();
+        String consulta = "select pin from tarjeta_bancaria where numero_tarjeta = '" + numeroTarjeta + "';";
+        try {
+            resultado = sentencia.executeQuery(consulta);
+            while (resultado.next()) {
+                int pinTarjetaSelec = resultado.getInt("pin");
+                txfPINAntiguo.setText(String.valueOf(pinTarjetaSelec));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(VentanaAdministrador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_listaTarjetasMouseClicked
+
+    private void txfPINNuevoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfPINNuevoKeyTyped
+        char tecla = evt.getKeyChar();
+        if (Character.isLetter(tecla)) {
+            evt.consume();
+        } else {
+            String txfValor = txfPINNuevo.getText();
+            if (txfValor.length() == 4) {
+                evt.consume();
+            }
+        }
+    }//GEN-LAST:event_txfPINNuevoKeyTyped
+
+    private void btnCambiarPINActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambiarPINActionPerformed
+        if (txfPINNuevo.getText().length() != 4) {
+            JOptionPane.showMessageDialog(this, "El PIN debe de tener 4 digitos numericos", "ERROR", JOptionPane.ERROR_MESSAGE);
+        } else {
+            TarjetaBancaria tarjetaSelec = listaTarjetas.getSelectedValue();
+            String numeroTarjeta = tarjetaSelec.getNumeroTarjeta();
+            for (TarjetaBancaria tb : tarjetas) {
+                if (tb.getNumeroTarjeta() != null && tb.getNumeroTarjeta().equals(numeroTarjeta)) {
+                    tb.setPin(Integer.parseInt(txfPINNuevo.getText()));
+                    String updatePIN = "update tarjeta_bancaria set pin = "+Integer.parseInt(txfPINNuevo.getText())+", numeroAdministrador = "+administrador+" where numero_tarjeta='"+numeroTarjeta+"';";
+                    txfPINAntiguo.setText(txfPINNuevo.getText());
+                    txfPINNuevo.setText("");
+                    try {
+                        sentencia.executeUpdate(updatePIN);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(VentanaAdministrador.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+        }
+    }//GEN-LAST:event_btnCambiarPINActionPerformed
+
+    private void initListaTarjetas() {
+        modeloListaTarjetas = (DefaultListModel) listaTarjetas.getModel();
+        modeloListaTarjetas.removeAllElements();
+        for (TarjetaBancaria tb : tarjetas) {
+            if (tb.getNumeroTarjeta() != null) {
+                modeloListaTarjetas.addElement(tb);
+            }
+
+        }
+    }
 
     private void initTablaTarjetasBloqDesbloq() {
         modeloTablaTarjetas = (DefaultTableModel) tablaBloqDesbloqTarjeta.getModel();
@@ -1392,7 +1583,7 @@ public class VentanaAdministrador extends JFrame {
     }
 
     private void initTarjetas() {
-        String consulta = "select * from cuenta_bancaria tb LEFT JOIN tarjeta_bancaria cb using(iban);";
+        String consulta = "select cb.dniCliente,cb.iban,tb.* from cuenta_bancaria cb LEFT JOIN tarjeta_bancaria tb using(iban);";
         try {
             resultado = sentencia.executeQuery(consulta);
             while (resultado.next()) {
@@ -1403,6 +1594,7 @@ public class VentanaAdministrador extends JFrame {
                 String iban = resultado.getString("iban");
                 TarjetaBancaria tarjeta = new TarjetaBancaria(numero, pin, bloqueada, dni, iban, administrador);
                 tarjetas.add(tarjeta);
+
             }
         } catch (SQLException ex) {
             Logger.getLogger(VentanaAdministrador.class.getName()).log(Level.SEVERE, null, ex);
@@ -1455,10 +1647,20 @@ public class VentanaAdministrador extends JFrame {
         tablaCuentaBancaria.getColumnModel().getColumn(2).setPreferredWidth(100);
         modeloTablaCuentas.setRowCount(0);
 
-        for (CuentaBancaria cb : cuentas) {
-            Object[] fila = {cb.getDniCliente(), cb.getIban(), cb.getSaldo()};
-            modeloTablaCuentas.addRow(fila);
+        String selectCuentas = "select * from cliente c LEFT join cuenta_bancaria cb on c.dni = cb.dniCliente;";
+        try {
+            resultado = sentencia.executeQuery(selectCuentas);
+            while (resultado.next()) {
+                String dni = resultado.getString("dni");
+                String iban = resultado.getString("iban");
+                double saldo = Math.round(resultado.getDouble("saldo") * 100.0) / 100.0;
+                Object[] fila = {dni, iban, saldo};
+                modeloTablaCuentas.addRow(fila);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(VentanaAdministrador.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }
 
     private void initTablaCuentas2() {
@@ -1557,7 +1759,7 @@ public class VentanaAdministrador extends JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                int numAdmin = 5572;
+                int numAdmin = 7813;
                 int dineroDispon = 1200;
                 new VentanaAdministrador(numAdmin, dineroDispon).setVisible(true);
             }
@@ -1581,6 +1783,7 @@ public class VentanaAdministrador extends JFrame {
     private javax.swing.JMenuItem btnBloquDesbloquTarjeta;
     private javax.swing.JButton btnBloquearCuenta;
     private javax.swing.JButton btnBloquearTarjeta;
+    private javax.swing.JButton btnCambiarPIN;
     private javax.swing.JButton btnDesbloquearCuenta;
     private javax.swing.JButton btnDesbloquearTarjeta;
     private javax.swing.JButton btnEliminarCliente;
@@ -1598,6 +1801,8 @@ public class VentanaAdministrador extends JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1617,6 +1822,8 @@ public class VentanaAdministrador extends JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -1625,8 +1832,10 @@ public class VentanaAdministrador extends JFrame {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JLabel lblFondo;
     private javax.swing.JList<Cliente> listaClientes;
+    private javax.swing.JList<TarjetaBancaria> listaTarjetas;
     private javax.swing.JMenu menuSalir;
     private javax.swing.JPanel paginaPrincipal;
     private javax.swing.JTable tablaAltaTarjetas;
@@ -1650,6 +1859,8 @@ public class VentanaAdministrador extends JFrame {
     private javax.swing.JTextField txfIBANEliminar;
     private javax.swing.JTextField txfIbanAddTarjeta;
     private javax.swing.JTextField txfNombre;
+    private javax.swing.JTextField txfPINAntiguo;
+    private javax.swing.JTextField txfPINNuevo;
     // End of variables declaration//GEN-END:variables
     private int pantalla;
     Connection conexion;
@@ -1659,6 +1870,7 @@ public class VentanaAdministrador extends JFrame {
     private ArrayList<CuentaBancaria> cuentas;
     private ArrayList<TarjetaBancaria> tarjetas;
     DefaultListModel<Cliente> modeloListaClientes;
+    DefaultListModel<TarjetaBancaria> modeloListaTarjetas;
     DefaultTableModel modeloTablaClientes;
     DefaultTableModel modeloTablaCuentas;
     DefaultTableModel modeloTablaTarjetas;

@@ -67,6 +67,11 @@ public class TarjetaBancaria {
     public void setBloqueada(boolean bloqueada) {
         this.bloqueada = bloqueada;
     }
+
+    public void setPin(int pin) {
+        this.pin = pin;
+    }
+    
     
     @Override
     public int hashCode() {
@@ -89,6 +94,12 @@ public class TarjetaBancaria {
         final TarjetaBancaria other = (TarjetaBancaria) obj;
         return Objects.equals(this.numeroTarjeta, other.numeroTarjeta);
     }
+
+    @Override
+    public String toString() {
+        return numeroTarjeta;
+    }
+
     
     
 }
