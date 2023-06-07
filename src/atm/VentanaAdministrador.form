@@ -209,6 +209,9 @@
         </Container>
         <Container class="javax.swing.JPanel" name="darAltaUsuario">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="99" red="0" type="rgb"/>
+            </Property>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
               <Color id="Default Cursor"/>
             </Property>
@@ -293,6 +296,9 @@
               <SubComponents>
                 <Component class="javax.swing.JLabel" name="jLabel1">
                   <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe UI" size="14" style="3"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="DNI"/>
                   </Properties>
                 </Component>
@@ -304,6 +310,9 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel2">
                   <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe UI" size="14" style="3"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Nombre"/>
                   </Properties>
                 </Component>
@@ -314,6 +323,9 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel3">
                   <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe UI" size="14" style="3"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Apellido principal"/>
                   </Properties>
                 </Component>
@@ -324,6 +336,9 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel4">
                   <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe UI" size="14" style="3"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Apellido Secundario"/>
                   </Properties>
                 </Component>
@@ -336,6 +351,9 @@
             </Container>
             <Component class="javax.swing.JButton" name="btnAddCliente">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="3"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Dar de alta"/>
               </Properties>
               <Events>
@@ -345,6 +363,11 @@
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="darBajaUsuario">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="99" red="0" type="rgb"/>
+            </Property>
+          </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="tab3">
@@ -357,25 +380,28 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace pref="37" max="32767" attributes="0"/>
-                      <Component id="jScrollPane2" min="-2" pref="735" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="298" max="-2" attributes="0"/>
-                      <Component id="btnEliminarCliente" min="-2" pref="236" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jScrollPane2" min="-2" pref="735" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="264" max="-2" attributes="0"/>
+                              <Component id="btnEliminarCliente" min="-2" pref="236" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace pref="60" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                       <Component id="jScrollPane2" min="-2" pref="292" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                      <EmptySpace pref="33" max="32767" attributes="0"/>
                       <Component id="btnEliminarCliente" min="-2" pref="45" max="-2" attributes="0"/>
-                      <EmptySpace pref="24" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -404,6 +430,9 @@
             </Container>
             <Component class="javax.swing.JButton" name="btnEliminarCliente">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="3"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Dar de baja"/>
               </Properties>
               <Events>
@@ -413,6 +442,11 @@
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="darAltaCuenta">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="99" red="0" type="rgb"/>
+            </Property>
+          </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="tab4">
@@ -432,7 +466,7 @@
                           <Component id="btnAddCuenta" max="32767" attributes="0"/>
                           <Component id="jPanel2" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="87" max="32767" attributes="0"/>
+                      <EmptySpace pref="51" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -485,6 +519,9 @@
               <SubComponents>
                 <Component class="javax.swing.JLabel" name="jLabel5">
                   <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe UI" size="14" style="3"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="IBAN:"/>
                   </Properties>
                 </Component>
@@ -495,6 +532,9 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel6">
                   <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe UI" size="14" style="3"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="DNI propietario de la cuenta:"/>
                   </Properties>
                 </Component>
@@ -507,6 +547,9 @@
             </Container>
             <Component class="javax.swing.JButton" name="btnAddCuenta">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="3"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Dar de alta cuenta bancaria"/>
               </Properties>
               <Events>
@@ -516,6 +559,11 @@
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="darBajaCuenta">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="99" red="0" type="rgb"/>
+            </Property>
+          </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="tab5">
@@ -535,7 +583,7 @@
                           <Component id="jPanel3" min="-2" pref="176" max="-2" attributes="0"/>
                           <Component id="btnEliminarCuenta" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="134" max="32767" attributes="0"/>
+                      <EmptySpace pref="98" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -601,6 +649,9 @@
             </Container>
             <Component class="javax.swing.JButton" name="btnEliminarCuenta">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="3"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Dar de baja cuenta bancaria"/>
               </Properties>
               <Events>
@@ -610,6 +661,11 @@
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="bloquearDesbloquearCuenta">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="99" red="0" type="rgb"/>
+            </Property>
+          </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="tab6">
@@ -676,6 +732,9 @@
             </Container>
             <Component class="javax.swing.JButton" name="btnBloquearCuenta">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="3"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Bloquear"/>
               </Properties>
               <Events>
@@ -684,6 +743,9 @@
             </Component>
             <Component class="javax.swing.JButton" name="btnDesbloquearCuenta">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="3"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Desbloquear"/>
               </Properties>
               <Events>
@@ -693,6 +755,11 @@
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="darAltaTarjeta">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="99" red="0" type="rgb"/>
+            </Property>
+          </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="tab7">
@@ -709,12 +776,12 @@
                       <Component id="jScrollPane6" min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-                              <Component id="btnAddTarjeta" min="-2" pref="143" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jPanel4" min="-2" pref="188" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                              <Component id="btnAddTarjeta" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace pref="106" max="32767" attributes="0"/>
@@ -770,6 +837,9 @@
               <SubComponents>
                 <Component class="javax.swing.JLabel" name="jLabel7">
                   <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe UI" size="14" style="3"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="N&#xfa;mero de tarjeta:"/>
                   </Properties>
                 </Component>
@@ -780,6 +850,9 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel8">
                   <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe UI" size="14" style="3"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="IBAN vinculado a la tarjeta"/>
                   </Properties>
                 </Component>
@@ -790,6 +863,9 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel9">
                   <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe UI" size="14" style="3"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Contrase&#xf1;a de la tarjeta"/>
                   </Properties>
                 </Component>
@@ -802,6 +878,9 @@
             </Container>
             <Component class="javax.swing.JButton" name="btnAddTarjeta">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="3"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Dar de alta tarjeta"/>
               </Properties>
               <Events>
@@ -811,6 +890,11 @@
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="darBajaTarjeta">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="99" red="0" type="rgb"/>
+            </Property>
+          </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="tab8">
@@ -872,6 +956,9 @@
             </Container>
             <Component class="javax.swing.JButton" name="btnEliminarTarjeta">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="3"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Dar de baja tarjeta"/>
               </Properties>
               <Events>
@@ -881,6 +968,11 @@
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="bloquearDesbloquearTarjeta">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="99" red="0" type="rgb"/>
+            </Property>
+          </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="tab9">
@@ -901,8 +993,8 @@
                       <EmptySpace min="-2" pref="116" max="-2" attributes="0"/>
                       <Component id="btnBloquearTarjeta" min="-2" pref="138" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="btnDesbloquearTarjeta" min="-2" pref="147" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="177" max="-2" attributes="0"/>
+                      <Component id="btnDesbloquearTarjeta" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="166" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -945,6 +1037,9 @@
             </Container>
             <Component class="javax.swing.JButton" name="btnBloquearTarjeta">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="3"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Bloquear tarjeta"/>
               </Properties>
               <Events>
@@ -953,6 +1048,9 @@
             </Component>
             <Component class="javax.swing.JButton" name="btnDesbloquearTarjeta">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="3"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Desbloquear tarjeta"/>
               </Properties>
               <Events>
@@ -962,6 +1060,11 @@
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="jPanel6">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="99" red="0" type="rgb"/>
+            </Property>
+          </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="tab10">
@@ -1038,6 +1141,9 @@
               <SubComponents>
                 <Component class="javax.swing.JLabel" name="jLabel12">
                   <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe UI" size="14" style="3"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Contrase&#xf1;a antigua:"/>
                   </Properties>
                 </Component>
@@ -1048,6 +1154,9 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel13">
                   <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe UI" size="14" style="3"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Contrase&#xf1;a nueva"/>
                   </Properties>
                 </Component>
@@ -1060,6 +1169,9 @@
             </Container>
             <Component class="javax.swing.JButton" name="btnCambiarPIN">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="3"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Cambiar contrase&#xf1;a"/>
               </Properties>
               <Events>
@@ -1069,6 +1181,11 @@
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="jPanel5">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="99" red="0" type="rgb"/>
+            </Property>
+          </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="tab11">
@@ -1092,7 +1209,7 @@
                           <Component id="txfDineroBanco" max="32767" attributes="0"/>
                           <Component id="txfCantidadIntroducir" pref="182" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="184" max="32767" attributes="0"/>
+                      <EmptySpace pref="119" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1119,6 +1236,9 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="jLabel10">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="3"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Total de dinero disponible en el banco:"/>
               </Properties>
             </Component>
@@ -1129,6 +1249,9 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel11">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="3"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Total de dinero a introducir en el banco (MAX: 10000)"/>
               </Properties>
             </Component>
@@ -1139,6 +1262,9 @@
             </Component>
             <Component class="javax.swing.JButton" name="btnIntroducirDinero">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="3"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Introducir dinero"/>
               </Properties>
               <Events>

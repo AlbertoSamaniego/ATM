@@ -127,7 +127,7 @@
                 <Component class="javax.swing.JLabel" name="lblIntroduccion">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Segoe UI" size="18" style="0"/>
+                      <Font name="Segoe UI" size="18" style="3"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="text" type="java.lang.String" value="Bienvenido, por favor eliga el idioma con el que quiere realizar las operaciones"/>
@@ -1756,6 +1756,11 @@
       </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="lblDerecha">
+      <Properties>
+        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+          <Color id="Hand Cursor"/>
+        </Property>
+      </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblDerechaMouseClicked"/>
       </Events>
@@ -1766,6 +1771,11 @@
       </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="lblizquierda">
+      <Properties>
+        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+          <Color id="Hand Cursor"/>
+        </Property>
+      </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblizquierdaMouseClicked"/>
       </Events>

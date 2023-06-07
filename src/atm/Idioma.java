@@ -11,12 +11,8 @@ import java.util.Properties;
 
 public class Idioma extends Properties{
 
-private static final long serialVersionUID = 1L;
-
 public Idioma(String idioma){
 
-    //Modificar si quieres añadir mas idiomas
-    //Cambia el nombre de los ficheros o añade los necesarios
     switch(idioma){
         case "Español":
                 getProperties("espanol.properties");

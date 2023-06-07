@@ -224,7 +224,7 @@ public class VentanaATM extends JFrame {
         reloj = new Timer(MAX_INACTIVIDAD, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (lblTarjeta.getBackground() == Color.green) {
+                if (lblTarjeta.getBackground().equals(Color.green)) {
                     JOptionPane.showMessageDialog(null, idioma.getProperty("caducidadSesion"), idioma.getProperty("tituloCadSesion"), JOptionPane.INFORMATION_MESSAGE);
                     ibanRegistrado = "";
                     lblTarjeta.setBackground(Color.red);
@@ -388,7 +388,7 @@ public class VentanaATM extends JFrame {
 
         contenedor.setFocusable(false);
 
-        lblIntroduccion.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblIntroduccion.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         lblIntroduccion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblIntroduccion.setText("Bienvenido, por favor eliga el idioma con el que quiere realizar las operaciones");
 
@@ -1400,6 +1400,7 @@ public class VentanaATM extends JFrame {
         getContentPane().add(jLabel21);
         jLabel21.setBounds(1380, 220, 335, 342);
 
+        lblDerecha.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblDerecha.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblDerechaMouseClicked(evt);
@@ -1408,6 +1409,7 @@ public class VentanaATM extends JFrame {
         getContentPane().add(lblDerecha);
         lblDerecha.setBounds(1680, 0, 170, 80);
 
+        lblizquierda.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblizquierda.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblizquierdaMouseClicked(evt);

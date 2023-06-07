@@ -175,6 +175,7 @@ public class VentanaAdministrador extends JFrame {
 
         contenedor.addTab("tab1", paginaPrincipal);
 
+        darAltaUsuario.setBackground(new java.awt.Color(0, 153, 255));
         darAltaUsuario.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         listaClientes.setModel(new javax.swing.DefaultListModel<Cliente>()
@@ -188,6 +189,7 @@ public class VentanaAdministrador extends JFrame {
 
         jPanel1.setLayout(new java.awt.GridLayout(4, 2, 20, 10));
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
         jLabel1.setText("DNI");
         jPanel1.add(jLabel1);
 
@@ -203,6 +205,7 @@ public class VentanaAdministrador extends JFrame {
         });
         jPanel1.add(txfDNI);
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
         jLabel2.setText("Nombre");
         jPanel1.add(jLabel2);
 
@@ -213,6 +216,7 @@ public class VentanaAdministrador extends JFrame {
         });
         jPanel1.add(txfNombre);
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
         jLabel3.setText("Apellido principal");
         jPanel1.add(jLabel3);
 
@@ -223,6 +227,7 @@ public class VentanaAdministrador extends JFrame {
         });
         jPanel1.add(txfApellido1);
 
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
         jLabel4.setText("Apellido Secundario");
         jPanel1.add(jLabel4);
 
@@ -233,6 +238,7 @@ public class VentanaAdministrador extends JFrame {
         });
         jPanel1.add(txfApellido2);
 
+        btnAddCliente.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
         btnAddCliente.setText("Dar de alta");
         btnAddCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -272,6 +278,8 @@ public class VentanaAdministrador extends JFrame {
 
         contenedor.addTab("tab2", darAltaUsuario);
 
+        darBajaUsuario.setBackground(new java.awt.Color(0, 153, 255));
+
         tablaClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -297,6 +305,7 @@ public class VentanaAdministrador extends JFrame {
         });
         jScrollPane2.setViewportView(tablaClientes);
 
+        btnEliminarCliente.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
         btnEliminarCliente.setText("Dar de baja");
         btnEliminarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -309,25 +318,28 @@ public class VentanaAdministrador extends JFrame {
         darBajaUsuarioLayout.setHorizontalGroup(
             darBajaUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(darBajaUsuarioLayout.createSequentialGroup()
-                .addContainerGap(37, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 735, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29))
-            .addGroup(darBajaUsuarioLayout.createSequentialGroup()
-                .addGap(298, 298, 298)
-                .addComponent(btnEliminarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(darBajaUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(darBajaUsuarioLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 735, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(darBajaUsuarioLayout.createSequentialGroup()
+                        .addGap(264, 264, 264)
+                        .addComponent(btnEliminarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
         darBajaUsuarioLayout.setVerticalGroup(
             darBajaUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, darBajaUsuarioLayout.createSequentialGroup()
-                .addGap(46, 46, 46)
+                .addGap(41, 41, 41)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addComponent(btnEliminarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addGap(25, 25, 25))
         );
 
         contenedor.addTab("tab3", darBajaUsuario);
+
+        darAltaCuenta.setBackground(new java.awt.Color(0, 153, 255));
 
         tablaCuentaBancaria.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -361,6 +373,7 @@ public class VentanaAdministrador extends JFrame {
 
         jPanel2.setLayout(new java.awt.GridLayout(4, 1, 0, 20));
 
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
         jLabel5.setText("IBAN:");
         jPanel2.add(jLabel5);
 
@@ -371,6 +384,7 @@ public class VentanaAdministrador extends JFrame {
         });
         jPanel2.add(txfAddIban);
 
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
         jLabel6.setText("DNI propietario de la cuenta:");
         jPanel2.add(jLabel6);
 
@@ -381,6 +395,7 @@ public class VentanaAdministrador extends JFrame {
         });
         jPanel2.add(txfAddIbanDni);
 
+        btnAddCuenta.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
         btnAddCuenta.setText("Dar de alta cuenta bancaria");
         btnAddCuenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -399,7 +414,7 @@ public class VentanaAdministrador extends JFrame {
                 .addGroup(darAltaCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnAddCuenta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(87, Short.MAX_VALUE))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
         darAltaCuentaLayout.setVerticalGroup(
             darAltaCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -414,6 +429,8 @@ public class VentanaAdministrador extends JFrame {
         );
 
         contenedor.addTab("tab4", darAltaCuenta);
+
+        darBajaCuenta.setBackground(new java.awt.Color(0, 153, 255));
 
         tablaCuentasEliminar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -450,6 +467,7 @@ public class VentanaAdministrador extends JFrame {
         jPanel3.add(txfIBANEliminar);
         jPanel3.add(txfCuentaSaldoEliminar);
 
+        btnEliminarCuenta.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
         btnEliminarCuenta.setText("Dar de baja cuenta bancaria");
         btnEliminarCuenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -468,7 +486,7 @@ public class VentanaAdministrador extends JFrame {
                 .addGroup(darBajaCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEliminarCuenta))
-                .addContainerGap(134, Short.MAX_VALUE))
+                .addContainerGap(98, Short.MAX_VALUE))
         );
         darBajaCuentaLayout.setVerticalGroup(
             darBajaCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -486,6 +504,8 @@ public class VentanaAdministrador extends JFrame {
         );
 
         contenedor.addTab("tab5", darBajaCuenta);
+
+        bloquearDesbloquearCuenta.setBackground(new java.awt.Color(0, 153, 255));
 
         tablaCuentasBloquDesbloqu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -512,6 +532,7 @@ public class VentanaAdministrador extends JFrame {
         });
         jScrollPane5.setViewportView(tablaCuentasBloquDesbloqu);
 
+        btnBloquearCuenta.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
         btnBloquearCuenta.setText("Bloquear");
         btnBloquearCuenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -519,6 +540,7 @@ public class VentanaAdministrador extends JFrame {
             }
         });
 
+        btnDesbloquearCuenta.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
         btnDesbloquearCuenta.setText("Desbloquear");
         btnDesbloquearCuenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -556,6 +578,8 @@ public class VentanaAdministrador extends JFrame {
 
         contenedor.addTab("tab6", bloquearDesbloquearCuenta);
 
+        darAltaTarjeta.setBackground(new java.awt.Color(0, 153, 255));
+
         tablaAltaTarjetas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -588,6 +612,7 @@ public class VentanaAdministrador extends JFrame {
 
         jPanel4.setLayout(new java.awt.GridLayout(6, 1, 0, 20));
 
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
         jLabel7.setText("Número de tarjeta:");
         jPanel4.add(jLabel7);
 
@@ -598,12 +623,14 @@ public class VentanaAdministrador extends JFrame {
         });
         jPanel4.add(txfAddNumTarjeta);
 
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
         jLabel8.setText("IBAN vinculado a la tarjeta");
         jPanel4.add(jLabel8);
 
         txfIbanAddTarjeta.setFocusable(false);
         jPanel4.add(txfIbanAddTarjeta);
 
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
         jLabel9.setText("Contraseña de la tarjeta");
         jPanel4.add(jLabel9);
 
@@ -614,6 +641,7 @@ public class VentanaAdministrador extends JFrame {
         });
         jPanel4.add(txfContrasenaTarjetaAlta);
 
+        btnAddTarjeta.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
         btnAddTarjeta.setText("Dar de alta tarjeta");
         btnAddTarjeta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -630,11 +658,11 @@ public class VentanaAdministrador extends JFrame {
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(darAltaTarjetaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(darAltaTarjetaLayout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(btnAddTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(darAltaTarjetaLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(darAltaTarjetaLayout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(btnAddTarjeta)))
                 .addContainerGap(106, Short.MAX_VALUE))
         );
         darAltaTarjetaLayout.setVerticalGroup(
@@ -650,6 +678,8 @@ public class VentanaAdministrador extends JFrame {
         );
 
         contenedor.addTab("tab7", darAltaTarjeta);
+
+        darBajaTarjeta.setBackground(new java.awt.Color(0, 153, 255));
 
         tablaBajaTarjetas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -676,6 +706,7 @@ public class VentanaAdministrador extends JFrame {
         });
         jScrollPane8.setViewportView(tablaBajaTarjetas);
 
+        btnEliminarTarjeta.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
         btnEliminarTarjeta.setText("Dar de baja tarjeta");
         btnEliminarTarjeta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -709,6 +740,8 @@ public class VentanaAdministrador extends JFrame {
 
         contenedor.addTab("tab8", darBajaTarjeta);
 
+        bloquearDesbloquearTarjeta.setBackground(new java.awt.Color(0, 153, 255));
+
         tablaBloqDesbloqTarjeta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -734,6 +767,7 @@ public class VentanaAdministrador extends JFrame {
         });
         jScrollPane7.setViewportView(tablaBloqDesbloqTarjeta);
 
+        btnBloquearTarjeta.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
         btnBloquearTarjeta.setText("Bloquear tarjeta");
         btnBloquearTarjeta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -741,6 +775,7 @@ public class VentanaAdministrador extends JFrame {
             }
         });
 
+        btnDesbloquearTarjeta.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
         btnDesbloquearTarjeta.setText("Desbloquear tarjeta");
         btnDesbloquearTarjeta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -760,8 +795,8 @@ public class VentanaAdministrador extends JFrame {
                 .addGap(116, 116, 116)
                 .addComponent(btnBloquearTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnDesbloquearTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(177, 177, 177))
+                .addComponent(btnDesbloquearTarjeta)
+                .addGap(166, 166, 166))
         );
         bloquearDesbloquearTarjetaLayout.setVerticalGroup(
             bloquearDesbloquearTarjetaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -777,6 +812,8 @@ public class VentanaAdministrador extends JFrame {
 
         contenedor.addTab("tab9", bloquearDesbloquearTarjeta);
 
+        jPanel6.setBackground(new java.awt.Color(0, 153, 255));
+
         listaTarjetas.setModel(new javax.swing.DefaultListModel<TarjetaBancaria>()
         );
         listaTarjetas.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -788,12 +825,14 @@ public class VentanaAdministrador extends JFrame {
 
         jPanel7.setLayout(new java.awt.GridLayout(4, 1, 0, 15));
 
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
         jLabel12.setText("Contraseña antigua:");
         jPanel7.add(jLabel12);
 
         txfPINAntiguo.setFocusable(false);
         jPanel7.add(txfPINAntiguo);
 
+        jLabel13.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
         jLabel13.setText("Contraseña nueva");
         jPanel7.add(jLabel13);
 
@@ -804,6 +843,7 @@ public class VentanaAdministrador extends JFrame {
         });
         jPanel7.add(txfPINNuevo);
 
+        btnCambiarPIN.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
         btnCambiarPIN.setText("Cambiar contraseña");
         btnCambiarPIN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -841,10 +881,14 @@ public class VentanaAdministrador extends JFrame {
 
         contenedor.addTab("tab10", jPanel6);
 
+        jPanel5.setBackground(new java.awt.Color(0, 153, 255));
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
         jLabel10.setText("Total de dinero disponible en el banco:");
 
         txfDineroBanco.setFocusable(false);
 
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
         jLabel11.setText("Total de dinero a introducir en el banco (MAX: 10000)");
 
         txfCantidadIntroducir.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -853,6 +897,7 @@ public class VentanaAdministrador extends JFrame {
             }
         });
 
+        btnIntroducirDinero.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
         btnIntroducirDinero.setText("Introducir dinero");
         btnIntroducirDinero.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -874,7 +919,7 @@ public class VentanaAdministrador extends JFrame {
                     .addComponent(btnIntroducirDinero, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
                     .addComponent(txfDineroBanco)
                     .addComponent(txfCantidadIntroducir, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE))
-                .addContainerGap(184, Short.MAX_VALUE))
+                .addContainerGap(119, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1051,7 +1096,7 @@ public class VentanaAdministrador extends JFrame {
      */
     private void btnAltaCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAltaCuentaActionPerformed
         moverPantalla(3);
-        initTablaCuentas();
+        initTablaCuentasAdd();
     }//GEN-LAST:event_btnAltaCuentaActionPerformed
 
     /**
@@ -1061,7 +1106,7 @@ public class VentanaAdministrador extends JFrame {
      */
     private void btnBajaCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBajaCuentaActionPerformed
         moverPantalla(4);
-        initTablaCuentas2();
+        initTablaCuentasEliminar();
     }//GEN-LAST:event_btnBajaCuentaActionPerformed
 
     /**
@@ -1081,7 +1126,7 @@ public class VentanaAdministrador extends JFrame {
      */
     private void btnAltaTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAltaTarjetaActionPerformed
         moverPantalla(6);
-        initTablaTarjetas();
+        initTablaTarjetasAdd();
     }//GEN-LAST:event_btnAltaTarjetaActionPerformed
 
     /**
@@ -1091,7 +1136,7 @@ public class VentanaAdministrador extends JFrame {
      */
     private void btnBajaTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBajaTarjetaActionPerformed
         moverPantalla(7);
-        initTablaTarjetas2();
+        initTablaTarjetasEliminar();
     }//GEN-LAST:event_btnBajaTarjetaActionPerformed
 
     /**
@@ -1763,7 +1808,7 @@ public class VentanaAdministrador extends JFrame {
     /**
      * Se inicializa la tabla de tarjetas cuando se quiere dar de baja una tarjeta
      */
-    private void initTablaTarjetas2() {
+    private void initTablaTarjetasEliminar() {
         modeloTablaTarjetas = (DefaultTableModel) tablaBajaTarjetas.getModel();
         tablaBajaTarjetas.setModel(modeloTablaTarjetas);
         tablaBajaTarjetas.getColumnModel().getColumn(0).setPreferredWidth(150);
@@ -1782,7 +1827,7 @@ public class VentanaAdministrador extends JFrame {
     /**
      * Se inicializa la tabla de tarjetas cuando se quiere dar de alta una tarjeta
      */
-    private void initTablaTarjetas() {
+    private void initTablaTarjetasAdd() {
         modeloTablaTarjetas = (DefaultTableModel) tablaAltaTarjetas.getModel();
         tablaAltaTarjetas.setModel(modeloTablaTarjetas);
         tablaAltaTarjetas.getColumnModel().getColumn(0).setPreferredWidth(150);
@@ -1864,7 +1909,7 @@ public class VentanaAdministrador extends JFrame {
     /**
      * Se inicializa la tabla de cuentas cuando se quiere dar de alta una cuenta
      */
-    private void initTablaCuentas() {
+    private void initTablaCuentasAdd() {
         modeloTablaCuentas = (DefaultTableModel) tablaCuentaBancaria.getModel();
         tablaCuentaBancaria.setModel(modeloTablaCuentas);
         tablaCuentaBancaria.getColumnModel().getColumn(0).setPreferredWidth(130);
@@ -1891,7 +1936,7 @@ public class VentanaAdministrador extends JFrame {
     /**
      * Se inicializa la tabla de cuentas cuando se quiere dar de baja una cuenta
      */
-    private void initTablaCuentas2() {
+    private void initTablaCuentasEliminar() {
         modeloTablaCuentas = (DefaultTableModel) tablaCuentasEliminar.getModel();
         tablaCuentasEliminar.setModel(modeloTablaCuentas);
         tablaCuentasEliminar.getColumnModel().getColumn(0).setPreferredWidth(130);
@@ -2004,8 +2049,8 @@ public class VentanaAdministrador extends JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                int numAdmin = 7813;
-                int dineroDispon = 1200;
+                int numAdmin = 0;
+                int dineroDispon = 0;
                 new VentanaAdministrador(numAdmin, dineroDispon).setVisible(true);
             }
         });
