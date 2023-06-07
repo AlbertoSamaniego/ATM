@@ -18,6 +18,15 @@ public class TarjetaBancaria {
     private String iban;
     private int numeroAdministrador;
 
+    /**
+     * Primer constructor de la clase TarjetaBancaria
+     * @param numeroTarjeta
+     * @param pin
+     * @param bloqueada
+     * @param dniCliente
+     * @param iban
+     * @param numeroAdministrador 
+     */
     public TarjetaBancaria(String numeroTarjeta, int pin, boolean bloqueada, String dniCliente, String iban, int numeroAdministrador) {
         this.numeroTarjeta = numeroTarjeta;
         this.pin = pin;
@@ -27,14 +36,19 @@ public class TarjetaBancaria {
         this.numeroAdministrador = numeroAdministrador;
     }
 
+    /**
+     * Segundo constructor de la clase TarjetaBancaria
+     * @param dniCliente
+     * @param numeroTarjeta
+     * @param pin
+     * @param iban 
+     */
     public TarjetaBancaria(String dniCliente, String numeroTarjeta, int pin, String iban) {
         this.dniCliente = dniCliente;
         this.numeroTarjeta = numeroTarjeta;
         this.pin = pin;
         this.iban = iban;
     }
-
-    
     
     public String getNumeroTarjeta() {
         return numeroTarjeta;

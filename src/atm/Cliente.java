@@ -17,6 +17,14 @@ public class Cliente implements Comparable<Cliente>{
     private String apellido2;
     private int numeroAdministrador;
 
+    /**
+     * Primer constructor de la clase cliente
+     * @param dni 
+     * @param nombre
+     * @param apellido1
+     * @param apellido2
+     * @param numeroAdministrador 
+     */
     public Cliente(String dni, String nombre, String apellido1, String apellido2, int numeroAdministrador) {
         this.dni = dni;
         this.nombre = nombre;
@@ -25,10 +33,15 @@ public class Cliente implements Comparable<Cliente>{
         this.numeroAdministrador = numeroAdministrador;
     }
 
+    /**
+     * Segundo contructor de la clase Cliente
+     * @param dni 
+     */
     public Cliente(String dni) {
         this.dni = dni;
     }
 
+    
     public String getDni() {
         return dni;
     }

@@ -17,6 +17,14 @@ public class CuentaBancaria {
     private String dniCliente;
     private int numeroAdministrador;
 
+    /**
+     * Primer constructor de la clase CuentaBancaria
+     * @param iban
+     * @param saldo
+     * @param bloqueada
+     * @param dniCliente
+     * @param numeroAdministrador 
+     */
     public CuentaBancaria(String iban, double saldo, boolean bloqueada, String dniCliente, int numeroAdministrador) {
         this.iban = iban;
         this.saldo = saldo;
@@ -25,12 +33,15 @@ public class CuentaBancaria {
         this.numeroAdministrador = numeroAdministrador;
     }
 
+    /**
+     * Segundo constructor de la clase CuentaBancaria
+     * @param iban
+     * @param dniCliente 
+     */
     public CuentaBancaria(String iban, String dniCliente) {
         this.iban = iban;
         this.dniCliente = dniCliente;
     }
-    
-    
 
     public String getIban() {
         return iban;

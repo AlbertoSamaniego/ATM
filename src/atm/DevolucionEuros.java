@@ -92,7 +92,9 @@ public class DevolucionEuros extends JFrame {
 
         add(panel);
 
+        //para que la ventana no salga sin contenido (solamente con la cabecera)
         pack();
+        //para que la ventana salga en el centro de la pantalla
         setLocationRelativeTo(null);
 
     }

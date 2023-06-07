@@ -19,6 +19,11 @@ public enum MonedaExtranjera {
     private String nombre;
     private double valor;
 
+    /**
+     * Constructor de enum MonedaExtranjera
+     * @param nombre nombre de la moneda
+     * @param valor valor de la moneda en Euros
+     */
     private MonedaExtranjera(String nombre, double valor) {
         this.nombre = nombre;
         this.valor = valor;

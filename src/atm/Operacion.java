@@ -18,6 +18,11 @@ public enum Operacion {
     private String nombre;
     private int identificador;
     
+    /**
+     * Constructor del enum Operacion
+     * @param nombre tipo de la operacion realizada
+     * @param identificador identificador del tipo de operacion realizada
+     */
     private Operacion(String nombre, int identificador){
         this.nombre = nombre;
         this.identificador = identificador;

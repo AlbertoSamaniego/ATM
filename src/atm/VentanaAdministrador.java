@@ -29,7 +29,9 @@ public class VentanaAdministrador extends JFrame {
     private int dineroDisponible;
 
     /**
-     * Creates new form VentanaAdministrador
+     * Constructor de la clase Administrador
+     * @param administrador número identificativo del administrador logeado
+     * @param dineroDisponible dinero disponible del ATM
      */
     public VentanaAdministrador(int administrador, int dineroDisponible) {
         this.administrador = administrador;
@@ -46,10 +48,6 @@ public class VentanaAdministrador extends JFrame {
         initCuentas();
         initTarjetas();
         moverPantalla(0);
-    }
-
-    public int getDineroDisponible() {
-        return dineroDisponible;
     }
 
     /**
@@ -150,7 +148,7 @@ public class VentanaAdministrador extends JFrame {
         btnAltaTarjeta = new javax.swing.JMenuItem();
         btnBajaTarjeta = new javax.swing.JMenuItem();
         btnBloquDesbloquTarjeta = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        cambiarPIN = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         btnRellenarCajero = new javax.swing.JMenuItem();
         btnApagarCajero = new javax.swing.JMenuItem();
@@ -970,13 +968,13 @@ public class VentanaAdministrador extends JFrame {
         });
         jMenu3.add(btnBloquDesbloquTarjeta);
 
-        jMenuItem1.setText("Cambiar PIN");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        cambiarPIN.setText("Cambiar PIN");
+        cambiarPIN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                cambiarPINActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem1);
+        jMenu3.add(cambiarPIN);
 
         jMenuBar1.add(jMenu3);
 
@@ -1026,60 +1024,119 @@ public class VentanaAdministrador extends JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Metodo que cambia de pantalla e inicializa la lista de clientes cuando
+     * se quiere dar de alta un usuario
+     * @param evt objeto del evento que se ha producido
+     */
     private void btnAltaUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAltaUsuarioActionPerformed
         moverPantalla(1);
         initListaClientes();
     }//GEN-LAST:event_btnAltaUsuarioActionPerformed
 
+    /**
+     * Metodo que cambia de pantalla e inicializa la lista de clientes cuando
+     * se quiere dar de baja un usuario
+     * @param evt objeto del evento que se ha producido
+     */
     private void btnBajaUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBajaUsuarioActionPerformed
         moverPantalla(2);
         initTablaClientes();
     }//GEN-LAST:event_btnBajaUsuarioActionPerformed
 
+    /**
+     * Metodo que cambia de pantalla e inicializa la tabla de cuentas cuando
+     * se quiere dar de alta una cuenta
+     * @param evt objeto del evento que se ha producido
+     */
     private void btnAltaCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAltaCuentaActionPerformed
         moverPantalla(3);
         initTablaCuentas();
     }//GEN-LAST:event_btnAltaCuentaActionPerformed
 
+    /**
+     * Metodo que cambia de pantalla e inicializa la tabla de cuentas cuando
+     * se quiere dar de baja una cuenta
+     * @param evt objeto del evento que se ha producido
+     */
     private void btnBajaCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBajaCuentaActionPerformed
         moverPantalla(4);
         initTablaCuentas2();
     }//GEN-LAST:event_btnBajaCuentaActionPerformed
 
+    /**
+     * Metodo que cambia de pantalla e inicializa la tabla de cuentas cuando
+     * se quiere bloquear o desbloquear una cuenta
+     * @param evt objeto del evento que se ha producido
+     */
     private void btnBloquDesbloquCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBloquDesbloquCuentaActionPerformed
         moverPantalla(5);
         initTablaBloqueos();
     }//GEN-LAST:event_btnBloquDesbloquCuentaActionPerformed
 
+    /**
+     * Metodo que cambia de pantalla e inicializa la tabla de tarjetas cuando
+     * se quiere dar de alta una tarjeta
+     * @param evt objeto del evento que se ha producido
+     */
     private void btnAltaTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAltaTarjetaActionPerformed
         moverPantalla(6);
         initTablaTarjetas();
     }//GEN-LAST:event_btnAltaTarjetaActionPerformed
 
+    /**
+     * Metodo que cambia de pantalla e inicializa la tabla de tarjetas cuando
+     * se quiere dar de baja una tarjeta
+     * @param evt objeto del evento que se ha producido
+     */
     private void btnBajaTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBajaTarjetaActionPerformed
         moverPantalla(7);
         initTablaTarjetas2();
     }//GEN-LAST:event_btnBajaTarjetaActionPerformed
 
+    /**
+     * Metodo que cambia de pantalla e inicializa la tabla de tarjetas cuando
+     * se quiere bloquear o desbloquear una tarjetas
+     * @param evt objeto del evento que se ha producido
+     */
     private void btnBloquDesbloquTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBloquDesbloquTarjetaActionPerformed
         moverPantalla(8);
         initTablaTarjetasBloqDesbloq();
     }//GEN-LAST:event_btnBloquDesbloquTarjetaActionPerformed
 
+    /**
+     * Metodo que cambia de pantalla e indica el dinero disponible en el ATM y la 
+     * cantidad maxima de dinero que se puede introducir
+     * @param evt objeto del evento que se ha producido
+     */
     private void btnRellenarCajeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRellenarCajeroActionPerformed
         moverPantalla(10);
         txfDineroBanco.setText(String.valueOf(dineroDisponible));
         txfCantidadIntroducir.setText(String.valueOf((MAX_CAJERO - dineroDisponible)));
     }//GEN-LAST:event_btnRellenarCajeroActionPerformed
 
+    /**
+     * Metodo que apaga totalmente el cajero
+     * @param evt objeto del evento que se ha producido
+     */
     private void btnApagarCajeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApagarCajeroActionPerformed
         System.exit(0);
     }//GEN-LAST:event_btnApagarCajeroActionPerformed
 
+    /**
+     * Metodo que cierra el modo administrador
+     * @param evt objeto del evento que se ha producido
+     */
     private void menuSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuSalirMouseClicked
         dispose();
     }//GEN-LAST:event_menuSalirMouseClicked
 
+    /**
+     * Metodo que añade un cliente al sistema dado su DNI, nombre y apellidos.
+     * Si no es posible añadirlo muestra un mensaje de error indicando el fallo.
+     * Si es posible añadirlo lo añade tanto a la lista de clientes como en la BD
+     * @param evt objeto del evento que se ha producido
+     */
     private void btnAddClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddClienteActionPerformed
         String dni = txfDNI.getText();
         String nombre = txfNombre.getText();
@@ -1109,6 +1166,11 @@ public class VentanaAdministrador extends JFrame {
 
     }//GEN-LAST:event_btnAddClienteActionPerformed
 
+    /**
+     * Cuando se selecciona un cliente de la lista de clientes, se muestran
+     * sus datos en pantalla
+     * @param evt objeto del evento que se ha producido
+     */
     private void listaClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaClientesMouseClicked
         Cliente c = listaClientes.getSelectedValue();
         txfDNI.setText(c.getDni());
@@ -1117,28 +1179,55 @@ public class VentanaAdministrador extends JFrame {
         txfApellido2.setText(c.getApellido2());
     }//GEN-LAST:event_listaClientesMouseClicked
 
+    /**
+     * Si la longitud del DNI del nuevo cliente es mayor que 9, elimina
+     * el caracter tecleado
+     * @param evt objeto del evento que se ha producido
+     */
     private void txfDNIKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfDNIKeyTyped
         if (txfDNI.getText().length() == 9) {
             evt.consume();
         }
     }//GEN-LAST:event_txfDNIKeyTyped
 
+    /**
+     * Si el campo del DNI gana el foco, se elimina su contenido
+     * @param evt objeto del evento que se ha producido
+     */
     private void txfDNIFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txfDNIFocusGained
         txfDNI.setText("");
     }//GEN-LAST:event_txfDNIFocusGained
 
+    /**
+     * Si el campo del nombre gana el foco, se elimina su contenido
+     * @param evt objeto del evento que se ha producido
+     */
     private void txfNombreFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txfNombreFocusGained
         txfNombre.setText("");
     }//GEN-LAST:event_txfNombreFocusGained
 
+    /**
+     * Si el campo del primer apellido gana el foco, se elimina su contenido
+     * @param evt objeto del evento que se ha producido
+     */
     private void txfApellido1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txfApellido1FocusGained
         txfApellido1.setText("");
     }//GEN-LAST:event_txfApellido1FocusGained
 
+    /**
+     * Si el campo del segundo apellido gana el foco, se elimina su contenido
+     * @param evt objeto del evento que se ha producido
+     */
     private void txfApellido2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txfApellido2FocusGained
         txfApellido2.setText("");
     }//GEN-LAST:event_txfApellido2FocusGained
 
+    /**
+     * Metodo que elimina el cliente seleccionado de la tabla de clientes.
+     * Solamente se eliminara si se ha seleccionado una fila de la tabla.
+     * Se elimina tanto de la tabla como de la base de datos.
+     * @param evt objeto del evento que se ha producido
+     */
     private void btnEliminarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarClienteActionPerformed
         int filaSelec = tablaClientes.getSelectedRow();
         if (filaSelec != -1) {
@@ -1158,6 +1247,14 @@ public class VentanaAdministrador extends JFrame {
         }
     }//GEN-LAST:event_btnEliminarClienteActionPerformed
 
+    /**
+     * Metodo que añade una nueva cuenta bancaria al sistema
+     * Si la cuenta ya existe porque se ha introducido un IBAN equivalente a otro
+     * registrado en el sistema, mostrará un mensaje de error
+     * Si el IBAN nuevo no existe, se añade tanto a la tabla que muestra las cuentas
+     * como en la base de datos.
+     * @param evt objeto del evento que se ha producido
+     */
     private void btnAddCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCuentaActionPerformed
         String dni = txfAddIbanDni.getText().trim().toUpperCase();
         String iban = txfAddIban.getText().trim().toUpperCase();
@@ -1196,18 +1293,34 @@ public class VentanaAdministrador extends JFrame {
         }
     }//GEN-LAST:event_btnAddCuentaActionPerformed
 
+    /**
+     * Si el IBAN a introducir tiene una longitud mayor a 28, se
+     * elimina el caracter tecleado
+     * @param evt objeto del evento que se ha producido
+     */
     private void txfAddIbanKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfAddIbanKeyTyped
         if (txfAddIban.getText().length() == 28) {
             evt.consume();
         }
     }//GEN-LAST:event_txfAddIbanKeyTyped
 
+    /**
+     * Si el DNI del cliente que va a controlar la cuenta a crear tiene una longitud
+     * mayor a 9, se elimina el caracter tecleado
+     * @param evt objeto del evento que se ha producido
+     */
     private void txfAddIbanDniKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfAddIbanDniKeyTyped
         if (txfAddIbanDni.getText().length() == 9) {
             evt.consume();
         }
     }//GEN-LAST:event_txfAddIbanDniKeyTyped
 
+    /**
+     * Metodo que elimina la cuenta seleccionada por el administrador
+     * Solamente se elimina la cuenta si se ha seleccionado una fila de la tabla
+     * Se elimina tanto de la tabla como de la base de datos
+     * @param evt objeto del evento que se ha producido
+     */
     private void btnEliminarCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarCuentaActionPerformed
         int filaSelec = tablaCuentasEliminar.getSelectedRow();
         if (filaSelec != -1) {
@@ -1225,6 +1338,11 @@ public class VentanaAdministrador extends JFrame {
         }
     }//GEN-LAST:event_btnEliminarCuentaActionPerformed
 
+    /**
+     * Cuando se seleccione una fila de la tabla de cuentas, se mostrara los
+     * datos pertenecientes a la cuenta de la fila seleccionada
+     * @param evt objeto del evento que se ha producido
+     */
     private void tablaCuentasEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaCuentasEliminarMouseClicked
         txfClienteCuentaEliminar.setText("");
         txfIBANEliminar.setText("");
@@ -1241,6 +1359,12 @@ public class VentanaAdministrador extends JFrame {
 
     }//GEN-LAST:event_tablaCuentasEliminarMouseClicked
 
+    /**
+     * Metodo que bloquea la cuenta indicada por el administrador
+     * Si se ha seleccionado una cuenta y su estado es "Desbloqueada", se
+     * cambiara ese estado a "Bloqueada", tanto en la tabla como en la BD
+     * @param evt objeto del evento que se ha producido
+     */
     private void btnBloquearCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBloquearCuentaActionPerformed
         int filaSelec = tablaCuentasBloquDesbloqu.getSelectedRow();
         if (filaSelec != -1) {
@@ -1264,6 +1388,12 @@ public class VentanaAdministrador extends JFrame {
         }
     }//GEN-LAST:event_btnBloquearCuentaActionPerformed
 
+    /**
+     * Metodo que desbloquea la cuenta indicada por el administrador
+     * Si se ha seleccionado una cuenta y su estado es "Bloqueada", se
+     * cambiara ese estado a "Desbloqueada", tanto en la tabla como en la BD
+     * @param evt objeto del evento que se ha producido
+     */
     private void btnDesbloquearCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDesbloquearCuentaActionPerformed
         int filaSelec = tablaCuentasBloquDesbloqu.getSelectedRow();
         if (filaSelec != -1) {
@@ -1287,6 +1417,10 @@ public class VentanaAdministrador extends JFrame {
         }
     }//GEN-LAST:event_btnDesbloquearCuentaActionPerformed
 
+    /**
+     * Metodo que da de alta la tarjeta de credito seleccionada
+     * @param evt objeto del evento que se ha producido
+     */
     private void tablaAltaTarjetasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaAltaTarjetasMouseClicked
         int filaSelec = tablaAltaTarjetas.getSelectedRow();
         if (filaSelec != -1) {
@@ -1295,6 +1429,12 @@ public class VentanaAdministrador extends JFrame {
         }
     }//GEN-LAST:event_tablaAltaTarjetasMouseClicked
 
+    /**
+     * Añade una nueva tarjeta con las credenciales indicadas por el administrador.
+     * No se puede añadir la tarjeta si no indica la cuenta bancaria a la que se
+     * va a vincular.
+     * @param evt objeto del evento que se ha producido
+     */
     private void btnAddTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddTarjetaActionPerformed
         String numero = txfAddNumTarjeta.getText();
         String iban = txfIbanAddTarjeta.getText();
@@ -1347,6 +1487,11 @@ public class VentanaAdministrador extends JFrame {
         }
     }//GEN-LAST:event_btnAddTarjetaActionPerformed
 
+    /**
+     * Si el numero de la tarjeta a introducir es mayor que 19 o se teclea
+     * una letra, se elimina el caracter tecleado
+     * @param evt objeto del evento que se ha producido
+     */
     private void txfAddNumTarjetaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfAddNumTarjetaKeyTyped
         char caracter = evt.getKeyChar();
         if (txfAddNumTarjeta.getText().length() == 19 || Character.isLetter(caracter)) {
@@ -1354,6 +1499,11 @@ public class VentanaAdministrador extends JFrame {
         }
     }//GEN-LAST:event_txfAddNumTarjetaKeyTyped
 
+    /**
+     * Si la contraseña de la tarjeta a dar de alta tiene mas de 4 digitos o el caracter
+     * tecleado es una letra, se consume
+     * @param evt objeto del evento que se ha producido
+     */
     private void txfContrasenaTarjetaAltaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfContrasenaTarjetaAltaKeyTyped
         char caracter = evt.getKeyChar();
         if (txfContrasenaTarjetaAlta.getText().length() == 4 || Character.isLetter(caracter)) {
@@ -1361,6 +1511,11 @@ public class VentanaAdministrador extends JFrame {
         }
     }//GEN-LAST:event_txfContrasenaTarjetaAltaKeyTyped
 
+    /**
+     * Metodo que elimina la tarjeta seleccionada. Se eliminara tanto de la 
+     * interfaz del administrador como de la base de datos
+     * @param evt objeto del evento que se ha producido
+     */
     private void btnEliminarTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarTarjetaActionPerformed
         int filaSelec = tablaBajaTarjetas.getSelectedRow();
         if (filaSelec != -1) {
@@ -1389,6 +1544,11 @@ public class VentanaAdministrador extends JFrame {
         }
     }//GEN-LAST:event_btnEliminarTarjetaActionPerformed
 
+    /**
+     * Metodo que bloquea una tarjeta indicada por el administrador.
+     * Se bloquea tanto en la GUI del administrador como en la BD
+     * @param evt objeto del evento que se ha producido
+     */
     private void btnBloquearTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBloquearTarjetaActionPerformed
         int filaSelec = tablaBloqDesbloqTarjeta.getSelectedRow();
         if (filaSelec != -1) {
@@ -1412,6 +1572,11 @@ public class VentanaAdministrador extends JFrame {
         }
     }//GEN-LAST:event_btnBloquearTarjetaActionPerformed
 
+    /**
+     * Metodo que desbloquea una tarjeta indicada por el administrador.
+     * Se desbloquea tanto en la GUI del administrador como en la BD
+     * @param evt objeto del evento que se ha producido
+     */
     private void btnDesbloquearTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDesbloquearTarjetaActionPerformed
         int filaSelec = tablaBloqDesbloqTarjeta.getSelectedRow();
         if (filaSelec != -1) {
@@ -1435,6 +1600,13 @@ public class VentanaAdministrador extends JFrame {
         }
     }//GEN-LAST:event_btnDesbloquearTarjetaActionPerformed
 
+    /**
+     * Metodo que introduce en el cajero la cantidad de dinero indicada por el administrador
+     * Si la cantidad introducida más la cantidad de dinero que tiene el cajero en ese momento
+     * supera la cantidad maxima, se pondrá como limite superior esa cantidad maxima.
+     * En caso contrario se introduce la cantidad indicada por el administrador.
+     * @param evt objeto del evento que se ha producido
+     */
     private void btnIntroducirDineroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIntroducirDineroActionPerformed
         int cantidadIngresar = Integer.parseInt(txfCantidadIntroducir.getText());
         if (dineroDisponible + cantidadIngresar > MAX_CAJERO) {
@@ -1449,6 +1621,10 @@ public class VentanaAdministrador extends JFrame {
 
     }//GEN-LAST:event_btnIntroducirDineroActionPerformed
 
+    /**
+     * Si al rellenar el cajero se teclea un carater no numerico, se elimina
+     * @param evt objeto del evento que se ha producido
+     */
     private void txfCantidadIntroducirKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfCantidadIntroducirKeyTyped
         char tecla = evt.getKeyChar();
         if (Character.isLetter(tecla)) {
@@ -1456,6 +1632,11 @@ public class VentanaAdministrador extends JFrame {
         }
     }//GEN-LAST:event_txfCantidadIntroducirKeyTyped
 
+    /**
+     * Al seleccionar una cuenta de la tabla se muestra en la pantalla el DNI
+     * del cliente que posee esa cuenta.
+     * @param evt objeto del evento que se ha producido
+     */
     private void tablaCuentaBancariaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaCuentaBancariaMouseClicked
         int filaSelec = tablaCuentaBancaria.getSelectedRow();
         if (filaSelec != -1) {
@@ -1464,11 +1645,20 @@ public class VentanaAdministrador extends JFrame {
         }
     }//GEN-LAST:event_tablaCuentaBancariaMouseClicked
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    /**
+     * Al elegir la opcion cambiar PIN, se mueve a la pantalla correspondiente y 
+     * se inicializa la lista que muestrar los numeros de todas las tarjetas
+     * @param evt objeto del evento que se ha producido
+     */
+    private void cambiarPINActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cambiarPINActionPerformed
         moverPantalla(9);
         initListaTarjetas();
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_cambiarPINActionPerformed
 
+    /**
+     * Se muestra por pantalla el pin actual de la tarjeta seleccionada en la lista
+     * @param evt objeto del evento que se ha producido
+     */
     private void listaTarjetasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaTarjetasMouseClicked
         TarjetaBancaria tarjetaSelec = listaTarjetas.getSelectedValue();
         String numeroTarjeta = tarjetaSelec.getNumeroTarjeta();
@@ -1485,6 +1675,11 @@ public class VentanaAdministrador extends JFrame {
 
     }//GEN-LAST:event_listaTarjetasMouseClicked
 
+    /**
+     * Al introducir el nuevo PIN de la tarjeta, si se teclea un digito no 
+     * numerico o la longitud del PIN excede los 4 digitos, se elimina el caracter
+     * @param evt objeto del evento que se ha producido
+     */
     private void txfPINNuevoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfPINNuevoKeyTyped
         char tecla = evt.getKeyChar();
         if (Character.isLetter(tecla)) {
@@ -1497,6 +1692,11 @@ public class VentanaAdministrador extends JFrame {
         }
     }//GEN-LAST:event_txfPINNuevoKeyTyped
 
+    /**
+     * Cambia el PIN actual por el nuevo PIN introducido por el administrador.
+     * Solamente se cambia si el PIN nuevo tiene 4 digitos numericos
+     * @param evt objeto del evento que se ha producido
+     */
     private void btnCambiarPINActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambiarPINActionPerformed
         if (txfPINNuevo.getText().length() != 4) {
             JOptionPane.showMessageDialog(this, "El PIN debe de tener 4 digitos numericos", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -1519,6 +1719,9 @@ public class VentanaAdministrador extends JFrame {
         }
     }//GEN-LAST:event_btnCambiarPINActionPerformed
 
+    /**
+     * Inicializa la lista de tarjetas al querer cambiar un PIN
+     */
     private void initListaTarjetas() {
         modeloListaTarjetas = (DefaultListModel) listaTarjetas.getModel();
         modeloListaTarjetas.removeAllElements();
@@ -1530,6 +1733,10 @@ public class VentanaAdministrador extends JFrame {
         }
     }
 
+    /**
+     * Se inicializa la tabla de tarjetas cuando se quiere bloquear o desbloquear
+     * una tarjeta
+     */
     private void initTablaTarjetasBloqDesbloq() {
         modeloTablaTarjetas = (DefaultTableModel) tablaBloqDesbloqTarjeta.getModel();
         tablaBloqDesbloqTarjeta.setModel(modeloTablaTarjetas);
@@ -1553,6 +1760,9 @@ public class VentanaAdministrador extends JFrame {
 
     }
 
+    /**
+     * Se inicializa la tabla de tarjetas cuando se quiere dar de baja una tarjeta
+     */
     private void initTablaTarjetas2() {
         modeloTablaTarjetas = (DefaultTableModel) tablaBajaTarjetas.getModel();
         tablaBajaTarjetas.setModel(modeloTablaTarjetas);
@@ -1569,6 +1779,9 @@ public class VentanaAdministrador extends JFrame {
         }
     }
 
+    /**
+     * Se inicializa la tabla de tarjetas cuando se quiere dar de alta una tarjeta
+     */
     private void initTablaTarjetas() {
         modeloTablaTarjetas = (DefaultTableModel) tablaAltaTarjetas.getModel();
         tablaAltaTarjetas.setModel(modeloTablaTarjetas);
@@ -1582,6 +1795,9 @@ public class VentanaAdministrador extends JFrame {
         }
     }
 
+    /**
+     * Se introduce en el ArrayList "tarjetas" todas las tarjetas de la base de datos.
+     */
     private void initTarjetas() {
         String consulta = "select cb.dniCliente,cb.iban,tb.* from cuenta_bancaria cb LEFT JOIN tarjeta_bancaria tb using(iban);";
         try {
@@ -1602,6 +1818,9 @@ public class VentanaAdministrador extends JFrame {
 
     }
 
+    /**
+     * Se introduce en el ArrayList "cuentas" todas las cuentas bancarias de la base de datos.
+     */
     private void initCuentas() {
         String consulta = "SELECT cb.* from cliente c join cuenta_bancaria cb on c.dni=cb.dniCliente order by c.dni;";
         try {
@@ -1620,6 +1839,9 @@ public class VentanaAdministrador extends JFrame {
         }
     }
 
+    /**
+     * Se inicializa la tabla de cuentas cuando se quiere bloquear una cuenta.
+     */
     private void initTablaBloqueos() {
         modeloTablaCuentas = (DefaultTableModel) tablaCuentasBloquDesbloqu.getModel();
         tablaCuentasBloquDesbloqu.setModel(modeloTablaCuentas);
@@ -1639,6 +1861,9 @@ public class VentanaAdministrador extends JFrame {
         }
     }
 
+    /**
+     * Se inicializa la tabla de cuentas cuando se quiere dar de alta una cuenta
+     */
     private void initTablaCuentas() {
         modeloTablaCuentas = (DefaultTableModel) tablaCuentaBancaria.getModel();
         tablaCuentaBancaria.setModel(modeloTablaCuentas);
@@ -1663,6 +1888,9 @@ public class VentanaAdministrador extends JFrame {
 
     }
 
+    /**
+     * Se inicializa la tabla de cuentas cuando se quiere dar de baja una cuenta
+     */
     private void initTablaCuentas2() {
         modeloTablaCuentas = (DefaultTableModel) tablaCuentasEliminar.getModel();
         tablaCuentasEliminar.setModel(modeloTablaCuentas);
@@ -1677,6 +1905,10 @@ public class VentanaAdministrador extends JFrame {
         }
     }
 
+    /**
+     * Inicializa el ArrayList "clientes" introduciendo todos los clientes de la 
+     * base de datos en el ArrayList
+     */
     private void initClientes() {
         try {
             sentencia = conexion.createStatement();
@@ -1696,6 +1928,9 @@ public class VentanaAdministrador extends JFrame {
         }
     }
 
+    /**
+     * Se introduce todos los clientes en la lista cuando se queire dar de alta un nuevo cliente
+     */
     private void initListaClientes() {
         modeloListaClientes = (DefaultListModel) listaClientes.getModel();
         modeloListaClientes.removeAllElements();
@@ -1705,6 +1940,9 @@ public class VentanaAdministrador extends JFrame {
 
     }
 
+    /**
+     * Se introduce todos los clientes en la tabla cuando se queire dar de baja un cliente existente
+     */
     private void initTablaClientes() {
         modeloTablaClientes = (DefaultTableModel) tablaClientes.getModel();
         tablaClientes.setModel(modeloTablaClientes);
@@ -1716,6 +1954,9 @@ public class VentanaAdministrador extends JFrame {
         }
     }
 
+    /**
+     * Inicializacion de la base de datos, donde se establece la conexion con esta.
+     */
     private void initBD() {
         conexion = Conexion.mySQL("atm", "root", "");
         if (conexion == null) {
@@ -1724,6 +1965,10 @@ public class VentanaAdministrador extends JFrame {
         }
     }
 
+    /**
+     * Metodo que mueve la pantalla de la actual a la indicada por parametro
+     * @param pant indice que representa la pantalla a la que se va a mover la GUI del administrador
+     */
     private void moverPantalla(int pant) {
         contenedor.setSelectedIndex(pant);
         pantalla = contenedor.getSelectedIndex();
@@ -1791,6 +2036,7 @@ public class VentanaAdministrador extends JFrame {
     private javax.swing.JButton btnEliminarTarjeta;
     private javax.swing.JButton btnIntroducirDinero;
     private javax.swing.JMenuItem btnRellenarCajero;
+    private javax.swing.JMenuItem cambiarPIN;
     private javax.swing.JTabbedPane contenedor;
     private javax.swing.JPanel darAltaCuenta;
     private javax.swing.JPanel darAltaTarjeta;
@@ -1816,7 +2062,6 @@ public class VentanaAdministrador extends JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
